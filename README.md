@@ -1,5 +1,5 @@
 # swe3313-course-project
-
+## Introduction
 ## Meet Our Team
 - [Daniel Tebor](docs/project-plan/dtebor-resume.md)
 - [Megan Ingram](docs/project-plan/mingram-resume.md)
