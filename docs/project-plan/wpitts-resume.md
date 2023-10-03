@@ -6,7 +6,8 @@
 - Software: Visual Studio and IntelliJ
 
 ## Technical Experience
-- Relevant Courses: Programming and Problem Solving 1 and 2
+- Fall Hackathon 2023
+- Relevant Courses: Programming and Problem Solving 1 and 2 and Technical Writing
 
 ## Contact Information
 - William Pitts
