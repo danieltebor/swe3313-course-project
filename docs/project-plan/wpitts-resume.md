@@ -3,7 +3,7 @@
 ## Technical Capabilities -
 
 - Languages: Java and C#
-- Tech:
+- Software: Visual Studio and IntelliJ
 ### Contact Information -
 - William Pitts
 - wpitts@students.kennesaw.edu
