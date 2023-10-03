@@ -11,4 +11,4 @@
 
 ## Contact Information -
 - William Pitts
-- KSU email: wpitts@students.kennesaw.edu
+- KSU email: wpitts6@students.kennesaw.edu
