@@ -1,8 +1,6 @@
 # Technology Selection
-### Language
-- C# was chosen because it will be good experience and it provides the best tools with smooth integration
-### Framework
-- ASPNET Core was chosen because it was listed as the client’s requirement according to the chosen language
+### Language and Framework
+- C# and ASPNET Core were chosen as the language and framework because they provide good experience and the best tools with smooth integration
 ### Storage Plan
 - JSON was chosen for database implementation because it is the easiest to use
 ### Operating Environment
