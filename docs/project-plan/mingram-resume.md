@@ -1,4 +1,4 @@
-# Megan Ingram Resume
+# Megan Ingram's Resume
 ## Technical Capabilities
 - Languages: Java, Python, HTML
 - Software: IntelliJ, PyCharm, Wireshark, RStudio
