@@ -1,6 +1,6 @@
 # swe3313-course-project
 ## Introducing Hank's Mineral Emporium
-Welcome to the project repository for NullPointerException! All of the artifacts, presentations, documentation, and source code for our SWE 3313 class project is located here. We will be creating a small e-commerce website using ASPNET Core and ???? to sell special minerals.
+Welcome to the project repository for NullPointerException! All of the artifacts, presentations, documentation, and source code for our SWE 3313 class project is located here. We will be creating a small e-commerce website using ASPNET Core and JSON to sell special minerals.
 ### Meet Our Team
 - [Daniel Tebor](docs/project-plan/dtebor-resume.md)
 - [Megan Ingram](docs/project-plan/mingram-resume.md)
