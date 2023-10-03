@@ -1,1 +1,14 @@
-# Will Pitts Resume
+# William Pitts' Resume -
+
+## Technical Capabilities -
+
+- Languages: Java and C#
+- Software: Visual Studio and IntelliJ
+
+## Technical Experience -
+- Hackathon Fall 2023
+- Programming and Problem Solving 1321 and 1322
+
+## Contact Information -
+- William Pitts
+- KSU email: wpitts6@students.kennesaw.edu
