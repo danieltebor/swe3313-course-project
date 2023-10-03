@@ -11,5 +11,4 @@
 
 ## Contact Information -
 - William Pitts
-- wpitts@students.kennesaw.edu
-- Github (wpitts2299)
+- KSU email: wpitts@students.kennesaw.edu
