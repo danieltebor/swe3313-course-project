@@ -9,7 +9,7 @@
 - Hackathon Fall 2023
 - Programming and Problem Solving 1321 and 1322
 
-- ## Contact Information -
+## Contact Information -
 - William Pitts
 - wpitts@students.kennesaw.edu
 - Github (wpitts2299)
