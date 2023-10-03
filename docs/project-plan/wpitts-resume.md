@@ -2,10 +2,8 @@
 
 ## Technical Capabilities -
 
-### Languages
-- Java
-- C#
-- Markdown
+- Languages: Java and C#
+- Tech:
 ### Contact Information -
 - William Pitts
 - wpitts@students.kennesaw.edu
