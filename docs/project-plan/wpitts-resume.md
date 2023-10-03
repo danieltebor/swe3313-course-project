@@ -1,4 +1,4 @@
-# Will Pitts Resume -
+# William Pitts' Resume -
 
 ## Technical Capabilities -
 
