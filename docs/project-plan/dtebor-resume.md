@@ -1,4 +1,4 @@
-# Daniel Tebor Resume
+# Daniel Tebor's Resume
 ## Technical Capabilities
 - Languages: Java, Python, C#, C/C++, HTML
 - Software: VS Code, VS, IntelliJ, GitHub
