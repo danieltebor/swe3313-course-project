@@ -6,4 +6,4 @@
 ### Operating Environment
 - Web-based was chosen as the operating environment because it is cross-platform for C# (Windows, Mac, Linux)
 ### Other Software
-- Other necessary software is Marvel, which will be used for UI design per the client’s requirement
+- Another necessary software is Marvel, which will be used for UI design per the client’s requirement
