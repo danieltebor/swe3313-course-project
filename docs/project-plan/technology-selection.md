@@ -1,9 +1,9 @@
 # Technology Selection
 ### Language and Framework
-- C# and ASPNET Core were chosen as the language and framework because they provide good experience and the best tools with smooth integration
+C# and the ASP.NET Core framework were chosen because of development tools, cross-platform support, and smooth integration.
 ### Storage Plan
-- JSON was chosen for database implementation because it is the easiest to use
+JSON was chosen for database implementation because it is easy to use and robust enough for the project requirements.
 ### Operating Environment
-- Web-based was chosen as the operating environment because it is cross-platform for C# (Windows, Mac, Linux)
+C# and ASP.NET are cross platform and can be integrated on most popular operating systems.
 ### Other Software
-- Another necessary software is Marvel, which will be used for UI design per the client’s requirement
+Marvel will be used for UI design as per the client's specification.
