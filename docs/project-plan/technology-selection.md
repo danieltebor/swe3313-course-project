@@ -1,6 +1,6 @@
 # Technology Selection
 ### Language and Framework
-C# and ASP.NET Core were chosen as the language because they have many tools, smooth integration, and are cross-platform. ASP.NET was chosen as the framework, as a web-based framework makes the most sense for the project requirements.
+C# was chosen as the language because it has smooth integration and is cross-platform. ASP.NET Core was chosen as the framework because it's web-based and has many tools, which makes the most sense for the project requirements.
 ### Storage Plan
 JSON was chosen for database implementation because it is easy to use and robust enough for the project requirements.
 ### Operating Environment
