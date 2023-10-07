@@ -5,7 +5,7 @@
 ## Technical Experience 
 - Hackathon Spring 2023
 - Programming and Problem Solving 1 and 2
-## Contact -
+## Contact Information 
 - Zachary Gray
 - KSU email: zgray8@students.kennesaw.edu
 
