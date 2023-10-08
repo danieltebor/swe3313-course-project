@@ -1,5 +1,5 @@
 # Team Assignments
-[Daniel Tebor](project-plan/dtebor-resume.md): Daniel is lead technical design and GitHub admin. He will lead the design of the project structure and implemention and manage the GitHub repository. Additionally, Daniel will help manage coding conventions and coding practices. Daniel will do the backend IT integration. 
+[Daniel Tebor](docs/project-plan/dtebor-resume.md): Daniel is lead technical design and GitHub admin. He will lead the design of the project structure and implemention and manage the GitHub repository. Additionally, Daniel will help manage coding conventions and coding practices. Daniel will do the backend IT integration. 
   
 [Megan Ingram](project-plan/mingram-resume.md): Megan is project manager. She will keep track of documentation and formatting. Additionally, she will help with GUI design and implementation. Finally, she will be helping create presentations for different phases of the project.
 
