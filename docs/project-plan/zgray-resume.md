@@ -3,7 +3,7 @@
 - Languages: Java, Python, C#
 - Software: IntelliJ, Pycharm
 ## Technical Experience 
-- Hackathon Spring 2023
+- Spring Hackathon 2023
 - Relevant Courses: Programming and Problem Solving 1 and 2
 ## Contact Information 
 - Zachary Gray
