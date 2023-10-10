@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # Common IntelliJ Platform excludes
 .idea
 # User specific
@@ -100,3 +101,14 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+=======
+# Build Files.
+out/
+
+# IDE Excludes.
+*.idea
+*.vs
+*.code-workspace
+*.sln
+*.csproj
+>>>>>>> Stashed changes
