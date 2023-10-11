@@ -1,7 +1,9 @@
 # swe3313-course-project
 
 ## Introducing Hank's Mineral Emporium
-Welcome to the SWE 3313 project repository for team NullPointerException! All project artifacts, presentations, documentation, and source code are located here. Hank from Breaking Bad needs to sell his collection of rare minerals and has commissioned a small website, Hank's Mineral Emporium. The website will be implemented using C#, ASPNET Core, and JSON.
+Welcome to the SWE 3313 project repository for team NullPointerException! All project artifacts, presentations, documentation, and source code are located here.
+
+Hank from Breaking Bad needs to sell his collection of rare minerals and has commissioned a small website, Hank's Mineral Emporium. The website will be implemented using C#, ASPNET Core, Blazor, and JSON.
 
 ## Meet Our Team
 - [Daniel Tebor](docs/project-plan/dtebor-resume.md)
@@ -13,6 +15,6 @@ Welcome to the SWE 3313 project repository for team NullPointerException! All pr
 
 ## [Technology Selection](docs/project-plan/technology-selection.md)
 
-## [Project Plan]()
+## [Project Plan](https://adkisson-swe-f23.youtrack.cloud/gantt-charts/174-15)
 
-## [Project Plan Video Presentation]()
+## [Project Plan Video Presentation](docs/project-plan/)
