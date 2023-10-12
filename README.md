@@ -17,4 +17,4 @@ Hank from Breaking Bad needs to sell his collection of rare minerals and has com
 
 ## [Project Plan](https://adkisson-swe-f23.youtrack.cloud/gantt-charts/174-15)
 
-## [Project Plan Video Presentation](https://github.com/danieltebor/swe3313-course-project/blob/project-plan/docs/project-plan/Project%20Plan%20presentation.mp4)
+## [Project Plan Presentation](docs/project-plan/project-plan-presentation.mp4)
