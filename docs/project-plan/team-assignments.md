@@ -5,4 +5,4 @@
 
 [William Pitts](/docs/project-plan/wpitts-resume.md) - Will is lead GUI design. He will be in charge of creating and implementing the GUI. He will also help with general code implementation and presentation creation.
 
-[Zachary Gray](/docs/project-plan/zgray-resume.md) - Zach will be working on backend implementation and assisting in technical design. He will also assist with designing the GUI and creating presentations.
+[Zachary Gray](/docs/project-plan/zgray-resume.md) - Zach will be working on backend implementation and assisting in technical design. He will also help with designing the GUI and creating presentations.
