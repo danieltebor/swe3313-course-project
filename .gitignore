@@ -1,0 +1,9 @@
+# Build files.
+out/
+
+# IDE files.
+*.idea
+*.vs
+*.code-workspace
+*.sln
+*.csproj
