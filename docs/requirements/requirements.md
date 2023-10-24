@@ -75,9 +75,19 @@
 - Milestone 2: Version 1.2
   - Epic Make guest account system.
     - Allows someone to view and buy items without a personal account.
+      - Estimated Effort: 2 days
+      - Non-Functional
   - Epic: implement a system that emails receipts
+      - Estimated Effort: 2 days
+      - Non-Functional
   - Epic: improve sales report
-    - Sales report adds "date purchased."
+    - When an item is bought, the sales report adds "date purchased."
+      - Estimated Effort: ¼ day
+      - Non-Functional
   - Epic: UI improvement
     - UI for admin to add inventory.
+      - Estimated Effort: 3 days
+      - Non-Functional
     - Make it so specific items can contain more than one picture.
+      - Estimated Effort: 1 day
+      - Non-Functional
