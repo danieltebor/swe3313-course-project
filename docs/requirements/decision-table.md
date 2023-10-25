@@ -1,5 +1,4 @@
 | Admin              | yes | yes | yes | yes | no  | no  | no  | no  |
-|--------------------|-----|-----|-----|-----|-----|-----|-----|-----|
 | Sales Access       | yes | yes | yes | yes | no  | no  | no  | no  |
 | Make/Remove Admins | yes | yes | yes | yes | no  | no  | no  | no  |
 | Add Stock          | yes | yes | yes | yes | no  | no  | no  | no  |
