@@ -1,5 +1,7 @@
 # Requirements
-- Milestone 1: Version 1.1
+
+## Version 1
+- Milestone: M1
   - Epic: Make a system for usernames and unique ID creation.
     - All usernames stored must be unique (6-character minimum) since the username will be used as an ID.
       - Estimated Effort: 1 day
@@ -72,7 +74,8 @@
       - Estimated Effort: ¼ day
       - Functional
 
-- Milestone 2: Version 1.2
+## Version 2
+- Milestone: Future
   - Epic Make guest account system.
     - Allows someone to view and buy items without a personal account.
       - Estimated Effort: 2 days
