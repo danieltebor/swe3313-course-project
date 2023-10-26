@@ -5,76 +5,98 @@
   - Epic: Make a system for usernames and unique ID creation.
     - All usernames stored must be unique (6-character minimum) since the username will be used as an ID.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
   - Epic: Make user interface
     - The inventory must be listed from the highest price to the lowest price for the customer.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
     - The UI must contain a picture, name, price, and a brief description of the item.
       - Estimated Effort: 5 days
+      - Priority: Must Have
       - Functional
     - Anyone without or with an account can view what is in stock.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
   - Epic: make sales report system
     - The sales report must be in expressive format.
       - Estimated Effort: 2 days
+      - Priority: Must Have
       - Functional
     - The sales data must contain who bought the item, and what was bought.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
     - By default, people who self-register are automatically not admins.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
   - Epic: Giving admins power
     - Admins must be able to remove and add admins.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
     - Admins must be able to add stock.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
     - Admins must have access to sales reports.
       - Estimated Effort: 1 day
+      - Priority: Must Have
       - Functional
   - Epic: make a shopping cart system
     The shopping cart must have something in it to go to checkout.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - Once the user is in checkout, the user must see a list of items with their subtotals.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - If the user removes everything from the cart, then take the user back to the main screen automatically.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - From the shopping cart page, the user must click "Pay Now" to start the payment process. They also should be able to return to shopping.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - The prices use built-in decimal type.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - When Pay Now is clicked, the user must enter their shipping address, credit card number, phone number, and shipping speed. All fields are required. The credit card also requires the expiration month and year and the CVV security code.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - There must be 3 shipping options:
       - Overnight: $29
       - 3-Day: $19
       - Ground: $0, free
         - Estimated Effort: ¼ day
+        - Priority: Must Have
         - Functional
     - After all the fields are complete, the user must be able to click "Confirm Order."
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - On the Confirm Order page, you must show a list of what the user is buying (name and price only), the subtotal, tax (6% of the subtotal) shipping speed cost, and grand total.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - After the user clicks "Confirm Order" the page will display their receipt."
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - The user will click "OK" to exit the receipt. Users should not be able to return to the cart or payment area at this point because the cart is empty.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
     - Whatever the user buys should immediately go into the sales report.
       - Estimated Effort: ¼ day
+      - Priority: Must Have
       - Functional
 
 ## Version 2
@@ -82,18 +104,23 @@
   - Epic Make guest account system.
     - Allows someone to view and buy items without a personal account.
       - Estimated Effort: 2 days
+      - Priority: Wants to have
       - Non-Functional
   - Epic: implement a system that emails receipts
       - Estimated Effort: 2 days
+      - Priority: Wants to have
       - Non-Functional
   - Epic: improve sales report
     - When an item is bought, the sales report adds "date purchased."
       - Estimated Effort: ¼ day
+      - Priority: Wants to have
       - Non-Functional
   - Epic: UI improvement
     - UI for admin to add inventory.
       - Estimated Effort: 3 days
+      - Priority: Wants to have
       - Non-Functional
     - Make it so specific items can contain more than one picture.
       - Estimated Effort: 1 day
+      - Priority: Wants to have
       - Non-Functional
