@@ -26,7 +26,7 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - Functional
       - The system provides a way for a user to add an item on the Product List Page (T1E-7) to their cart. A user must be logged into an account to do this.
     - T1S-2.3: Item Search
-      - Needs to have
+      - Must have
       - 4 days effort
       - Functional
       - The system provides a way to query available products by name.
@@ -112,7 +112,7 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - Functional
       - A user can add a displayed item to their cart by clicking a button.
     - T1S-7.3: Item Search
-      - Needs to have
+      - Must have
       - 4 days effort
       - Functional
       - A user can enter a search key in a search bar and items with similar names to the key will be shown.
