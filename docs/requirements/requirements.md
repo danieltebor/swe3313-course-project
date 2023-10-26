@@ -232,13 +232,13 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - 5 days effort
       - Functional
       - A user can request a password reset via email.
-    - T1S-: Password Reset Page
+    - T1S-: View Password Reset Page
       - Needs to have
       - 3 days effort
       - Functional
       - A user can input a new 6-character or more password.
   - T1E-: Product List Page QOL
-    - T1S-: Multiple Item Images
+    - T1S-: Display Multiple Item Images
       - Wants to have
       - 3 days effort
       - Functional
@@ -260,7 +260,7 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - Functional
       - The system emails an order receipt to the user when an order is completed.
   - T1E-: Allow New Item Entering QOL
-    - T1S-: Uploading New Item Images
+    - T1S-: Upload New Item Images
       - Wants to have
       - 4 days effort
       - Functional
