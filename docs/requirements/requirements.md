@@ -178,7 +178,7 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - Must have
       - 4 days effort
       - Functional
-      -The page allows an admin to submit the item to the database once all fields have been filled out.
+      - The page allows an admin to submit the item to the database once all fields have been filled out.
 - Milestone: Technical Design
 - Milestone: Implementation
 
