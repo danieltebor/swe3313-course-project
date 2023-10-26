@@ -172,7 +172,7 @@
       - Wants to have
       - 3 days effort
       - Functional
-      - The page shows a box with all available images. The page enables the admin to scroll down through the images and click the desired image to select it. A “Select Image” button is provided to confirm the selected image. The page lets the admin change the selected image before the item is submitted.
+      - The page shows a box with all available images. The page enables the admin to scroll down through the images and click the desired image to select it. When an image is selected, the window displaying the images is closed and the selected image is shown. A new image can be selected if necessary.
     - T1S-10.3: Submit Item to Database
       - Must have
       - 4 days effort
@@ -194,7 +194,7 @@
       - Must have
       - 2 days effort
       - Non-Functional
-      - The database can insert new users into the user database. This is when the user's unique ID is generated.
+      - The database can insert new users into the user database. This is when the user's unique ID is generated. This process must ensure that items are not added at the same time.
     - T1S-11.4: Store Product Items
       - Must have
       - 5 days effort
@@ -214,7 +214,7 @@
       - Must have
       - 2 days
       - Non-Functional
-      - The database can insert new items into the item database. This is when the item's unique ID is generated.
+      - The database can insert new items into the item database. This is when the item's unique ID is generated. This process must ensure that items are not added at the same time.
     - T1S-11.7: Store Sales
       - Must have
       - 5 days effort
@@ -234,7 +234,7 @@
       - Must have
       - 4 days effort
       - Non-Functional
-      - The database can insert new sales into the sales database. Given an order that has multiple items, a unique sale is created for each item with the corresponding item ID and user ID. The order receipt is copied into each sale in the sale database.
+      - The database can insert new sales into the sales database. Given an order that has multiple items, a unique sale is created for each item with the corresponding item ID and user ID. The order receipt is copied into each sale in the sale database. This process must ensure that items are not added at the same time.
   - T1E-12: Product Item Page Components
     - T1S-12.1: List Product Items
       - Must have
@@ -251,12 +251,7 @@
       - 4 days effort
       - Functional
       - The page only shows items with a similar name to a search key when a key is entered into a provided search bar.
-    - T1S-12.4: Travere to Other Pages
-      - Must have
-      - 2 days effort
-      - Functional
-      - The page provides a button to traverse to a Login Page (T1S-6.2), a Checkout Page (T1E-8), a Sales Report Page (T1E-9), and an Item Creation Page (T1E-10). The Checkout Page (T1E-8) button is only clickable if there is at least one item in the shopping cart and the user is logged into an account. The Sales Report Page (T1E-9) button and Item Creation Page (T1E-10) button are only shown if a user is logged into an admin account. The Login Page (T1S-6.2) button will show a Log Out Button if the user is logged into an account.
-    - T1S-12.5: Log Out
+    - T1S-12.4: Log Out
       - Must have
       - 2 days effort
       - Functional
@@ -337,6 +332,69 @@
       - 1 day effort
       - Functional
       - The page provides an OK button that, when pressed, brings the user back to the Product List Page (T1E-7).
+  - T1E-18: Sales Report Page Components
+    - T1S-18.1: Query Sales Report
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides a button that a user can press that queries the sales database for all sales and returns a list of sales.
+    - T1S-18.2: View Sales Report
+      - Must have
+      - 3 days effort
+      - Functional
+      - The page displays a list of all sales once a sales report has been queried. When a sale is clicked, the Receipt Page (T1S-8.6) for that sale is displayed.
+    - T1S-18.3: Dump Sales Report to CSV
+      - Must have
+      - 2 days effort
+      - Non-Functional
+      - The system dumps a sales report into a CSV file, maintaining the sale ID, item ID, and user ID.
+    - T1S-18.4: Export Sales Report
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides a Download Sales Report Button. When the button is pressed, the CSV file is downloaded by the client in their browser.
+  - T1E-19: Add Item Page Components
+    - T1S-19.1: Enter Item Info
+      - Needs to have
+      - 3 days effort
+      - Functional
+      - The page provides fields that must be filled out: item name, item price, item image, and item description.
+    - T1S-19.2: Select Item Image
+      - Needs to have
+      - 4 days effort
+      - Functional
+      - The page opens a grid of all available images if a Select Item Image button is pressed. The images are pulled from a directory of images. If an image is clicked, the grid is closed and the selected image is shown. The Select Item Image button can be pressed again to select a different image.
+    - T1S-19.3: Confirm Item
+      - Needs to have
+      - 2 days effort
+      - Functional
+      - The page allows a Confirm Item button to be pressed once all fields are filled. Once the button is pressed, the item is inserted into the database. The fields are cleared so that a user can repeat the process.
+  - TIE-20: Common Webpage Components
+    - T1S-20.1: Travere to Product List Page
+      - Must have
+      - 1 day effort
+      - Functional
+      - The page provides a Home button that can be pressed to traverse to the Product List Page (T1E-7).
+    - T1S-20.2: Traverse to Login Page
+      - Must have
+      - 1 day effort
+      - Functional
+      - The page provides a Login button that can be pressed to traverse to the Login Page (T1S-6.2). When is user is logged in, this button turns into a Logout button.
+    - T1S-20.3: Traverse to Checkout Page
+      - Must have
+      - 1 day effort
+      - Functional
+      - The page provides a Checkout button that can be pressed to traverse to the Checkout Page (T1E-8). This button can only be pressed if a user is logged in and has at least one item in their cart.
+    - T1S-20.4: Traverse to Sales Report Page
+      - Needs to have
+      - 1 day effort
+      - Functional
+      - The page provides a Sales Report button that can be pressed to traverse to the Sales Report Page (T1E-9). This button can only be seen if the user is an admin.
+    - T1S-20.5: Traverse to Item Creation Page
+      - Needs to have
+      - 1 day effort
+      - Functional
+      - The page provides a Create new Item button that can be pressed to traverse to the Create new Item Page (T1E-10). This button can only be seen if the user is an admin.
 - Milestone: Implementation
 
 ## Version 2
@@ -432,3 +490,9 @@
       - 4 days effort
       - Functional
       - An admin can upload new images for items being added to the database.
+  - T1E-: Admin Promotion Page
+    - T1S-: Promote User to Admin
+      - Wants to have
+      - 3 days effort
+      - Functional
+      - The page provides a way for admins to search for a user and then promote them to admin.
