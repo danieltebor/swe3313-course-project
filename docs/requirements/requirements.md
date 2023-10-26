@@ -180,6 +180,164 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - Functional
       - The page allows an admin to submit the item to the database once all fields have been filled out.
 - Milestone: Technical Design
+  - T1E-11: Database Components
+    - T1S-11.1: Store Users
+      - Must have
+      - 5 days effort
+      - Non-Functional
+      - The database stores each created user account and the account information. That account information includes a uniquely generated ID, unique username, encrypted/hashed password, and whether or not the user is an admin for each user.
+    - T1S-11.2: Query User
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - The database can return the information of a user given the user's ID or username.
+    - T1S-11.3: Add User
+      - Must have
+      - 2 days effort
+      - Non-Functional
+      - The database can insert new users into the user database. This is when the user's unique ID is generated.
+    - T1S-11.4: Store Product Items
+      - Must have
+      - 5 days effort
+      - Non-Functional
+      - The database stores each item that can be sold and that item's information. The item information includes a uniquely generated ID, a name, a price, a path to an image, and an optional description.
+    - T1S-11.5: Query Item
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - The database can return the information of an item given the item's ID.
+    - T1S-11.5: Retrieve Sellable Items
+      - Must have
+      - 4 days effort
+      - Non-Functional
+      - The database can return a list of all items that haven't yet been sold and the item's information.
+    - T1S-11.6: Add Item
+      - Must have
+      - 2 days
+      - Non-Functional
+      - The database can insert new items into the item database. This is when the item's unique ID is generated.
+    - T1S-11.7: Store Sales
+      - Must have
+      - 5 days effort
+      - Non-Functional
+      - The database stores each sale completed. The sale information includes the unique sale ID, the item ID, the ID of the user who bought the item, and the corresponding sale receipt.
+    - T1S-11.8: Query Sale
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - The database can return the information of a sale given the sale ID or the item ID.
+    - T1S-11.9: Retrieve Sales
+      - Must have
+      - 4 days effort
+      - Non-Functional
+      - The database can return a list of all sales ever made.
+    - T1S-11.10: Add Sale/s
+      - Must have
+      - 4 days effort
+      - Non-Functional
+      - The database can insert new sales into the sales database. Given an order that has multiple items, a unique sale is created for each item with the corresponding item ID and user ID. The order receipt is copied into each sale in the sale database.
+  - T1E-12: Product Item Page Components
+    - T1S-12.1: List Product Items
+      - Must have
+      - 3 days effort
+      - Functional
+      - The page makes a database request to Retrieve Sellable Items (T1S-11.5). The items are shown in a grid.
+    - T1S-12.2: Display Item Information
+      - Must have
+      - 3 days effort
+      - Functional
+      - The page shows an item's name, price, image, and description in its corresponding slot in the grid. There is also a button to add the item to the cart.
+    - T1S-12.3: Filter Shown Items
+      - Needs to have
+      - 4 days effort
+      - Functional
+      - The page only shows items with a similar name to a search key when a key is entered into a provided search bar.
+    - T1S-12.4: Travere to Other Pages
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides a button to traverse to a Login Page (T1S-6.2), a Checkout Page (T1E-8), a Sales Report Page (T1E-9), and an Item Creation Page (T1E-10). The Checkout Page (T1E-8) button is only clickable if there is at least one item in the shopping cart and the user is logged into an account. The Sales Report Page (T1E-9) button and Item Creation Page (T1E-10) button are only shown if a user is logged into an admin account. The Login Page (T1S-6.2) button will show a Log Out Button if the user is logged into an account.
+    - T1S-12.5: Log Out
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides a logout button when a user is logged in. If the user presses this button, they will be logged out of their account and lose access to their shopping cart.
+  - T1E-13: Login Page Components
+    - T1S-13.1: Enter Login Information
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides 2 fields that a user must fill out: a username field and a password field. The password is shown as dots unless a show password button is pressed.
+    - T1S-13.2: Confirm Login
+      - Must have
+      - 1 day effort
+      - Functional
+      - The page checks the database for an account corresponding with the inputted username and password. If there is an account, log the user in and send them back to the Product List Page (T1E-7).
+    - T1S-13.3: Register New Account
+      - Must have
+      - 1 day effort
+      - Functional
+      - The page provides a button that a user can press to proceed to the Register User Page (T1S-6.1).
+  - T1E-14: Register User Page Components
+    - T1S-14.1: Enter Login Information
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides 2 fields that a user must fill out: a username field and a password field. The password is shown as dots unless a show password button is pressed.
+    - T1S-14.2: Confirm Login Information
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides a button to confirm login information. If the username already belongs to another user in the database, an error will be shown. If the password is less than 6 characters long, an error will be shown. If both fields are valid, a new user will be added to the database and the user will be brought back to the Product List Page (T1E-7).
+  - T1E-15: Checkout Page Components
+    - T1S-15.1: Show Item List
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page stores a list of all items added to the cart. The items are listed on the page and a subtotal is calculated and shown.
+    - T1S-15.2: Remove Items
+      - Must have
+      - 1 day effort
+      - Functional
+      - The page provides a button next to each item in the cart that, when pressed, removes the item from the cart. If the items in the cart drop to 0, the user is redirected to the Product List Page (T1E-7).
+    - T1S-15.3: Pay for Items
+      - Must have
+      - 1 day effort
+      - Functional
+      - The page provides a button that takes the user to a Pay Now Page when pressed.
+  - T1E-16: Pay Now Page Components
+    - T1S-16.1: Enter Payment Info
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides fields for the shipping address, phone number, credit card number, credit card expiration date, and credit card CVV number.
+        - As this is a class project, these fields do not need to be checked for validity.
+    - T1S-16.2: Select Shipping Option
+      - Must have
+      - 2 days effort
+      - Functional
+      - The page provides 3 options from T1S-3.3 for the user to select. The default selected option is the free option.
+    - T1S-16.3: Show Order Summary
+      - Must have
+      - 3 days effort
+      - Functional
+      - The page shows the list of all items stored in the cart and their subtotal, the calculated tax, the shipping cost, and the total price.
+    - T1S-16.4: Confirm Order
+      - Must have
+      - 1 days effort
+      - Functional
+      - The page provides a Confirm Order button. Once this button is pressed, and all fields are filled out, the sale will be entered into the database and the user will be taken to the Receipt Page (T1S-8.6).
+  - T1E-17: Receipt Page Components
+    - T1S-17.1: View Order Summary
+      - Needs to have
+      - 1 day effort
+      - Functional
+      - The page provides the information from T1S-16.3 in addition to the last 4 digits of the credit card number and the shipping address from T1S-16.1.
+    - T1S-17.2: Return to Shopping
+      - Needs to have
+      - 1 day effort
+      - Functional
+      - The page provides an OK button that, when pressed, brings the user back to the Product List Page (T1E-7).
 - Milestone: Implementation
 
 ## Version 2
@@ -221,6 +379,11 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - 2 days effort
       - Functional
       - A user can change their password. Doing so requires the current password to be inputted. If the user does not know their password, an account recovery page can be accessed.
+    - T1S-: Delete Account
+      - Wants to have
+      - 3 days effort
+      - Functional
+      - The page allows for a user to permanently delete their account.
     - T1S-: Scrub Shipping & Payment Info
       - Needs to have
       - 2 days effort
@@ -259,6 +422,11 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - 2 days effort
       - Functional
       - The system emails an order receipt to the user when an order is completed.
+    - T1S-: Store Current Cart
+      - Wants to have
+      - 4 days effort
+      - Non-Functional
+      - The system stores the user's current cart in the database so that it can be loaded if a user leaves the site or logs out and back in again.
   - T1E-: Allow New Item Entering QOL
     - T1S-: Upload New Item Images
       - Wants to have
