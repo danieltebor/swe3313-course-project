@@ -30,6 +30,9 @@
     - Admins must be able to remove and add admins.
       - Estimated Effort: 1 day
       - Functional
+    - Admins must be able to add stock.
+      - Estimated Effort: 1 day
+      - Functional
     - Admins must have access to sales reports.
       - Estimated Effort: 1 day
       - Functional
