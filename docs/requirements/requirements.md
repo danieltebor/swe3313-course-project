@@ -4,12 +4,12 @@ The following is the written requirements for Hank's Mineral Emporium. Version 1
 ## Version 1
 - Milestone: Requirements
   - T1E-1: Users
-    - T1S-1.1: Register General Users
+    - T1S-1.1: General Users
       - Must have
       - 3 days effort
       - Non-Functional
       - Users are registered in the database using a unique username and a 6-character minimum password. Users can add items to their cart and checkout items.
-    - T1S-1.2: Create Admin Users
+    - T1S-1.2: Admin Users
       - Must have
       - 3 days effort
       - Non-Functional
