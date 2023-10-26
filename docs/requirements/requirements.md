@@ -395,7 +395,6 @@
       - 1 day effort
       - Functional
       - The page provides a Create new Item button that can be pressed to traverse to the Create new Item Page (T1E-10). This button can only be seen if the user is an admin.
-- Milestone: Implementation
 
 ## Version 2
 - Milestone: Future
