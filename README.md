@@ -32,3 +32,5 @@ The full list of written requirements can be found [here](/docs/requirements/req
 
 ### Decision Table
 ![](/docs/requiremenets/decision-table.png)
+
+### Requirements Presentation
