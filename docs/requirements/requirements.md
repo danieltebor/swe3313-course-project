@@ -90,7 +90,6 @@ Version 1 includes all features that must be implemented before the due date hig
       - 3 days effort
       - Non-Functional
       - The system appends a newly created item to the items database.
-
 - Milestone: UI Design
   - T1E-6: Login/Registration
     - T1S-6.1: New User Registration Page
@@ -177,7 +176,6 @@ Version 1 includes all features that must be implemented before the due date hig
       - 4 days effort
       - Functional
       - Once all item fields have been filled out, an admin can click the "Submit Item" button to add the item to the database.
-
 - Milestone: Technical Design
 - Milestone: Implementation
 
