@@ -1,126 +1,196 @@
 # Requirements
 
 ## Version 1
-- Milestone: M1
-  - Epic: Make a system for usernames and unique ID creation.
-    - All usernames stored must be unique (6-character minimum) since the username will be used as an ID.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+- Milestone: Requirements
+  - T1E-1: Users
+    - T1S-1.1: General Users
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - Users are registered in the database using a unique username and a 6-character minimum password. Users can add items to their cart and checkout items.
+    - T1S-1.2: Admin Users
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - Admin users are created by other admins by transforming a normal user into an admin user. Admins have the same abilities as general users but can also run sales reports and add new items to the product list.
+  - T1E-2: Product List Page
+    - T1S-2.1: Item Information
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - The system is able to serve a name, picture, price, and description for each item in the database. Items that have been sold should not be served on the product list page.
+    - T1S-2.2: Add Item to Cart
+      - Must have
+      - 3 days effort
       - Functional
-  - Epic: Make user interface
-    - The inventory must be listed from the highest price to the lowest price for the customer.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+      - The system provides a way for a user to add an item in the product list to their cart. A user must be logged into an account to do this.
+    - T1S-2.3: Item Search
+      - Needs to have
+      - 4 days effort
       - Functional
-    - The UI must contain a picture, name, price, and a brief description of the item.
-      - Estimated Effort: 5 days
-      - Priority: Must Have
+      - The system provides a way to query available products by name.
+  - T1E-3: Item Checkout
+    - T1S-3.1: Checkout Item List
+      - Must have
+      - 2 days effort
       - Functional
-    - Anyone without or with an account can view what is in stock.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+      - The system provides a list of items in a user's shopping cart. The cart items are removable from the cart. A subtotal of the items in the cart needs to be provided.
+    - T1S-3.2: Payment Method
+      - Must have
+      - 3 days effort
       - Functional
-  - Epic: make sales report system
-    - The sales report must be in expressive format.
-      - Estimated Effort: 2 days
-      - Priority: Must Have
+      - The system requires a shipping address, phone number, credit card number, credit card expiration date, and credit card CVV number.
+    - T1S-3.3: Shipping Option
+      - Must have
+      - 2 days effort
       - Functional
-    - The sales data must contain who bought the item, and what was bought.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+      - The system requires the user to select a shipping option. The options are free ground shipping, $19 3-day shipping, and $29 overnight shipping.
+    - T1S-3.4: Order Summary
+      - Must have
+      - 1 day effort
       - Functional
-    - By default, people who self-register are automatically not admins.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+      - The system must provide a list of the names of each ordered item and their price, a subtotal, the calculated tax (6%), the shipping price, and a grand total.
+    - T1S-3.5: Receipt
+      - Must have
+      - 3 days effort
       - Functional
-  - Epic: Giving admins power
-    - Admins must be able to remove and add admins.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+      - The system will provide a receipt when an order is completed. The receipt must have all information from the confirm order page in addition to the last 4 digits of the provided credit card number and the shipping address.
+    - T1s-3.6: Sales
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - The system will save sales in the database. Products that have been sold must no longer be served on the product list page.
+- Milestone: UI Design
+  - T1E-: Login/Registration
+    - T1S-: New User Registration Page
+      - Must have
+      - 4 days effort
       - Functional
-    - Admins must be able to add stock.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+      - A new user can enter their username and password into boxes and click a submit button once the fields are filled out.
+    - T1S-: User Login Page
+      - Must have
+      - 4 days effort
       - Functional
-    - Admins must have access to sales reports.
-      - Estimated Effort: 1 day
-      - Priority: Must Have
+      - A user can log into their account by entering a username and password field and clicking a submit button.
+  - T1E-: Product List Page
+    - T1S-: Item Display
+      - Must have
+      - 2 days effort
       - Functional
-  - Epic: make a shopping cart system
-    The shopping cart must have something in it to go to checkout.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - Displayed products show a name, picture, price, and description. Sold items are not shown.
+    - T1S-: Add Item to Shopping Cart Button
+      - Must have
+      - 3 days effort
       - Functional
-    - Once the user is in checkout, the user must see a list of items with their subtotals.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - A user can add a displayed item to their cart by clicking a button.
+    - T1S-: Item Search
+      - Needs to have
+      - 4 days effort
       - Functional
-    - If the user removes everything from the cart, then take the user back to the main screen automatically.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - A user can enter a search key in a search bar and items with similar names to the key will be shown.
+  - T1E-: Shopping Cart & Checkout Page
+    - T1S-: Checkout Page
+      - Must have
+      - 3 days effort
       - Functional
-    - From the shopping cart page, the user must click "Pay Now" to start the payment process. They also should be able to return to shopping.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - A user can access checkout by clicking a button once they have added at least one item to the cart. The items in the cart are listed with a calculated subtotal and can be removed with a button press. The user can click a button to proceed to the Pay Now page.
+    - T1S-: Entering Payment Info
+      - Must have
+      - 2 days effort
       - Functional
-    - The prices use built-in decimal type.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - The user must fill out a valid shipping address, phone number, credit card number, credit card expiration date, and credit card CVV number before proceeding
+    - T1S-: Shipping Option Selection
+      - Must have
+      - 1 days effort
       - Functional
-    - When Pay Now is clicked, the user must enter their shipping address, credit card number, phone number, and shipping speed. All fields are required. The credit card also requires the expiration month and year and the CVV security code.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - The user can check one of the shipping options from the 3 stored shipping options in T1S-3.3.
+    - T1S-: Order Summary View
+      - Must have
+      - 2 days effort
       - Functional
-    - There must be 3 shipping options:
-      - Overnight: $29
-      - 3-Day: $19
-      - Ground: $0, free
-        - Estimated Effort: ¼ day
-        - Priority: Must Have
-        - Functional
-    - After all the fields are complete, the user must be able to click "Confirm Order."
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - The page shows a list of all item names and their prices, a subtotal, the calculated tax owed, the shipping cost, and a grand total.
+    - T1S-: Order Completion
+      - Must have
+      - 1 day effort
       - Functional
-    - On the Confirm Order page, you must show a list of what the user is buying (name and price only), the subtotal, tax (6% of the subtotal) shipping speed cost, and grand total.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
+      - The user can press a complete order button once all fields have been filled out.
+    - T1S-: Receipt Page
+      - Must have
+      - 2 days effort
       - Functional
-    - After the user clicks "Confirm Order" the page will display their receipt."
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
-      - Functional
-    - The user will click "OK" to exit the receipt. Users should not be able to return to the cart or payment area at this point because the cart is empty.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
-      - Functional
-    - Whatever the user buys should immediately go into the sales report.
-      - Estimated Effort: ¼ day
-      - Priority: Must Have
-      - Functional
+      - The page shows all of the information from the order summary, the last 4 digits of the credit card number, and the shipping address. The user can press an OK button to return to the Product List page.
+- Milestone: Technical Design
+- Milestone: Implementation
 
 ## Version 2
 - Milestone: Future
-  - Epic Make guest account system.
-    - Allows someone to view and buy items without a personal account.
-      - Estimated Effort: 2 days
-      - Priority: Wants to have
-      - Non-Functional
-  - Epic: implement a system that emails receipts
-      - Estimated Effort: 2 days
-      - Priority: Wants to have
-      - Non-Functional
-  - Epic: improve sales report
-    - When an item is bought, the sales report adds "date purchased."
-      - Estimated Effort: ¼ day
-      - Priority: Wants to have
-      - Non-Functional
-  - Epic: UI improvement
-    - UI for admin to add inventory.
-      - Estimated Effort: 3 days
-      - Priority: Wants to have
-      - Non-Functional
-    - Make it so specific items can contain more than one picture.
-      - Estimated Effort: 1 day
-      - Priority: Wants to have
-      - Non-Functional
+  - T1E-: Additional User Information
+    - T1S-: Saved Email
+      - Wants to have
+      - 1 day effort
+      - Functional
+      - A user can optionally provide their email address during account creation. This value is saved in the database.
+    - T1S-: Saved Phone Number
+      - Wants to have
+      - 1 day effort
+      - Functional
+      - A user can optionally provide their phone number during account creation. This value is saved in the database.
+    - T1S-: Saved Shipping Info
+      - Wants to have
+      - 1 day effort
+      - Functional
+      - A user can have their shipping info saved during checkout for future use.
+    - T1S-: Saved Payment Method
+      - Wants to have
+      - 1 day effort
+      - Functional
+      - A user can opt to have their payment method saved for future purchases.
+  - T1E-: User Account Page
+    - T1S-: Enter Additional Information
+      - Wants to have
+      - 2 days effort
+      - Functional
+      - A user can enter/edit their email or phone number for future use.
+    - T1S-: Change Username
+      - Wants to have
+      - 2 days effort
+      - Functional
+      - A user can change their username to a new unique username.
+    - T1S-: Change Password
+      - Needs to have
+      - 2 days effort
+      - Functional
+      - A user can change their password. Doing so requires the current password to be inputted. If the user does not know their password, an account recovery page can be accessed.
+    - T1S-: Scrub Shipping & Payment Info
+      - Needs to have
+      - 2 days effort
+      - Functional
+      - A user can delete their saved shipping info and payment info if they no longer want it saved.
+  - T1E-: Account Recovery
+    - T1S-: Password Recovery
+      - Needs to have
+      - 5 days effort
+      - Functional
+      - A user can request a password reset via email.
+    - T1S-: Password Reset Page
+      - Needs to have
+      - 3 days effort
+      - Functional
+      - A user can input a new 6-character or more password.
+  - T1E-: Product List Page QOL
+    - T1S-: Multiple Product Images
+      - Wants to have
+      - 3 days effort
+      - Functional
+      - Items can have multiple images uploaded. A user can cycle through item images on the product list page.
+  - T1E-: Checkout QOL
+    - T1S-: Deselect Items in Cart
+      - Wants to have
+      - 1 day effort
+      - Functional
+      - A user can uncheck an item in their cart to unselect them. When proceeding with payment, only selected items are included in checkout.
+    - T1S-: Email Receipt to User
+      - Needs to have
+      - 2 days effort
+      - Functional
+      - The system emails an order receipt to the user when an order is completed.
