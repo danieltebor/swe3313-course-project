@@ -1,6 +1,9 @@
 # Requirements
+The following are the written requirements for Hank's Mineral Emporium.
 
 ## Version 1
+Version 1 includes all features that must be implemented before the due date highlighted in the project plan on [YouTrack](https://adkisson-swe-f23.youtrack.cloud/gantt-charts/174-15) in order for Hank's Mineral Emporium to be feature-complete.
+
 - Milestone: Requirements
   - T1E-1: Users
     - T1S-1.1: General Users
@@ -87,6 +90,7 @@
       - 3 days effort
       - Non-Functional
       - The system appends a newly created item to the items database.
+
 - Milestone: UI Design
   - T1E-6: Login/Registration
     - T1S-6.1: New User Registration Page
@@ -173,10 +177,13 @@
       - 4 days effort
       - Functional
       - Once all item fields have been filled out, an admin can click the "Submit Item" button to add the item to the database.
+
 - Milestone: Technical Design
 - Milestone: Implementation
 
 ## Version 2
+Version 2 includes features that aren't necessary for Hank's Mineral Emporium to be feature-complete, but that are nice-to-have features for quality of life and product success.
+
 - Milestone: Future
   - T1E-: Additional User Information
     - T1S-: Saved Email
