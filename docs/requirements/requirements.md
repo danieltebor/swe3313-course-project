@@ -243,7 +243,7 @@ The following is the written requirements for Hank's Mineral Emporium. Version 1
       - 3 days effort
       - Functional
       - Items can have multiple images uploaded. A user can cycle through item images on the Product List Page (T1E-7).
-    - T1S-: Modify Existing Item
+    - T1S-: Modify Existing Product Item
       - Wants to have
       - 4 days effort
       - Functional
