@@ -4,18 +4,18 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
 ## Version 1
 - Milestone: Requirements
   - T1E-1: Users
-    - T1S-1.1: General Users
+    - T1S-1.1: Register General Users
       - Must have
       - 3 days effort
       - Non-Functional
       - Users are registered in the database using a unique username and a 6-character minimum password. Users can add items to their cart and checkout items.
-    - T1S-1.2: Admin Users
+    - T1S-1.2: Create Admin Users
       - Must have
       - 3 days effort
       - Non-Functional
       - Admin users are created by other admins by transforming a normal user into an admin user. Admins have the same abilities as general users but can also run sales reports and add new items to the Product List (T1E-2).
   - T1E-2: Product List
-    - T1S-2.1: Item Information
+    - T1S-2.1: Generate Item Information
       - Must have
       - 3 days effort
       - Non-Functional
@@ -25,83 +25,83 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - 3 days effort
       - Functional
       - The system provides a way for a user to add an item on the Product List Page (T1E-7) to their cart. A user must be logged into an account to do this.
-    - T1S-2.3: Item Search
+    - T1S-2.3: Create Item Search
       - Must have
       - 4 days effort
       - Functional
       - The system provides a way to query available products by name.
   - T1E-3: Item Checkout
-    - T1S-3.1: Checkout Item List
+    - T1S-3.1: Generate Checkout Item List
       - Must have
       - 2 days effort
       - Functional
       - The system provides a list of items in a user's shopping cart. The cart items are removable from the cart. A subtotal of the items in the cart needs to be provided.
-    - T1S-3.2: Payment Method
+    - T1S-3.2: Display Payment Method
       - Must have
       - 3 days effort
       - Functional
       - The system requires a shipping address, phone number, credit card number, credit card expiration date, and credit card CVV number.
-    - T1S-3.3: Shipping Option
+    - T1S-3.3: Display Shipping Option
       - Must have
       - 2 days effort
       - Functional
       - The system requires the user to select a shipping option. The options are free ground shipping, $19 3-day shipping, and $29 overnight shipping.
-    - T1S-3.4: Order Summary
+    - T1S-3.4: Generate Order Summary
       - Must have
       - 1 day effort
       - Functional
       - The system must provide a list of the names of each ordered item and their price, a subtotal, the calculated tax (6%), the shipping price, and a grand total.
-    - T1S-3.5: Receipt
+    - T1S-3.5: Generate Receipt
       - Must have
       - 3 days effort
       - Functional
       - The system will provide a receipt when an order is completed. The receipt must have all information from the confirm order page in addition to the last 4 digits of the provided credit card number and the shipping address.
-    - T1S-3.6: Confirmed Sale
+    - T1S-3.6: Confirm Sale
       - Must have
       - 3 days effort
       - Non-Functional
       - The system will save sales in the database. Products that have been sold must no longer be served on the Product List Page (T1E-7).
   - T1E-4: Sales Report
-    - T1S-4.1: Generating Sales Report
+    - T1S-4.1: Generate Sales Report
       - Must have
       - 5 days effort
       - Functional
       - The system provides a list of all sales in the database. Each sale includes what was sold, who purchased it, and the Receipt (T1S-3.5) from that purchase. This function can only be run by admins.
-    - T1S-4.2: Exporting Sales Report
+    - T1S-4.2: Export Sales Report
       - Needs to have
       - 2 days effort
       - Functional
       - The system dumps the sales report into a CSV file and supplies it to the admin to download.
   - T1E-5: Entering New Items
-    - T1S-5.1: Item Database Seed Info
+    - T1S-5.1: Create Item Database Seed Info
       - Needs to have
       - 1 day effort
       - Non-Functional
       - The item database must start with some items so that the Product List Page (T1E-7) is not empty.
-    - T1S-5.2: Item Creation
+    - T1S-5.2: Create Item
       - Must have
       - 2 days effort
       - Functional
       - An admin enters a name, selects a picture, enters a price, and enters a description for a new item.
-    - T1S-5.3: Item Submission
+    - T1S-5.3: Generate Item Submission
       - Must have
       - 3 days effort
       - Non-Functional
       - The system appends a newly created item to the items database.
 - Milestone: UI Design
   - T1E-6: Login/Registration
-    - T1S-6.1: New User Registration Page
+    - T1S-6.1: Create New User Registration Page
       - Must have
       - 4 days effort
       - Functional
       - A new user can enter their username and password into boxes and click a submit button once the fields are filled out.
-    - T1S-6.2: User Login Page
+    - T1S-6.2: Create User Login Page
       - Must have
       - 4 days effort
       - Functional
       - A user can log into their account by entering a username and password field and clicking a submit button.
   - T1E-7: Product List Page
-    - T1S-7.1: Item Display
+    - T1S-7.1: Create Item Display
       - Must have
       - 2 days effort
       - Functional
@@ -111,65 +111,65 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - 3 days effort
       - Functional
       - A user can add a displayed item to their cart by clicking a button.
-    - T1S-7.3: Item Search
+    - T1S-7.3: Create Item Search
       - Must have
       - 4 days effort
       - Functional
       - A user can enter a search key in a search bar and items with similar names to the key will be shown.
   - T1E-8: Shopping Cart & Checkout Page
-    - T1S-8.1: Checkout Page
+    - T1S-8.1: Create Checkout Page
       - Must have
       - 3 days effort
       - Functional
       - A user can access checkout by clicking a button once they have added at least one item to the cart. The items in the cart are listed with a calculated subtotal and can be removed with a button press. The user can click a button to proceed to the Pay Now page.
-    - T1S-8.2: Entering Payment Info
+    - T1S-8.2: Enter Payment Info
       - Must have
       - 2 days effort
       - Functional
       - The user must fill out a valid shipping address, phone number, credit card number, credit card expiration date, and credit card CVV number before proceeding
-    - T1S-8.3: Shipping Option Selection
+    - T1S-8.3: Create Shipping Option Selection
       - Must have
       - 1 days effort
       - Functional
       - The user can check one of the shipping options from the 3 stored shipping options in T1S-3.3.
-    - T1S-8.4: Order Summary View
+    - T1S-8.4: Create Order Summary View
       - Must have
       - 2 days effort
       - Functional
       - The page shows a list of all item names and their prices, a subtotal, the calculated tax owed, the shipping cost, and a grand total.
-    - T1S-8.5: Order Completion
+    - T1S-8.5: Create Order Completion
       - Must have
       - 1 day effort
       - Functional
       - The user can press a complete order button once all fields have been filled out.
-    - T1S-8.6: Receipt Page
+    - T1S-8.6: Create Receipt Page
       - Must have
       - 2 days effort
       - Functional
       - The page shows all of the information from the order summary, the last 4 digits of the credit card number, and the shipping address. The user can press an OK button to return to the Product List Page (T1E-7).
   - T1E-9: Sales Report Page
-    - T1S-9.1: Sales Report View
+    - T1S-9.1: Create Sales Report View
       - Must have
       - 4 days effort
       - Functional
       - The admin is shown a list of all sales. Each sale includes the product name and who bought it. The admin can click an individual sale to show that sales Receipt Page (T1S-8.6).
-    - T1S-9.2: Downloading Sales Report
+    - T1S-9.2: Allow Downloading Sales Report
       - Must have
       - 2 days effort
       - Functional
       - The admin can click a "Download Sales Report" button to download a CSV file containing the sales report.
   - T1E-10: Item Creation Page
-    - T1S-10.1: Entering Item Information
+    - T1S-10.1: Enter Item Information
       - Needs to have
       - 1 day effort
       - Functional
       - The admin must fill out an item name, item price, and item description field. An image can be selected from a list of available images.
-    - T1S-10.2: Item Image Selection
+    - T1S-10.2: Select Item Image
       - Wants to have
       - 3 days effort
       - Functional
       - A box shows all available images. The admin can scroll down through the images and click the desired image to select it. Once an image is selected, the admin can press the "Select Image" button to use the currently selected image. The selected image can be changed before the item is submitted.
-    - T1S-10.3: Item Submission
+    - T1S-10.3: Submit Item
       - Must have
       - 4 days effort
       - Functional
@@ -180,22 +180,22 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
 ## Version 2
 - Milestone: Future
   - T1E-: Additional User Information
-    - T1S-: Saved Email
+    - T1S-: Save Email
       - Wants to have
       - 1 day effort
       - Functional
       - A user can optionally provide their email address during account creation. This value is saved in the database.
-    - T1S-: Saved Phone Number
+    - T1S-: Save Phone Number
       - Wants to have
       - 1 day effort
       - Functional
       - A user can optionally provide their phone number during account creation. This value is saved in the database.
-    - T1S-: Saved Shipping Info
+    - T1S-: Save Shipping Info
       - Wants to have
       - 1 day effort
       - Functional
       - A user can have their shipping info saved during checkout for future use.
-    - T1S-: Saved Payment Method
+    - T1S-: Save Payment Method
       - Wants to have
       - 1 day effort
       - Functional
@@ -222,23 +222,23 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - Functional
       - A user can delete their saved shipping info and payment info if they no longer want it saved.
   - T1E-: Account Recovery
-    - T1S-: Password Recovery
+    - T1S-: Recover Password
       - Needs to have
       - 5 days effort
       - Functional
       - A user can request a password reset via email.
-    - T1S-: Password Reset Page
+    - T1S-: Create Password Reset Page
       - Needs to have
       - 3 days effort
       - Functional
       - A user can input a new 6-character or more password.
   - T1E-: Product List Page QOL
-    - T1S-: Multiple Item Images
+    - T1S-: Allow Multiple Item Images
       - Wants to have
       - 3 days effort
       - Functional
       - Items can have multiple images uploaded. A user can cycle through item images on the Product List Page (T1E-7).
-    - T1S-: Modifying Existing Item
+    - T1S-: Modify Existing Item
       - Wants to have
       - 4 days effort
       - Functional
@@ -254,7 +254,7 @@ The following are the written requirements for Hank's Mineral Emporium. Version 
       - 2 days effort
       - Functional
       - The system emails an order receipt to the user when an order is completed.
-  - T1E-: New Item Entering QOL
+  - T1E-: Allow New Item Entering QOL
     - T1S-: Uploading New Item Images
       - Wants to have
       - 4 days effort
