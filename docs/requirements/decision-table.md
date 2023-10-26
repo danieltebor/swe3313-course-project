@@ -8,4 +8,10 @@
 | Viewable           | yes | yes | yes | yes | yes | yes | no  | no  |
 | Purchase           | yes | yes | no  | on  | yes | yes | no  | no  |
 
+| User               | yes | yes | yes | yes | no  | no  | no  | no  |
+|--------------------|-----|-----|-----|-----|-----|-----|-----|-----|
+| Cart Access        | yes | yes | yes | yes | yes | yes | yes | yes |
+| In Stock           | yes | yes | no  | no  | yes | yes | no  | no  |
+| Viewable           | yes | yes | yes | yes | yes | yes | no  | no  |
+| Purchase           | yes | yes | no  | on  | yes | yes | no  | no  |
 
