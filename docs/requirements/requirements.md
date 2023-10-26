@@ -12,18 +12,18 @@
       - Must have
       - 3 days effort
       - Non-Functional
-      - Admin users are created by other admins by transforming a normal user into an admin user. Admins have the same abilities as general users but can also run sales reports and add new items to the product list.
-  - T1E-2: Product List Page
+      - Admin users are created by other admins by transforming a normal user into an admin user. Admins have the same abilities as general users but can also run sales reports and add new items to the Product List (T1E-2).
+  - T1E-2: Product List
     - T1S-2.1: Item Information
       - Must have
       - 3 days effort
       - Non-Functional
-      - The system is able to serve a name, picture, price, and description for each item in the database. Items that have been sold should not be served on the product list page.
+      - The system is able to serve a name, picture, price, and description for each item in the database. Items that have been sold should not be served on the Product List Page (T1E-7).
     - T1S-2.2: Add Item to Cart
       - Must have
       - 3 days effort
       - Functional
-      - The system provides a way for a user to add an item in the product list to their cart. A user must be logged into an account to do this.
+      - The system provides a way for a user to add an item on the Product List Page (T1E-7) to their cart. A user must be logged into an account to do this.
     - T1S-2.3: Item Search
       - Needs to have
       - 4 days effort
@@ -55,70 +55,124 @@
       - 3 days effort
       - Functional
       - The system will provide a receipt when an order is completed. The receipt must have all information from the confirm order page in addition to the last 4 digits of the provided credit card number and the shipping address.
-    - T1s-3.6: Sales
+    - T1S-3.6: Confirmed Sale
       - Must have
       - 3 days effort
       - Non-Functional
-      - The system will save sales in the database. Products that have been sold must no longer be served on the product list page.
+      - The system will save sales in the database. Products that have been sold must no longer be served on the Product List Page (T1E-7).
+  - T1E-4: Sales Report
+    - T1S-4.1: Generating Sales Report
+      - Must have
+      - 5 days effort
+      - Functional
+      - The system provides a list of all sales in the database. Each sale includes what was sold, who purchased it, and the Receipt (T1S-3.5) from that purchase. This function can only be run by admins.
+    - T1S-4.2: Exporting Sales Report
+      - Needs to have
+      - 2 days effort
+      - Functional
+      - The system dumps the sales report into a CSV file and supplies it to the admin to download.
+  - T1E-5: Entering New Items
+    - T1S-5.1: Item Database Seed Info
+      - Needs to have
+      - 1 day effort
+      - Non-Functional
+      - The item database must start with some items so that the Product List Page (T1E-7) is not empty.
+    - T1S-5.2: Item Creation
+      - Must have
+      - 2 days effort
+      - Functional
+      - An admin enters a name, selects a picture, enters a price, and enters a description for a new item.
+    - T1S-5.3: Item Submission
+      - Must have
+      - 3 days effort
+      - Non-Functional
+      - The system appends a newly created item to the items database.
 - Milestone: UI Design
-  - T1E-: Login/Registration
-    - T1S-: New User Registration Page
+  - T1E-6: Login/Registration
+    - T1S-6.1: New User Registration Page
       - Must have
       - 4 days effort
       - Functional
       - A new user can enter their username and password into boxes and click a submit button once the fields are filled out.
-    - T1S-: User Login Page
+    - T1S-6.2: User Login Page
       - Must have
       - 4 days effort
       - Functional
       - A user can log into their account by entering a username and password field and clicking a submit button.
-  - T1E-: Product List Page
-    - T1S-: Item Display
+  - T1E-7: Product List Page
+    - T1S-7.1: Item Display
       - Must have
       - 2 days effort
       - Functional
       - Displayed products show a name, picture, price, and description. Sold items are not shown.
-    - T1S-: Add Item to Shopping Cart Button
+    - T1S-7.2: Add Item to Shopping Cart Button
       - Must have
       - 3 days effort
       - Functional
       - A user can add a displayed item to their cart by clicking a button.
-    - T1S-: Item Search
+    - T1S-7.3: Item Search
       - Needs to have
       - 4 days effort
       - Functional
       - A user can enter a search key in a search bar and items with similar names to the key will be shown.
-  - T1E-: Shopping Cart & Checkout Page
-    - T1S-: Checkout Page
+  - T1E-8: Shopping Cart & Checkout Page
+    - T1S-8.1: Checkout Page
       - Must have
       - 3 days effort
       - Functional
       - A user can access checkout by clicking a button once they have added at least one item to the cart. The items in the cart are listed with a calculated subtotal and can be removed with a button press. The user can click a button to proceed to the Pay Now page.
-    - T1S-: Entering Payment Info
+    - T1S-8.2: Entering Payment Info
       - Must have
       - 2 days effort
       - Functional
       - The user must fill out a valid shipping address, phone number, credit card number, credit card expiration date, and credit card CVV number before proceeding
-    - T1S-: Shipping Option Selection
+    - T1S-8.3: Shipping Option Selection
       - Must have
       - 1 days effort
       - Functional
       - The user can check one of the shipping options from the 3 stored shipping options in T1S-3.3.
-    - T1S-: Order Summary View
+    - T1S-8.4: Order Summary View
       - Must have
       - 2 days effort
       - Functional
       - The page shows a list of all item names and their prices, a subtotal, the calculated tax owed, the shipping cost, and a grand total.
-    - T1S-: Order Completion
+    - T1S-8.5: Order Completion
       - Must have
       - 1 day effort
       - Functional
       - The user can press a complete order button once all fields have been filled out.
-    - T1S-: Receipt Page
+    - T1S-8.6: Receipt Page
       - Must have
       - 2 days effort
       - Functional
-      - The page shows all of the information from the order summary, the last 4 digits of the credit card number, and the shipping address. The user can press an OK button to return to the Product List page.
+      - The page shows all of the information from the order summary, the last 4 digits of the credit card number, and the shipping address. The user can press an OK button to return to the Product List Page (T1E-7).
+  - T1E-9: Sales Report Page
+    - T1S-9.1: Sales Report View
+      - Must have
+      - 4 days effort
+      - Functional
+      - The admin is shown a list of all sales. Each sale includes the product name and who bought it. The admin can click an individual sale to show that sales Receipt Page (T1S-8.6).
+    - T1S-9.2: Downloading Sales Report
+      - Must have
+      - 2 days effort
+      - Functional
+      - The admin can click a "Download Sales Report" button to download a CSV file containing the sales report.
+  - T1E-10: Item Creation Page
+    - T1S-10.1: Entering Item Information
+      - Needs to have
+      - 1 day effort
+      - Functional
+      - The admin must fill out an item name, item price, and item description field. An image can be selected from a list of available images.
+    - T1S-10.2: Item Image Selection
+      - Wants to have
+      - 3 days effort
+      - Functional
+      - A box shows all available images. The admin can scroll down through the images and click the desired image to select it. Once an image is selected, the admin can press the "Select Image" button to use the currently selected image. The selected image can be changed before the item is submitted.
+    - T1S-10.3: Item Submission
+      - Must have
+      - 4 days effort
+      - Functional
+      - Once all item fields have been filled out, an admin can click the "Submit Item" button to add the item to the database.
 - Milestone: Technical Design
 - Milestone: Implementation
 
@@ -178,11 +232,16 @@
       - Functional
       - A user can input a new 6-character or more password.
   - T1E-: Product List Page QOL
-    - T1S-: Multiple Product Images
+    - T1S-: Multiple Item Images
       - Wants to have
       - 3 days effort
       - Functional
-      - Items can have multiple images uploaded. A user can cycle through item images on the product list page.
+      - Items can have multiple images uploaded. A user can cycle through item images on the Product List Page (T1E-7).
+    - T1S-: Modifying Existing Item
+      - Wants to have
+      - 4 days effort
+      - Functional
+      - An admin can modify any of the fields of an item in the database.
   - T1E-: Checkout QOL
     - T1S-: Deselect Items in Cart
       - Wants to have
@@ -194,3 +253,9 @@
       - 2 days effort
       - Functional
       - The system emails an order receipt to the user when an order is completed.
+  - T1E-: New Item Entering QOL
+    - T1S-: Uploading New Item Images
+      - Wants to have
+      - 4 days effort
+      - Functional
+      - An admin can upload new images for items being added to the database.
