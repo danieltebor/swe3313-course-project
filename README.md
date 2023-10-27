@@ -25,7 +25,7 @@ A brief presentation of the project plan can be found [here](/docs/project-plan/
 
 
 ## Requirements
-The full list of written requirements can be found [here](/docs/requirements/requirements.md). Version 1 includes all features that must be implemented before the due date highlighted in the project plan on [YouTrack](https://adkisson-swe-f23.youtrack.cloud/gantt-charts/174-15) in order for Hank's Mineral Emporium to be feature-complete. Version 2 includes features that aren't necessary for Hank's Mineral Emporium to be feature-complete, but that are nice-to-have features for quality of life and product success.
+The full list of written requirements can be found [here](/docs/requirements/requirements.md). Version 1 includes all features that must be implemented before the due date highlighted in the project plan in order for Hank's Mineral Emporium to be feature-complete. Version 2 includes features that aren't necessary for Hank's Mineral Emporium to be feature-complete, but that are nice-to-have features for quality of life and product success.
 
 ### Use Case Diagram
 The use case diagram for Hank's Mineral Emporium can be viewed [here](/docs/requirements/use-case-diagram.md).
