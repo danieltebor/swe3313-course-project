@@ -1,0 +1,24 @@
+@startuml
+
+skinparam packageStyle rectangle
+actor Admin
+actor User
+note left of User: Interact with front end features
+note left of Admin: Access backend features
+left to right direction
+rectangle Hank's\tMineral\tEmporium{
+User -- (Hank's\tMineral\tEmporium)
+(Hank's\tMineral\tEmporium) -- Admin
+User -> (Create Account)
+Admin->(Run Sales Report)
+User -> (Login)
+User ->(Display Items)
+User -> (Inventory Search)
+User -> (Add to Cart)
+User -> (Checkout Items)
+User -> (Review Receipt)
+Admin -> (Add/Remove Item to Inventory)
+}
+
+
+@enduml
