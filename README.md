@@ -23,7 +23,6 @@ Our project plan can be found on [YouTrack](https://adkisson-swe-f23.youtrack.cl
 ### Project Plan Presentation
 A brief presentation of the project plan can be found [here](/docs/project-plan/project-plan-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/project-plan/project-plan-presentation.mp4).
 
-
 ## Requirements
 The full list of written requirements can be found [here](/docs/requirements/requirements.md). Version 1 includes all features that must be implemented before the due date highlighted in the project plan in order for Hank's Mineral Emporium to be feature-complete. Version 2 includes features that aren't necessary for Hank's Mineral Emporium to be feature-complete, but that are nice-to-have features for quality of life and product success.
 
@@ -35,3 +34,8 @@ The decision table for Hank's Mineral Emporium can be viewed [here](/docs/requir
 
 ### Requirements Presentation
 A brief presentation of the written requirements can be found [here](/docs/requirements/requirements-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/requirements/requirements-presentation.mp4).
+
+## UI Design
+A mockup for the UI design can be found on [Marvel]().
+
+A brief presentation of the design can be found [here](/docs/ui-design/ui-design-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/ui-design/ui-design-presentation.mp4).
