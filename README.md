@@ -35,7 +35,7 @@ The decision table for Hank's Mineral Emporium can be viewed [here](/docs/requir
 ### Requirements Presentation
 A brief presentation of the written requirements can be found [here](/docs/requirements/requirements-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/requirements/requirements-presentation.mp4).
 
-## UI Design
+### UI Design
 A mockup for the UI design can be found on [https://marvelapp.com/prototype/a1da735]().
 
 A brief presentation of the design can be found [here](/docs/ui-design/ui-design-presentation.mp4) or can be [UI Presentation.mp4](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/ui-design/ui-design-presentation.mp4).
