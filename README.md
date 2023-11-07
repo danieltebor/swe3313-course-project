@@ -38,4 +38,4 @@ A brief presentation of the written requirements can be found [here](/docs/requi
 ### UI Design
 A mockup for the UI design can be found [here](https://marvelapp.com/prototype/a1da735).
 
-A brief presentation of the design can be found [here](/docs/requirements/UI Presentation.mp4) or can be downloaded [here](/https://github.com/danieltebor/swe3313-course-project/blob/ui-design/docs/ui-design/New%20Project.mp4).
+A brief presentation of the design can be found [here](/docs/requirements/New Project.mp4) or can be downloaded [here](/https://github.com/danieltebor/swe3313-course-project/blob/ui-design/docs/ui-design/New%20Project.mp4).
