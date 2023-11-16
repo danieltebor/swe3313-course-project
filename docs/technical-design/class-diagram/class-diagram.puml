@@ -1,0 +1,5 @@
+@startuml class-diagram
+
+!include service/authentication-service.puml
+
+@enduml

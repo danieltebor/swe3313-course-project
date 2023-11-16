@@ -1,0 +1,51 @@
+@startuml database-service-class-diagram
+
+namespace Service {
+namespace DatabaseService {
+
+left to right direction
+
+' T should be a JSON serializable object.
+interface IJsonDatabaseService<T> {
+    + Save(T data)
+    + GetByKey(DatabaseKey key, int value) : T
+    + GetByKey(DatabaseKey key, String value) : T
+    + GetAll() : List<T>
+    + GenerateNewPrimaryKey() : int
+}
+
+' T should be a JSON serializable object.
+abstract JsonDatabaseServiceBase<T> {
+    - _databaseName: String
+    - _databasePath: String
+    - _databaseLock: Mute
+    # _keys: Dictionary<string, dynamic> 
+    + JsonDatabaseServiceBase(String databaseName)
+}
+
+JsonDatabaseServiceBase -up-|> IJsonDatabaseService
+
+class UserDatabaseService {}
+
+UserDatabaseService -up-|> JsonDatabaseServiceBase
+note right of UserDatabaseService: JsonDatabaseServiceBase<User>
+
+class ReceiptDatabaseService {}
+
+ReceiptDatabaseService -up-|> JsonDatabaseServiceBase
+note right of ReceiptDatabaseService: JsonDatabaseServiceBase<Receipt>
+
+class InventoryDatabaseService {}
+
+InventoryDatabaseService -up-|> JsonDatabaseServiceBase
+note right of InventoryDatabaseService: JsonDatabaseServiceBase<Item>
+
+class SaleDatabaseService {}
+
+SaleDatabaseService -up-|> JsonDatabaseServiceBase
+note right of SaleDatabaseService: JsonDatabaseServiceBase<Sale>
+
+}
+}
+
+@enduml

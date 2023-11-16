@@ -1,0 +1,47 @@
+@startuml user-management-class-diagram
+
+!include ../service/database-service.puml
+
+namespace Core {
+namespace UserManagement {
+
+class User {
+    - _userId: int
+    - _username: string
+    - _password: string <<hashed>>
+    - _isAdmin: bool
+    + User(username: string, password: string, isAdmin: bool = false)
+    + GetUserId(): int
+    + GetUsername(): string
+    + IsAdmin(): bool
+}
+
+Service.DatabaseService.UserDatabaseService ..> User: uses
+
+note right of User
+    This class should be serializable as a JSON object.
+end note
+
+class UserNotFoundException {
+    + UserNotFoundException(message: string)
+}
+
+class UserFactory {
+    - _userDatabaseService: UserDatabaseService
+    + UserFactory(userDatabaseService: UserDatabaseService)
+    + CreateUser(username: string, password: string, isAdmin: bool = false): User
+    + GetUser(userId: int): User
+    + GetUser(username: string): User
+}
+
+UserFactory --> Service.DatabaseService.UserDatabaseService: uses
+UserFactory ..> User: creates
+
+note right of UserFactory::GetUser
+    Both overrides of GetUser throw UserNotFoundException
+end note
+
+}
+}
+
+@enduml

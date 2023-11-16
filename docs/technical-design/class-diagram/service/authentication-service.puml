@@ -1,0 +1,44 @@
+@startuml login-service-class-diagram
+
+!include ../core/user-management.puml
+
+namespace Service {
+namespace AuthenticationService {
+
+class InvalidUsernameException {
+    + InvalidUsernameException(message: string)
+}
+
+class InvalidPasswordException {
+    + InvalidPasswordException(message: string)
+}
+
+class AuthenticationService {
+    - _userFactory: UserFactory
+    - _UsernameIsAvailable(String username) : bool
+    - _UsernameIsValid(String username) : bool
+    - _PasswordIsValid(String password) : bool
+    - _HashPassword(String password) : String
+    + AuthenticationService(UserFactory userFactory)
+    + Register() : User
+    + Login() : User
+    + Logout()
+}
+
+note left of AuthenticationService::Register
+    throws InvalidUsernameException, InvalidPasswordException
+end note
+
+note left of AuthenticationService::Login
+    throws InvalidUsernameException, InvalidPasswordException
+end note
+
+AuthenticationService --> Core.UserManagement.UserFactory : uses
+AuthenticationService ..> Core.UserManagement.User : returns
+AuthenticationService ..> InvalidUsernameException : throws
+AuthenticationService ..> InvalidPasswordException : throws
+
+}
+}
+
+@enduml
