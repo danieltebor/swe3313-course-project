@@ -9,23 +9,29 @@ left to right direction
 interface IJsonDatabaseService<T> {
     + Save(T data)
     + GetByKey(DatabaseKey key, int value) : T
-    + GetByKey(DatabaseKey key, String value) : T
+    + GetByKey(DatabaseKey key, string value) : T
     + GetAll() : List<T>
     + GenerateNewPrimaryKey() : int
+    + AddObserver(IObserver observer)
+    + RemoveObserver(IObserver observer)
 }
 
 ' T should be a JSON serializable object.
 abstract JsonDatabaseServiceBase<T> {
-    - _databaseName: String
-    - _databasePath: String
-    - _databaseLock: Mute
+    - _databaseName: string
+    - _databasePath: string
+    - _databaseLock: Mutex
+    - _transientPrimaryKeys: Set<int>
     # _keys: Dictionary<string, dynamic> 
-    + JsonDatabaseServiceBase(String databaseName)
+    + JsonDatabaseServiceBase(string databaseName)
 }
 
 JsonDatabaseServiceBase -up-|> IJsonDatabaseService
 
-class UserDatabaseService {}
+class UserDatabaseService {
+    - _transientUsernames: Set<string>
+    + RegisterTransientUsername(string username)
+}
 
 UserDatabaseService -up-|> JsonDatabaseServiceBase
 note right of UserDatabaseService: JsonDatabaseServiceBase<User>

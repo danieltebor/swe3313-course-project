@@ -15,10 +15,10 @@ class InvalidPasswordException {
 
 class AuthenticationService {
     - _userFactory: UserFactory
-    - _UsernameIsAvailable(String username) : bool
-    - _UsernameIsValid(String username) : bool
-    - _PasswordIsValid(String password) : bool
-    - _HashPassword(String password) : String
+    - _UsernameIsAvailable(string username) : bool
+    - _UsernameIsValid(string username) : bool
+    - _PasswordIsValid(string password) : bool
+    - _HashPassword(string password) : string
     + AuthenticationService(UserFactory userFactory)
     + Register() : User
     + Login() : User

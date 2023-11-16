@@ -10,7 +10,7 @@ class User {
     - _username: string
     - _password: string <<hashed>>
     - _isAdmin: bool
-    + User(username: string, password: string, isAdmin: bool = false)
+    + User(string username, string password, bool isAdmin = false)
     + GetUserId(): int
     + GetUsername(): string
     + IsAdmin(): bool
@@ -23,15 +23,15 @@ note right of User
 end note
 
 class UserNotFoundException {
-    + UserNotFoundException(message: string)
+    + UserNotFoundException(string message)
 }
 
 class UserFactory {
     - _userDatabaseService: UserDatabaseService
     + UserFactory(userDatabaseService: UserDatabaseService)
-    + CreateUser(username: string, password: string, isAdmin: bool = false): User
-    + GetUser(userId: int): User
-    + GetUser(username: string): User
+    + CreateUser(string username, string password, bool isAdmin = false): User
+    + GetUser(int userId): User
+    + GetUser(string username): User
 }
 
 UserFactory --> Service.DatabaseService.UserDatabaseService: uses
