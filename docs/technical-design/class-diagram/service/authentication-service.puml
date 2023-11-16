@@ -6,11 +6,11 @@ namespace Service {
 namespace AuthenticationService {
 
 class InvalidUsernameException {
-    + InvalidUsernameException(message: string)
+    + InvalidUsernameException(string message)
 }
 
 class InvalidPasswordException {
-    + InvalidPasswordException(message: string)
+    + InvalidPasswordException(string message)
 }
 
 class AuthenticationService {

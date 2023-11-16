@@ -1,0 +1,25 @@
+@startuml sale-management-class-diagram
+
+namespace Core {
+namespace UserManagement {
+
+class Receipt {
+
+}
+
+class Sale {
+
+}
+
+class ReceiptFactory {
+
+}
+
+class SaleFactory {
+
+}
+
+}
+}
+
+@enduml
