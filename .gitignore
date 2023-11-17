@@ -1,9 +1,61 @@
-# Build files.
-out/
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+*.nuget.props
+*.nuget.targets
+*.user
+*.userosscache
+*.aspx.cs
+*.csproj.user
+*.pubxml
+*.pubxml.user
+*.cache
+*.vspscc
+*.vssscc
+.vs/
+*.log
+*.suo
+*.user
+*.userosscache
+*.dbmdl
+*.jfm
+*.p7s
+*.p12
+*.pfx
+*.publishsettings
+orleans.codegen.cs
 
-# IDE files.
-*.idea
-*.vs
-*.code-workspace
-*.sln
-*.csproj
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+# NuGet v3's project.json files produces more ignoreable files
+*.nuget.props
+*.nuget.targets
+
+# Visual Studio 2015
+.vs/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
