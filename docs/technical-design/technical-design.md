@@ -125,7 +125,7 @@ The following represents the seed data that will be used to populate the databas
 The class diagrams for HanksMineralEmporium can be found [here](/docs/technical-design/class-diagram.md).
 
 ## Data Storage
-JSON will be used to store data for HanksMineralEmporium. For the size of HanksMineralEmporium, JSON will be sufficient. Newtonsoft.Json will be used to serialize and deserialize the JSON data. There will be a serparate JSON file for Users, Items, Receipts, and Sales.
+JSON will be used to store data for HanksMineralEmporium. For the size of HanksMineralEmporium, JSON will be sufficient. Newtonsoft.Json will be used to serialize and deserialize the JSON data. There will be a separate JSON file for Users, Items, Receipts, and Sales.
 
 ## Coding Conventions
 Microsoft is the creator of C# and as such their naming and coding conventions will be used. The Google style guide will be used for HTML and CSS.
