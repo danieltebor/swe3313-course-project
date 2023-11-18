@@ -98,9 +98,9 @@ The following represents the seed data that will be used to populate the databas
 | 3          | admin2   | 123456   | true    |
 
 #### Receipts
-| RecieptID *PK | userID *FK | shipping | tax   | total |
-|---------------|------------|----------|-------|-------|
-| 1             | 1          | 0.00     | 2.50a | -     |
+| RecieptID *PK | userID *FK | shipping | tax | total |
+|---------------|------------|----------|-----|-------|
+| -             | -          | -        | -   | -     |
 
 #### Items
 | itemID *PK | name      | price | description                                                                                                                                                                                                             | imagePath                               |
