@@ -1,0 +1,38 @@
+@startuml sales-report-service
+
+hide empty members
+
+namespace Service {
+namespace SalesReportService {
+
+class SaleData {
+    + saleId: int
+    + saleName: string
+    + userId: int
+    + username: string
+}
+
+interface ISalesReportService {
+    + GenerateReport(): List<SaleData>
+    + GetReceipt(saleData: SaleData): Receipt
+    + GetReportAsCsv(): FileContentReport
+}
+
+ISalesReportService .left.> SaleData: uses
+ISalesReportService .down.> Core.SalesManagement.Receipt: returns
+ISalesReportService .up.> Microsoft.AspNetCore.Mvc.FileContentResult: uses
+
+class SalesReportService {
+    - _saleFactory: SaleFactory
+    - _receiptFactory: ReceiptFactory
+    + SalesReportService(saleFactory: SaleFactory, receiptFactory: ReceiptFactory)
+}
+
+SalesReportService .up.|> ISalesReportService
+SalesReportService .down.> Core.SalesManagement.SaleFactory: uses
+SalesReportService .down.> Core.SalesManagement.ReceiptFactory: uses
+
+}
+}
+
+@enduml

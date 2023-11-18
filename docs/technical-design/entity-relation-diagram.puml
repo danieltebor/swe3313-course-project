@@ -14,9 +14,9 @@ entity "Receipt" as Receipt {
     --
     *userID : int <<FK>>
     --
-    shippingPrice : decimal(10, 2)
-    taxPrice : decimal(10, 2)
-    totalPrice : decimal(10, 2)
+    shipping: decimal(10, 2)
+    tax: decimal(10, 2)
+    total : decimal(10, 2)
 }
 
 entity "Item" as Item {

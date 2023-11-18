@@ -1,5 +1,9 @@
 @startuml class-diagram
 
-!include_once service/authentication-service.puml
+left to right direction
+
+!include data/database-io.puml
+!include core/core.puml
+!include service/service.puml
 
 @enduml

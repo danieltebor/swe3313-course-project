@@ -1,42 +1,46 @@
-@startuml login-service-class-diagram
+@startuml authentication-service
 
-!include ../core/user-management.puml
+hide empty members
 
 namespace Service {
 namespace AuthenticationService {
 
 class InvalidUsernameException {
-    + InvalidUsernameException(string message)
+    + InvalidUsernameException(message: string)
 }
 
 class InvalidPasswordException {
-    + InvalidPasswordException(string message)
+    + InvalidPasswordException(message: string)
 }
 
-class AuthenticationService {
-    - _userFactory: UserFactory
-    - _UsernameIsAvailable(string username) : bool
-    - _UsernameIsValid(string username) : bool
-    - _PasswordIsValid(string password) : bool
-    - _HashPassword(string password) : string
-    + AuthenticationService(UserFactory userFactory)
+interface IAuthenticationService {
     + Register() : User
     + Login() : User
     + Logout()
 }
 
-note left of AuthenticationService::Register
+note left of IAuthenticationService::Register
     throws InvalidUsernameException, InvalidPasswordException
 end note
 
-note left of AuthenticationService::Login
+note left of IAuthenticationService::Login
     throws InvalidUsernameException, InvalidPasswordException
 end note
 
-AuthenticationService --> Core.UserManagement.UserFactory : uses
-AuthenticationService ..> Core.UserManagement.User : returns
-AuthenticationService ..> InvalidUsernameException : throws
-AuthenticationService ..> InvalidPasswordException : throws
+class AuthenticationService {
+    - _userFactory: UserFactory
+    - _UsernameIsAvailable(username: string) : bool
+    - _UsernameIsValid(username: string) : bool
+    - _PasswordIsValid(password: string) : bool
+    - _HashPassword(password: string) : string
+    + AuthenticationService(userFactory: UserFactory)
+}
+
+AuthenticationService .left.|> IAuthenticationService
+AuthenticationService .down.> InvalidUsernameException : throws
+AuthenticationService .down.> InvalidPasswordException : throws
+AuthenticationService -up-> "1" Core.UserManagement.UserFactory : uses
+AuthenticationService .up.> Core.UserManagement.User : returns
 
 }
 }

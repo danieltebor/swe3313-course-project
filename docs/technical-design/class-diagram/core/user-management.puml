@@ -1,45 +1,46 @@
-@startuml user-management-class-diagram
+@startuml user-management
 
-!include ../service/database-service.puml
+hide empty members
 
 namespace Core {
 namespace UserManagement {
 
 class User {
-    - _userId: int
+    - _userId: int <<generated>>
     - _username: string
     - _password: string <<hashed>>
     - _isAdmin: bool
-    + User(string username, string password, bool isAdmin = false)
+    + User(userId: int, username: string, password: password, isAdmin: bool = false)
     + GetUserId(): int
     + GetUsername(): string
     + IsAdmin(): bool
 }
 
-Service.DatabaseService.UserDatabaseService ..> User: uses
-
-note right of User
+note left of User
     This class should be serializable as a JSON object.
 end note
 
+User <.up. Data.DatabaseIO.UserDatabaseOperator: uses
+
 class UserNotFoundException {
-    + UserNotFoundException(string message)
+    + UserNotFoundException(message: string)
 }
 
 class UserFactory {
     - _userDatabaseService: UserDatabaseService
     + UserFactory(userDatabaseService: UserDatabaseService)
-    + CreateUser(string username, string password, bool isAdmin = false): User
-    + GetUser(int userId): User
-    + GetUser(string username): User
+    + CreateNewUser(username: string, password: string, isAdmin: bool = false): User
+    + GetUser(userId: int): User
+    + GetUser(username: string): User
 }
 
-UserFactory --> Service.DatabaseService.UserDatabaseService: uses
-UserFactory ..> User: creates
-
-note right of UserFactory::GetUser
+note left of UserFactory::GetUser
     Both overrides of GetUser throw UserNotFoundException
 end note
+
+UserFactory .up.> User: creates
+UserFactory .right.> UserNotFoundException: throws
+UserFactory -up-> "1" Data.DatabaseIO.UserDatabaseOperator: uses
 
 }
 }

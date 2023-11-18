@@ -1,0 +1,9 @@
+@startuml core
+
+left to right direction
+
+!include inventory-management.puml
+!include user-management.puml
+!include sales-management.puml
+
+@enduml
