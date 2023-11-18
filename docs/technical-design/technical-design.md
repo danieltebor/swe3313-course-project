@@ -95,23 +95,32 @@ The following represents the seed data that will be used to populate the databas
 | userID *PK | username | password | isAdmin |
 |------------|----------|----------|---------|
 | 1          | admin    | password | true    |
+| 2          | nonAdmin | psswrd22 | false   |
+| 3          | admin2   | 123456   | true    |
 
 #### Receipts
-| RecieptID *PK | userID *FK | shipping | tax | total |
-|---------------|------------|----------|-----|-------|
-| -             | -          | -        | -   | -     |
+| RecieptID *PK | userID *FK | shipping | tax  | total |
+|---------------|------------|----------|------|-------|
+| 1             | 1          | 5.00     | 2.50 | -     |
 
 #### Items
-| itemID *PK | name     | price | description | imagePath                            |
-|------------|----------|-------|-------------|--------------------------------------|
-| 1          | Amethyst | 5.00  | Purple      | assets/inventory_images/amethyst.png |
-| 2          | Quartz   | 3.00  | Clear       | assets/inventory_images/quartz.png   |
-| 3          | Ruby     | 10.00 | Red         | assets/inventory_images/ruby.png     |
+| itemID *PK | name     | price | description                                                            | imagePath                            |
+|------------|----------|-------|------------------------------------------------------------------------|--------------------------------------|
+| 1          | Amethyst | 5.00  | Purple                                                                 | assets/inventory_images/amethyst.png |
+| 2          | Quartz   | 3.00  | Clear                                                                  | assets/inventory_images/quartz.png   |
+| 3          | Ruby     | 10.00 | Red                                                                    | assets/inventory_images/ruby.png     |
+| 4          | Pyrite   | 2.00  | Also known as "fool's gold" due to its metallic luster.                |                                      |
+| 5          | Hematite | 6.00  | A dense, metallic mineral with a blood-red streak.                     |                                      |
+| 6          | Beryl    | 8.00  | Known for its various gem varieties, including emerald and aquamarine. |                                      |
+| 7          | Gypsum   | 9.00  | Used in construction and for making plaster.                           |                                      |
+| 8          | Talc     | 8.50  | The softest mineral, often used in cosmetics and talcum powder.        |                                      |
+| 9          | Mica     | 9.25  | Known for its sheet-like structure and used in electrical insulation.  |                                      |
+| 10         | Topaz    | 15.00 | A popular gemstone with a range of colors, including blue and yellow.  |                                      |
 
 #### Sales
 | saleID *PK | itemID *FK | receiptID *FK |
 |------------|------------|---------------|
-| -          | -          | -             |
+| 1          | 1          | 1             |
 
 ## Class Diagrams
 The class diagrams for HanksMineralEmporium can be found [here](/docs/technical-design/class-diagram.md).
