@@ -4,7 +4,6 @@
 - [Languages](#languages)
 - [Frameworks](#frameworks)
 - [Entity Relation Diagram](#entity-relation-diagram)
-- [Database Seed Data](#database-seed-data)
 - [Class Diagrams](#class-diagrams)
 - [Coding Conventions](#coding-conventions)
 
