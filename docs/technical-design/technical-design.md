@@ -98,23 +98,23 @@ The following represents the seed data that will be used to populate the databas
 | 3          | admin2   | 123456   | true    |
 
 #### Receipts
-| RecieptID *PK | userID *FK | shipping | tax  | total |
-|---------------|------------|----------|------|-------|
-| 1             | 1          | 5.00     | 2.50 | -     |
+| RecieptID *PK | userID *FK | shipping | tax   | total |
+|---------------|------------|----------|-------|-------|
+| 1             | 1          | 0.00     | 2.50a | -     |
 
 #### Items
-| itemID *PK | name     | price | description                                                            | imagePath                            |
-|------------|----------|-------|------------------------------------------------------------------------|--------------------------------------|
-| 1          | Amethyst | 5.00  | Purple                                                                 | assets/inventory_images/amethyst.png |
-| 2          | Quartz   | 3.00  | Clear                                                                  | assets/inventory_images/quartz.png   |
-| 3          | Ruby     | 10.00 | Red                                                                    | assets/inventory_images/ruby.png     |
-| 4          | Pyrite   | 2.00  | Also known as "fool's gold" due to its metallic luster.                |                                      |
-| 5          | Hematite | 6.00  | A dense, metallic mineral with a blood-red streak.                     |                                      |
-| 6          | Beryl    | 8.00  | Known for its various gem varieties, including emerald and aquamarine. |                                      |
-| 7          | Gypsum   | 9.00  | Used in construction and for making plaster.                           |                                      |
-| 8          | Talc     | 8.50  | The softest mineral, often used in cosmetics and talcum powder.        |                                      |
-| 9          | Mica     | 9.25  | Known for its sheet-like structure and used in electrical insulation.  |                                      |
-| 10         | Topaz    | 15.00 | A popular gemstone with a range of colors, including blue and yellow.  |                                      |
+| itemID *PK | name      | price | description                                                                                                                                                                                                             | imagePath                               |
+|------------|-----------|-------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| 1          | Amethyst  | 5.00  | Color: Purple, ranging from pale lilac to deep violet<br/>Weight: Relatively light.<br/>Purity: Generally pure, but may have color variations due to impurities.                                                        | ![Amethyst](https://rb.gy/ia1g1l)       |
+| 2          | Quartz    | 3.00  | Color: Typically clear or white, but can also be found in various shades including pink, purple, and smoky brown.<br/>Weight: Relatively light.<br/>Purity: Often pure, but impurities can lead to variations in color. | ![Quartz](https://rb.gy/er99ix)         |
+| 3          | Ruby      | 10.00 | Color: Red, varying shades from deep crimson to pink.<br/>Weight: Moderate to heavy.<br/>Purity: Often contains impurities, such as chromium, which gives it its red color.                                             | ![Ruby](https://rb.gy/ro2ire)           |
+| 4          | Pyrite    | 2.00  | Color: Brass-yellow to gold<br/>Weight: Moderate weight (5.01)<br/>Purity: Often relatively pure, may contain traces of other elements                                                                                  | ![Pyrite](https://shorturl.at/hkEMU)    |
+| 5          | Hematite  | 6.00  | Color: Metallic gray to silver-black<br/>Weight: Heavy (5.26)<br/>Purity: Can be relatively pure, with rust-red streak                                                                                                  | ![Hermatite](https://rb.gy/xwv0ij)      |
+| 6          | Calcite   | 8.00  | Color: Colorless or white, various colors<br/>Weight: Relatively light (2.71)<br/>Purity: Commonly pure, color variations due to impurities                                                                             | ![Calcite](https://rb.gy/s1xnci)        |
+| 7          | Gypsum    | 9.00  | Color: Colorless or white, shades of pink, gray, or brown<br/>Weight: Relatively light (2.3)<br/>Purity: Commonly pure, impurities may affect color                                                                     | ![Gypsum](https://shorturl.at/goJ25)    |
+| 8          | Feldspar  | 8.50  | Color: Various colors, including white, pink, gray<br/>Weight: Moderate weight (2.56 - 2.76)<br/>Purity: Can vary, impurities influence color                                                                           | ![Feldspar](https://shorturl.at/czBIX)  |
+| 9          | Magnetite | 9.25  | Color: Black or brownish-black<br/>Weight: Heavy (5.18)<br/>Purity: Often relatively pure, may contain impurities                                                                                                       | ![Magnetite](https://shorturl.at/dijwJ) |
+| 10         | Topaz     | 15.00 | Color: Typically blue, yellow, pink, or colorless<br/>Weight: Moderate to heavy<br/>V                                                                                                                                   | ![Topaz](https://shorturl.at/rBDG0)     |
 
 #### Sales
 | saleID *PK | itemID *FK | receiptID *FK |
