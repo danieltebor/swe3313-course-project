@@ -1,6 +1,5 @@
 # swe3313-course-project
 
-
 ## Introducing Hank's Mineral Emporium
 Welcome to the SWE 3313 project repository for team NullPointerException! All project artifacts, presentations, documentation, and source code are located here.
 
