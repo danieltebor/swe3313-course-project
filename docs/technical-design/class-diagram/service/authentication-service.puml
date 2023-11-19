@@ -1,0 +1,48 @@
+@startuml authentication-service
+
+hide empty members
+
+namespace Service {
+namespace AuthenticationService {
+
+class InvalidUsernameException {
+    + InvalidUsernameException(message: string)
+}
+
+class InvalidPasswordException {
+    + InvalidPasswordException(message: string)
+}
+
+interface IAuthenticationService {
+    + Register() : User
+    + Login() : User
+    + Logout()
+}
+
+note left of IAuthenticationService::Register
+    throws InvalidUsernameException, InvalidPasswordException
+end note
+
+note left of IAuthenticationService::Login
+    throws InvalidUsernameException, InvalidPasswordException
+end note
+
+class AuthenticationService {
+    - _userFactory: UserFactory
+    - _UsernameIsAvailable(username: string) : bool
+    - _UsernameIsValid(username: string) : bool
+    - _PasswordIsValid(password: string) : bool
+    - _HashPassword(password: string) : string
+    + AuthenticationService(userFactory: UserFactory)
+}
+
+AuthenticationService .left.|> IAuthenticationService
+AuthenticationService .down.> InvalidUsernameException : throws
+AuthenticationService .down.> InvalidPasswordException : throws
+AuthenticationService -up-> "1" Core.UserManagement.UserFactory : uses
+AuthenticationService .up.> Core.UserManagement.User : returns
+
+}
+}
+
+@enduml

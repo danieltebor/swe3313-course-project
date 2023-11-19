@@ -1,0 +1,79 @@
+@startuml sales-management
+
+hide empty members
+
+namespace Core {
+namespace SalesManagement {
+
+class Receipt {
+    - _receiptId: int <<generated>>
+    - _userId: int <<foreign>>
+    - _shipping: decimal
+    - _tax: decimal
+    - _total: decimal
+    + Receipt(userId: int, shipping: decimal, tax: decimal, total: decimal)
+}
+
+class ReceiptFactory {
+    - _receiptDatabaseOperator: ReceiptDatabaseOperator
+    + ReceiptFactory(receiptDatabaseOperator: ReceiptDatabaseOperator)
+    + CreateReceipt(user: User, shipping: decimal, tax: decimal, total: decimal): Receipt
+    + GetReceipt(receiptId: int): Receipt
+    + GetRelatedReceipt(sale: Sale): Receipt
+    + GetReceipts(): List<Receipt>
+}
+
+ReceiptFactory .up.> Receipt: returns
+ReceiptFactory .up.> Core.UserManagement.User: uses
+ReceiptFactory -down-> "1" Data.DatabaseOperator.ReceiptDatabaseOperator: observes
+
+class Sale {
+    - _saleId: int <<generated>>
+    - _itemId: int <<foreign>>
+    - _receiptId: int <<foreign>>
+    + Sale(saleId: int, receiptId: int, itemId: int)
+}
+
+class SaleFactory {
+    - _saleDatabaseOperator: SaleDatabaseOperator
+    + CreateSale(item: Item, receipt: Receipt): Sale
+    + GetSale(saleId: int): Sale
+    + GetRelatedSales(receipt: Receipt): List<Sale>
+    + GetSales(): List<Sale>
+}
+
+SaleFactory .left.> Core.ItemManagement.Item: uses
+
+enum ShippingOption {
+    GROUND: decimal = 0
+    THREE_DAY: decimal = 19
+    OVERNIGHT: decimal = 29
+}
+
+SaleFactory .left.> Receipt: uses
+SaleFactory .down.> Sale: returns
+SaleFactory -down-> "1" Data.DatabaseOperator.SaleDatabaseOperator: observes
+
+interface ICheckoutManager {
+    + Checkout(items: List<Item>, user: User, ShippingOption: ShippingOption): Receipt
+}
+
+ICheckoutManager .right.> ShippingOption: uses
+ICheckoutManager .up.> Receipt: returns
+ICheckoutManager .left.> Core.ItemManagement.Item: uses
+ICheckoutManager .up.> Core.UserManagement.User: uses
+
+class CheckoutManager {
+    - _receiptFactory: ReceiptFactory
+    - _saleFactory: SaleFactory
+    + CheckoutManager(receiptFactory: ReceiptFactory, saleFactory: SaleFactory)
+}
+
+CheckoutManager .up.|> ICheckoutManager: implements
+CheckoutManager -right-> "1" ReceiptFactory: creates
+CheckoutManager -right-> "1" SaleFactory: creates
+
+}
+}
+
+@enduml

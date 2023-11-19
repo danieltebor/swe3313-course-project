@@ -1,0 +1,48 @@
+@startuml user-management
+
+hide empty members
+
+namespace Core {
+namespace UserManagement {
+
+class User {
+    - _userId: int <<generated>>
+    - _username: string
+    - _password: string <<hashed>>
+    - _isAdmin: bool
+    + User(userId: int, username: string, password: password, isAdmin: bool = false)
+    + GetUserId(): int
+    + GetUsername(): string
+    + IsAdmin(): bool
+}
+
+note left of User
+    This class should be serializable as a JSON object.
+end note
+
+User <.up. Data.DatabaseIO.UserDatabaseOperator: uses
+
+class UserNotFoundException {
+    + UserNotFoundException(message: string)
+}
+
+class UserFactory {
+    - _userDatabaseService: UserDatabaseService
+    + UserFactory(userDatabaseService: UserDatabaseService)
+    + CreateNewUser(username: string, password: string, isAdmin: bool = false): User
+    + GetUser(userId: int): User
+    + GetUser(username: string): User
+}
+
+note left of UserFactory::GetUser
+    Both overrides of GetUser throw UserNotFoundException
+end note
+
+UserFactory .up.> User: creates
+UserFactory .right.> UserNotFoundException: throws
+UserFactory -up-> "1" Data.DatabaseIO.UserDatabaseOperator: uses
+
+}
+}
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml inventory-service
+
+hide empty members
+
+namespace Service {
+namespace InventoryService {
+
+interface IInventoryService {
+    + GetAvailableInventory(): List<Item>
+}
+
+IInventoryService .right.|> System.IObserver
+
+class InventoryService {
+    - _inventoryManager: IInventoryManager
+    + InventoryService(inventoryManager: IInventoryManager)
+}
+
+InventoryService -up-|> IInventoryService
+InventoryService -down-> "1" Core.InventoryManagement.IInventoryManager : uses
+
+}
+}
+
+@enduml

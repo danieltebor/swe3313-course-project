@@ -1,0 +1,9 @@
+@startuml class-diagram
+
+left to right direction
+
+!include data/database-io.puml
+!include core/core.puml
+!include service/service.puml
+
+@enduml

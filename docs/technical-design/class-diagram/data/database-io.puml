@@ -1,0 +1,70 @@
+@startuml database-io
+
+hide empty members
+
+namespace Data {
+namespace DatabaseIO {
+
+' T should be a JSON serializable object.
+interface IDatabaseOperator<T> {
+    + Save(data: T)
+    + GetByKey(key: string, value: int) : T
+    + GetByKey(key: string, value: string) : T
+    + GetAll() : List<T>
+    + GenerateNewPrimaryKey() : int
+    + AddObserver(observer: IObserver)
+    + RemoveObserver(observer: IObserver)
+}
+
+IDatabaseOperator --> System.IObserver : notifies
+
+' T should be a JSON serializable object.
+abstract JsonDatabaseOperator<T> {
+    - _databaseName: string
+    - _databasePath: string
+    - _databaseLock: Mutex
+    - _transientPrimaryKeys: Set<int>
+    # _keys: Dictionary<string, dynamic> 
+    + JsonDatabaseOperatorBase(databaseName: string)
+}
+
+JsonDatabaseOperator -left-|> IDatabaseOperator
+
+class UserDatabaseOperator {
+    - _transientUsernames: Set<string>
+    + IsUsernameTaken(username: string, shouldRegisterUsernameAsTransient: bool = false) : bool
+}
+
+UserDatabaseOperator .up.|> JsonDatabaseOperator
+note right of UserDatabaseOperator: JsonDatabaseOperatorBase<User>
+
+UserDatabaseOperator ..> Core.UserManagement.User : uses
+
+class ReceiptDatabaseOperator {}
+
+ReceiptDatabaseOperator .up.|> JsonDatabaseOperator
+note right of ReceiptDatabaseOperator: JsonDatabaseOperatorBase<Receipt>
+
+ReceiptDatabaseOperator ..> Core.SaleManagement.Receipt : uses
+
+class InventoryDatabaseOperator {}
+
+InventoryDatabaseOperator .up.|> JsonDatabaseOperator
+note right of InventoryDatabaseOperator: JsonDatabaseOperatorBase<Item>
+
+InventoryDatabaseOperator ..> Core.InventoryManagement.Item : uses
+
+class SaleDatabaseOperator {
+    + IsItemSold(item: Item)
+}
+
+SaleDatabaseOperator .up.|> JsonDatabaseOperator
+note right of SaleDatabaseOperator: JsonDatabaseOperatorBase<Sale>
+
+SaleDatabaseOperator ..> Core.InventoryManagement.Item : uses
+SaleDatabaseOperator ..> Core.SaleManagement.Sale : uses
+
+}
+}
+
+@enduml

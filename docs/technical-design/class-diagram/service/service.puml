@@ -1,0 +1,10 @@
+@startuml service
+
+left to right direction
+
+!include inventory-service.puml
+!include authentication-service.puml
+!include order-service.puml
+!include sales-report-service.puml
+
+@enduml

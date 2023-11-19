@@ -1,0 +1,42 @@
+@startuml entity-relation-diagram
+
+entity "User" as User {
+    *userID : int <<generated>>
+    --
+    username : string
+    password : string <<hashed>>
+    --
+    isAdmin : bool
+}
+
+entity "Receipt" as Receipt {
+    *receiptID : int <<generated>>
+    --
+    *userID : int <<FK>>
+    --
+    shipping: decimal(10, 2)
+    tax: decimal(10, 2)
+    total : decimal(10, 2)
+}
+
+entity "Item" as Item {
+    *itemID : int <<generated>>
+    --
+    name : string
+    price : decimal(10, 2)
+    description : string
+    imagePath : string
+}
+
+entity "Sale" as Sale {
+    *saleID : int <<generated>>
+    --
+    *itemID : int <<FK>>
+    *receiptID : int <<FK>>
+}
+
+User ||--o{ Receipt
+Receipt ||--|{ Sale
+Item ||--o| Sale
+
+@enduml

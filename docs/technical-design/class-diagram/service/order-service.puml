@@ -1,0 +1,53 @@
+@startuml order-service
+
+hide empty members
+
+namespace Service {
+namespace OrderService {
+
+interface IShoppingCartService {
+    + AddItem(item: Item)
+    + RemoveItem(item: Item)
+    + GetItems(): List<Item>
+    + GetUser(): User
+}
+
+IShoppingCartService .down.> Core.InventoryManagement.Item: uses
+IShoppingCartService .right.> Core.UserManagement.User: uses
+
+class ShoppingCartService {
+    - _items: List<Item>
+    - _user: User
+    + ShoppingCartService(user: User)
+}
+
+ShoppingCartService .up.|> IShoppingCartService
+ShoppingCartService -down-o Core.InventoryManagement.Item: uses
+ShoppingCartService -left-> "1" Core.UserManagement.User: uses
+
+interface ICheckoutService {
+    + Checkout()
+    + SelectShippingOption(shippingOption: ShippingOption)
+    + GetShippingOptions(): List<Tuple<string, decimal>>
+    + GetCalculatedSubtotal(): decimal
+    + GetCalculatedTax(): decimal
+    + GetShippingCost(): decimal
+}
+
+ICheckoutService -left-> "1" Core.SalesManagement.ShippingOption: uses
+
+class CheckoutService {
+    - _shoppingCartService: IShoppingCartService
+    - _checkoutManager: ICheckoutManager
+    - _shippingOption: ShippingOption
+    + CheckoutService(checkoutManager: ICheckoutManager, shoppingCartService: IShoppingCartService)
+}
+
+CheckoutService .up.|> ICheckoutService
+CheckoutService -up-> "1" IShoppingCartService: uses
+CheckoutService -left-> "1" Core.SalesManagement.ICheckoutManager: uses
+
+}
+}
+
+@enduml

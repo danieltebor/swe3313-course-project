@@ -1,0 +1,59 @@
+@startuml inventory-management
+
+hide empty members
+
+namespace Core {
+namespace InventoryManagement {
+
+class Item {
+    - _itemId: int <<generated>>
+    - _name: string
+    - _description: string
+    - _price: decimal
+    + Item(userId: int, name: string, price: decimal, description: string)
+    + GetItemId(): int
+    + GetName(): string
+    + GetPrice(): decimal
+    + GetDescription(): string
+}
+
+Item <.left. Data.DatabaseIO.InventoryDatabaseOperator: uses
+
+class ItemFactory {
+    - _inventoryDatabaseOperator: InventoryDatabaseOperator
+    + CreateItem(name: string, price: decimal, description: string): Item
+    + CreateItemFromDatabase(itemId: int): Item
+    + GetItem(itemId: int): Item
+    + GetAvailableItems(): List<Item>
+}
+
+ItemFactory -right-> Data.DatabaseIO.InventoryDatabaseOperator: uses
+ItemFactory .down.> Item: creates
+
+interface IInventoryManager {
+    + CreateItem(name: string, price: decimal, description: string): Item
+    + GetItem(itemId: int): Item
+    + GetAvailableItems(): List<Item>
+    + AddObserver(observer: IObserver)
+    + RemoveObserver(observer: IObserver)
+}
+
+IInventoryManager .left.|> System.IObserver
+IInventoryManager .down.> Item: returns
+
+class InventoryManager {
+    - _itemFactory: ItemFactory
+    + InventoryManager(itemFactory: ItemFactory, inventoryDatabaseOperator: InventoryDatabaseOperator, saleDatabaseOperator: SaleDatabaseOperator)
+
+}
+
+InventoryManager -down-|> IInventoryManager
+InventoryManager -down-> "1" ItemFactory: uses
+InventoryManager .down.> Item: returns
+InventoryManager -left-> "1" Data.DatabaseIO.InventoryDatabaseOperator: observes
+InventoryManager -left-> "1" Data.DatabaseIO.SaleDatabaseOperator: observes
+
+}
+}
+
+@enduml
