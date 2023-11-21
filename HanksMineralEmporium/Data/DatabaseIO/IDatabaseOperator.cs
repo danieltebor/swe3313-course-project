@@ -12,22 +12,22 @@ public interface IDatabaseOperator<T>
     /// <param name="obj">The object to save.</param>
     /// <exception cref="ArgumentNullException">Thrown when obj is null.</exception>
     /// <exception cref="IOException">Thrown when an IO error occurs while writing to the database file.</exception>
-    public void Save(T obj);
+    public Task Save(T obj);
     
     /// <summary>
     /// Gets an object from the database by its ID.
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns>IJsonDatabaseObject?</returns>
+    /// <param name="id">The id of the object to get.</param>
+    /// <returns>The object with the given ID, or null if no object with that ID exists.</returns>
     /// <exception cref="IOException">Thrown when an IO error occurs while reading from the database file.</exception>
-    public T? GeyById(ulong id);
+    public Task<T?> GeyById(ulong id);
 
     /// <summary>
     /// Gets all objects from the database.
     /// </summary>
     /// <returns>List of all objects in the database.</returns>
     /// <exception cref="IOException">Thrown when an IO error occurs while reading from the database file.</exception>
-    public List<T> GetAll();
+    public Task<List<T>> GetAll();
 
     // <summary>
     /// Generates a new unique ID for an object.

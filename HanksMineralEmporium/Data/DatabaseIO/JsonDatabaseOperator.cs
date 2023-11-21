@@ -17,7 +17,7 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
     private ulong _lastId = 0;
     
     [NotNull]
-    protected Mutex _databaseLock = new();
+    protected SemaphoreSlim _databaseLock = new(1, 1);
     [NotNull]
     protected JsonSerializerSettings _serializerSettings;
 
@@ -43,14 +43,14 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
     }
 
     /// <inheritdoc/>
-    public void Save(IJsonDatabaseObject obj)
+    public async Task Save(IJsonDatabaseObject obj)
     {
         if (obj == null)
         {
             throw new ArgumentNullException(nameof(obj));
         }
 
-        _databaseLock.WaitOne();
+        await _databaseLock.WaitAsync();
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
@@ -79,14 +79,14 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
         }
         finally
         {
-            _databaseLock.ReleaseMutex();
+            _databaseLock.Release();
         }
     }
 
     /// <inheritdoc/>
-    public IJsonDatabaseObject? GeyById(ulong id)
+    public async Task<IJsonDatabaseObject?> GeyById(ulong id)
     {
-        _databaseLock.WaitOne();
+        await _databaseLock.WaitAsync();
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
@@ -101,14 +101,14 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
         }
         finally
         {
-            _databaseLock.ReleaseMutex();
+            _databaseLock.Release();
         }
     }
 
     /// <inheritdoc/>
-    public List<IJsonDatabaseObject> GetAll()
+    public async Task<List<IJsonDatabaseObject>> GetAll()
     {
-        _databaseLock.WaitOne();
+        await _databaseLock.WaitAsync();
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
@@ -118,21 +118,21 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
         }
         finally
         {
-            _databaseLock.ReleaseMutex();
+            _databaseLock.Release();
         }
     }
 
     /// <inheritdoc/>
     public ulong GetNewUniqueId()
     {
-        _databaseLock.WaitOne();
+        _databaseLock.Wait();
         try {
             _lastId++;
             _transientIds.Add(_lastId);
             
             return _lastId;
         } finally {
-            _databaseLock.ReleaseMutex();
+            _databaseLock.Release();
         }
     }
 }
