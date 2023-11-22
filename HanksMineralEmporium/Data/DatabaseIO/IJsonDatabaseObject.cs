@@ -3,10 +3,10 @@ using Newtonsoft.Json;
 namespace HanksMineralEmporium.Data.DatabaseIO;
 
 /// <summary>
-/// Base definition for a database object.
+/// Base definition for a JSON database object.
 /// </summary>
-public interface IJsonDatabaseObject
+public interface IJsonDatabaseObject : IDatabaseObject
 {
     [JsonProperty("id")]
-    public ulong Id { get; }
+    public new ulong Id { get; }
 }

@@ -4,7 +4,7 @@ namespace HanksMineralEmporium.Data.DatabaseIO;
 /// Base definition for a database operator.
 /// </summary>
 /// <typeparam name="T">The type of the object to be saved to the database</typeparam>
-public interface IDatabaseOperator<T>
+public interface IDatabaseOperator<T> where T : IDatabaseObject
 {
     /// <summary>
     /// Saves an object to the database.
