@@ -1,15 +1,19 @@
-using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 using HanksMineralEmporium.Data.DatabaseIO;
 
 namespace HanksMineralEmporium.Core.UserManagement;
 
-public interface IUser : IJsonDatabaseObject
+/// <summary>
+/// Contract for a user.
+/// </summary>
+public interface IUser : IDatabaseObject
 {
-    [JsonProperty("username")]
+    [NotNull, StringLength(32, MinimumLength = 3)]
     public string Username { get; }
-    [JsonProperty("password")]
+    [NotNull, StringLength(72, MinimumLength = 8)]
     public string Password { get; }
-    [JsonProperty("isAdmin")]
-    public bool IsAdmin { get; }
+    [NotNull]
+    public bool IsAdmin { get; set; }
 }

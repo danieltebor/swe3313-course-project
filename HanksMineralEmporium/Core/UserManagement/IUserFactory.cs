@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace HanksMineralEmporium.Core.UserManagement;
 
 /// <summary>
@@ -13,7 +15,7 @@ public interface IUserFactory
     /// <param name="password"></param>
     /// <param name="isAdmin"></param>
     /// <returns>The created IUser.</returns>
-    public IUser CreateNewUser(string username, string password, bool isAdmin = false);
+    public IUser CreateNewUser([DisallowNull] string username, [DisallowNull] string password, bool isAdmin = false);
     
     /// <summary>
     /// Gets an existing user by their username.
@@ -29,5 +31,5 @@ public interface IUserFactory
     /// <param name="username"></param>
     /// <returns>The retreived IUser</returns>
     /// <exception cref="UserNotFoundException">Thrown when no user with the given username exists.</exception>
-    public IUser GetUserByUsername(string username);
+    public IUser GetUserByUsername([DisallowNull] string username);
 }
