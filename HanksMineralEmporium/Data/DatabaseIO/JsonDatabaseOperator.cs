@@ -7,7 +7,7 @@ namespace HanksMineralEmporium.Data.DatabaseIO;
 /// <summary>
 /// Provides base implementation for a database operator that uses JSON files.
 /// </summary>
-internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObject>
+public abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObject>
 {
     [NotNull]
     private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") + Path.DirectorySeparatorChar;
