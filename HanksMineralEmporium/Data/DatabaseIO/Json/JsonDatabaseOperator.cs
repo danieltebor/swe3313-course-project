@@ -2,12 +2,12 @@ using System.Diagnostics.CodeAnalysis;
 
 using Newtonsoft.Json;
 
-namespace HanksMineralEmporium.Data.DatabaseIO;
+namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 
 /// <summary>
-/// Provides base implementation for a database operator that uses JSON files.
+/// Provides base implementations for operations on a JSON database.
 /// </summary>
-public abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObject>
+public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : IDatabaseObject
 {
     [NotNull]
     private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") + Path.DirectorySeparatorChar;
@@ -22,7 +22,7 @@ public abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObje
     [NotNull]
     protected JsonSerializerSettings _serializerSettings;
 
-    protected abstract IReadOnlyList<IJsonDatabaseObject> GetSeedData();
+    protected abstract IReadOnlyList<T> GetSeedData();
 
     private void InitializeDatabase()
     {
@@ -77,7 +77,7 @@ public abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObje
     }
 
     /// <inheritdoc/>
-    public async Task Save(IJsonDatabaseObject obj)
+    public async Task Save(T obj)
     {
         if (obj == null)
         {
@@ -88,7 +88,7 @@ public abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObje
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
-            var objects = JsonConvert.DeserializeObject<List<IJsonDatabaseObject>>(jsonFile, _serializerSettings);
+            var objects = JsonConvert.DeserializeObject<List<T>>(jsonFile, _serializerSettings);
 
             if (!_transientIds.Contains(obj.Id))
             {
@@ -117,13 +117,13 @@ public abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObje
     }
 
     /// <inheritdoc/>
-    public async Task<IJsonDatabaseObject?> GeyById(ulong id)
+    public async Task<T?> GeyById(ulong id)
     {
         await _databaseLock.WaitAsync();
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
-            var objects = JsonConvert.DeserializeObject<List<IJsonDatabaseObject>>(jsonFile, _serializerSettings);
+            var objects = JsonConvert.DeserializeObject<List<T>>(jsonFile, _serializerSettings);
             
             if (objects == null || objects.Count == 0)
             {
@@ -139,15 +139,15 @@ public abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObje
     }
 
     /// <inheritdoc/>
-    public async Task<IReadOnlyList<IJsonDatabaseObject>> GetAll()
+    public async Task<IReadOnlyList<T>> GetAll()
     {
         await _databaseLock.WaitAsync();
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
-            var objects = JsonConvert.DeserializeObject<List<IJsonDatabaseObject>>(jsonFile, _serializerSettings);
+            var objects = JsonConvert.DeserializeObject<List<T>>(jsonFile, _serializerSettings);
             
-            return objects ?? new List<IJsonDatabaseObject>();
+            return objects ?? new List<T>();
         }
         finally
         {
