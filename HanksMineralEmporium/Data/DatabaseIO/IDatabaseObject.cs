@@ -1,12 +1,14 @@
 namespace HanksMineralEmporium.Data.DatabaseIO;
 
 /// <summary>
-/// Base definition for a JSON database object.
+/// Contract for objects that can be stored in a database.
+/// Implementing classes or interfaces should have properties
+/// that correspond with fields in a database.
 /// </summary>
 public interface IDatabaseObject
 {
     /// <summary>
-    /// The unique ID of the object.
+    /// Primary Key.
     /// </summary>
     public ulong Id { get; }
 }
