@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-using Newtonsoft.Json;
+using HanksMineralEmporium.Data.DatabaseIO.Exception;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 
@@ -28,7 +28,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     {
         if (File.Exists(_databasePath))
         {
-            if (GetAll().Result.Count > 0)
+            if (GetAllAsync().Result.Count > 0)
             {
                 return;
             }
@@ -77,7 +77,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     }
 
     /// <inheritdoc/>
-    virtual public async Task Save(T obj)
+    virtual public async Task SaveAsync(T obj)
     {
         if (obj == null)
         {
@@ -92,8 +92,8 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
 
             if (!_transientIds.Contains(obj.Id))
             {
-                throw new ArgumentException("Object ID is not transient. "
-                    + "Make sure the id is generated with GenerateNewId.", nameof(obj));
+                throw new InvalidIdException("Object ID is not transient. "
+                    + "Make sure the id is generated with GenerateNewUniqueId().");
             }
             _transientIds.Remove(obj.Id);
 
@@ -117,7 +117,37 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     }
 
     /// <inheritdoc/>
-    public async Task<T?> GetById(ulong id)
+    public async Task OverwriteAsync(T obj)
+    {
+        if (obj == null)
+        {
+            throw new ArgumentNullException(nameof(obj));
+        }
+
+        await _databaseLock.WaitAsync();
+        try
+        {
+            var jsonFile = File.ReadAllText(_databasePath);
+            var objects = _jsonSerializer.DeserializeList(jsonFile);
+
+            int idx = objects!.FindIndex(existingObj => existingObj.Id == obj.Id);
+            if (idx == -1)
+            {
+                throw new DatabaseObjectNotFoundException<T>(obj.Id);
+            }
+
+            objects[idx] = obj;
+
+            File.WriteAllText(_databasePath, _jsonSerializer.SerializeList(objects));
+        }
+        finally
+        {
+            _databaseLock.Release();
+        }
+    }
+
+    /// <inheritdoc/>
+    public async Task<T?> GetByIdAsync(ulong id)
     {
         await _databaseLock.WaitAsync();
         try
@@ -139,7 +169,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     }
 
     /// <inheritdoc/>
-    public async Task<IReadOnlyList<T>> GetAll()
+    public async Task<IReadOnlyList<T>> GetAllAsync()
     {
         await _databaseLock.WaitAsync();
         try
