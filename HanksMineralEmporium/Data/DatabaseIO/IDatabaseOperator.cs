@@ -22,7 +22,7 @@ public interface IDatabaseOperator<T> where T : IDatabaseObject
     /// <param name="id">The id of the object to get.</param>
     /// <returns>The object with the given ID, or null if no object with that ID exists.</returns>
     /// <exception cref="IOException">Thrown when an IO error occurs while reading from the database file.</exception>
-    public Task<T?> GeyById(ulong id);
+    public Task<T?> GetById(ulong id);
 
     /// <summary>
     /// Gets all objects from the database.
