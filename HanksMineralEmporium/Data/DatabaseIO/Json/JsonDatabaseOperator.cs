@@ -57,13 +57,18 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     /// <summary>
     /// Creates a new JsonDatabaseOperator.
     /// </summary>
-    /// <param name="databasePath"></param>
+    /// <param name="databaseName">Name of the JSON database file. Should not end in .json.</param>
     /// <exception cref="ArgumentException">Thrown when database path is null or empty.</exception>
-    public JsonDatabaseOperator(string databaseName, IDatabaseObjectSerializer<T> jsonSerializer)
+    /// <exception cref="ArgumentNullException">Thrown when jsonSerializer is null.</exception>
+    public JsonDatabaseOperator([DisallowNull] string databaseName, [DisallowNull] IDatabaseObjectSerializer<T> jsonSerializer)
     {
         if (string.IsNullOrWhiteSpace(databaseName))
         {
             throw new ArgumentException("Database name cannot be null or whitespace.", nameof(databaseName));
+        }
+        else if (jsonSerializer == null)
+        {
+            throw new ArgumentNullException(nameof(jsonSerializer));
         }
 
         _databasePath = _databasePath + databaseName + ".json";

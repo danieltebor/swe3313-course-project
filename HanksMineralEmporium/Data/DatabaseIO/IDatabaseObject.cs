@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace HanksMineralEmporium.Data.DatabaseIO;
 
 /// <summary>
@@ -10,5 +12,6 @@ public interface IDatabaseObject
     /// <summary>
     /// Primary Key.
     /// </summary>
+    [NotNull]
     public ulong Id { get; }
 }
