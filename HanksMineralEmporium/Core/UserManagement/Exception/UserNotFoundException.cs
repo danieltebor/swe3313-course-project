@@ -3,7 +3,7 @@ namespace HanksMineralEmporium.Core.UserManagement.Exception;
 /// <summary>
 /// Exception thrown when a user is not found.
 /// </summary>
-class UserNotFoundException : Exception
+public class UserNotFoundException : System.Exception
 {
     /// <summary>
     /// Creates a new <see cref="UserNotFoundException"/>.

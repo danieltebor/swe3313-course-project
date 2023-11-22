@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace HanksMineralEmporium.Core.UserManagement.Exception;
 
 /// <summary>

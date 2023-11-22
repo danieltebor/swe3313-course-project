@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Serialization;
 
 using HanksMineralEmporium.Core.UserManagement;
-using System.Security.Cryptography.X509Certificates;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 

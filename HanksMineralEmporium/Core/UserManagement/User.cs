@@ -8,7 +8,7 @@ namespace HanksMineralEmporium.Core.UserManagement;
 /// <summary>
 /// Implementation of <see cref="IUser"/>.
 /// </summary>
-public class User : IUser
+internal class User : IUser
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="User"/> class.

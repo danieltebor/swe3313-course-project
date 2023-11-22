@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace HanksMineralEmporium.Core.UserManagement.Exception;
 
 /// <summary>
 /// Exception thrown when an invalid password is given.
 /// </summary>
-class InvalidPasswordException : ArgumentException
+public class InvalidPasswordException : ArgumentException
 {
     /// <summary>
     /// Creates a new <see cref="InvalidPasswordException"/>.

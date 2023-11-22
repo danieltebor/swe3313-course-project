@@ -7,7 +7,7 @@ namespace HanksMineralEmporium.Core.UserManagement;
 /// <summary>
 /// Factory implementation for creating and retrieving users.
 /// </summary>
-class UserFactory : IUserFactory
+internal class UserFactory : IUserFactory
 {
     private readonly IUserDatabaseOperator _userDatabaseOperator;
 
