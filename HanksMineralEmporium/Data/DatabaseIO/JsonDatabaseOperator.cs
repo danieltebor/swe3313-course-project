@@ -22,7 +22,7 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
     [NotNull]
     protected JsonSerializerSettings _serializerSettings;
 
-    protected abstract List<IJsonDatabaseObject> GetSeedData();
+    protected abstract IReadOnlyList<IJsonDatabaseObject> GetSeedData();
 
     private void InitializeDatabase()
     {
