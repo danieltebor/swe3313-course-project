@@ -117,7 +117,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     }
 
     /// <inheritdoc/>
-    public async Task<T?> GeyById(ulong id)
+    public async Task<T?> GetById(ulong id)
     {
         await _databaseLock.WaitAsync();
         try
