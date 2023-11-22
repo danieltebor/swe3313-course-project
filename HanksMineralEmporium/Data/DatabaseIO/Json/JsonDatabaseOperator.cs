@@ -12,14 +12,14 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     [NotNull]
     private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
                                                 + Path.DirectorySeparatorChar;
-    [NotNull]
-    private readonly IDatabaseObjectSerializer<T> _jsonSerializer;
+    
     [NotNull]
     private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
-
     [NotNull]
     private ulong _lastId = 0;
     
+    [NotNull]
+    protected readonly IDatabaseObjectSerializer<T> _jsonSerializer;
     [NotNull]
     protected SemaphoreSlim _databaseLock = new(1, 1);
 
