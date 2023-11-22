@@ -1,7 +1,7 @@
 namespace HanksMineralEmporium.Data.DatabaseIO;
 
 /// <summary>
-/// Base definition for a database operator.
+/// Contract for a database operator that handles <see cref="IDatabaseObject"/> objects.
 /// </summary>
 /// <typeparam name="T">The type of the object to be saved to the database</typeparam>
 public interface IDatabaseOperator<T> where T : IDatabaseObject
@@ -29,7 +29,7 @@ public interface IDatabaseOperator<T> where T : IDatabaseObject
     /// <exception cref="IOException">Thrown when an IO error occurs while reading from the database file.</exception>
     public Task<IReadOnlyList<T>> GetAll();
 
-    // <summary>
+    /// <summary>
     /// Generates a new unique ID for an object.
     /// </summary>
     /// <returns>Unique ID.</returns>

@@ -10,7 +10,10 @@ namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : IDatabaseObject
 {
     [NotNull]
-    private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") + Path.DirectorySeparatorChar;
+    private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
+                                                + Path.DirectorySeparatorChar;
+    [NotNull]
+    private readonly IDatabaseObjectSerializer<T> _jsonSerializer;
     [NotNull]
     private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
 
@@ -19,8 +22,6 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     
     [NotNull]
     protected SemaphoreSlim _databaseLock = new(1, 1);
-    [NotNull]
-    protected JsonSerializerSettings _serializerSettings;
 
     protected abstract IReadOnlyList<T> GetSeedData();
 
@@ -45,7 +46,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
                 Directory.CreateDirectory(directoryPath!);
             }
 
-            File.WriteAllText(_databasePath, JsonConvert.SerializeObject(seedData, _serializerSettings));
+            File.WriteAllText(_databasePath, _jsonSerializer.SerializeList((IList<T>)seedData));
         }
         finally
         {
@@ -58,7 +59,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     /// </summary>
     /// <param name="databasePath"></param>
     /// <exception cref="ArgumentException">Thrown when database path is null or empty.</exception>
-    public JsonDatabaseOperator(string databaseName)
+    public JsonDatabaseOperator(string databaseName, IDatabaseObjectSerializer<T> jsonSerializer)
     {
         if (string.IsNullOrWhiteSpace(databaseName))
         {
@@ -66,12 +67,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
         }
 
         _databasePath = _databasePath + databaseName + ".json";
-
-        _serializerSettings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.Auto,
-            Formatting = Formatting.Indented
-        };
+        _jsonSerializer = jsonSerializer;
 
         InitializeDatabase();
     }
@@ -88,7 +84,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
-            var objects = JsonConvert.DeserializeObject<List<T>>(jsonFile, _serializerSettings);
+            var objects = _jsonSerializer.DeserializeList(jsonFile);
 
             if (!_transientIds.Contains(obj.Id))
             {
@@ -108,7 +104,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
                 objects.Insert(idx + 1, obj);
             }
 
-            File.WriteAllText(_databasePath, JsonConvert.SerializeObject(objects, _serializerSettings));
+            File.WriteAllText(_databasePath, _jsonSerializer.SerializeList(objects));
         }
         finally
         {
@@ -122,12 +118,12 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
         await _databaseLock.WaitAsync();
         try
         {
-            var jsonFile = File.ReadAllText(_databasePath);
-            var objects = JsonConvert.DeserializeObject<List<T>>(jsonFile, _serializerSettings);
+            var jsonFileStr = File.ReadAllText(_databasePath);
+            var objects = _jsonSerializer.DeserializeList(jsonFileStr);
             
             if (objects == null || objects.Count == 0)
             {
-                return null;
+                return default;
             }
 
             return objects[(int)id];
@@ -145,7 +141,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
-            var objects = JsonConvert.DeserializeObject<List<T>>(jsonFile, _serializerSettings);
+            var objects = _jsonSerializer.DeserializeList(jsonFile);
             
             return objects ?? new List<T>();
         }
