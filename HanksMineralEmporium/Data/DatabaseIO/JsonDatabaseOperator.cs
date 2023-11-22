@@ -10,9 +10,10 @@ namespace HanksMineralEmporium.Data.DatabaseIO;
 internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseObject>
 {
     [NotNull]
-    private readonly string _databasePath;
+    private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") + Path.DirectorySeparatorChar;
     [NotNull]
-    private ISet<ulong> _transientIds = new HashSet<ulong>();
+    private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
+
     [NotNull]
     private ulong _lastId = 0;
     
@@ -21,25 +22,58 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
     [NotNull]
     protected JsonSerializerSettings _serializerSettings;
 
+    protected abstract List<IJsonDatabaseObject> GetSeedData();
+
+    private void InitializeDatabase()
+    {
+        if (File.Exists(_databasePath))
+        {
+            if (GetAll().Result.Count > 0)
+            {
+                return;
+            }
+        }
+
+        var seedData = GetSeedData();
+
+        _databaseLock.Wait();
+        try
+        {
+            var directoryPath = Path.GetDirectoryName(_databasePath);
+            if (!Directory.Exists(directoryPath!))
+            {           
+                Directory.CreateDirectory(directoryPath!);
+            }
+
+            File.WriteAllText(_databasePath, JsonConvert.SerializeObject(seedData, _serializerSettings));
+        }
+        finally
+        {
+            _databaseLock.Release();
+        }
+    }
+
     /// <summary>
     /// Creates a new JsonDatabaseOperator.
     /// </summary>
     /// <param name="databasePath"></param>
     /// <exception cref="ArgumentException">Thrown when database path is null or empty.</exception>
-    public JsonDatabaseOperator(string databasePath)
+    public JsonDatabaseOperator(string databaseName)
     {
-        if (string.IsNullOrWhiteSpace(databasePath))
+        if (string.IsNullOrWhiteSpace(databaseName))
         {
-            throw new ArgumentException("Database path cannot be null or whitespace.", nameof(databasePath));
+            throw new ArgumentException("Database name cannot be null or whitespace.", nameof(databaseName));
         }
 
-        _databasePath = databasePath;
+        _databasePath = _databasePath + databaseName + ".json";
 
         _serializerSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Auto,
             Formatting = Formatting.Indented
         };
+
+        InitializeDatabase();
     }
 
     /// <inheritdoc/>
@@ -54,8 +88,7 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
-            var objects = JsonConvert.DeserializeObject<List<IJsonDatabaseObject>>(jsonFile, _serializerSettings)
-                ?? new List<IJsonDatabaseObject>();
+            var objects = JsonConvert.DeserializeObject<List<IJsonDatabaseObject>>(jsonFile, _serializerSettings);
 
             if (!_transientIds.Contains(obj.Id))
             {
@@ -64,7 +97,7 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
             }
             _transientIds.Remove(obj.Id);
 
-            int idx = objects.FindLastIndex(existingObj => existingObj.Id < obj.Id);
+            int idx = objects!.FindLastIndex(existingObj => existingObj.Id < obj.Id);
             
             if (idx == -1)
             {
