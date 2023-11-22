@@ -27,7 +27,7 @@ public interface IDatabaseOperator<T>
     /// </summary>
     /// <returns>List of all objects in the database.</returns>
     /// <exception cref="IOException">Thrown when an IO error occurs while reading from the database file.</exception>
-    public Task<List<T>> GetAll();
+    public Task<IReadOnlyList<T>> GetAll();
 
     // <summary>
     /// Generates a new unique ID for an object.

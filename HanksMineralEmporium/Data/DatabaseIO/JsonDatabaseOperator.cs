@@ -139,7 +139,7 @@ internal abstract class JsonDatabaseOperator : IDatabaseOperator<IJsonDatabaseOb
     }
 
     /// <inheritdoc/>
-    public async Task<List<IJsonDatabaseObject>> GetAll()
+    public async Task<IReadOnlyList<IJsonDatabaseObject>> GetAll()
     {
         await _databaseLock.WaitAsync();
         try
