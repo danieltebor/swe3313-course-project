@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace HanksMineralEmporium.Data.DatabaseIO;
 
 /// <summary>
@@ -12,7 +14,7 @@ public interface IDatabaseOperator<T> where T : IDatabaseObject
     /// <param name="obj">The object to save.</param>
     /// <exception cref="ArgumentNullException">Thrown when obj is null.</exception>
     /// <exception cref="IOException">Thrown when an IO error occurs while writing to the database file.</exception>
-    public Task Save(T obj);
+    public Task Save([DisallowNull] T obj);
     
     /// <summary>
     /// Gets an object from the database by its ID.
