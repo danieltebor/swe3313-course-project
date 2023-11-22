@@ -77,7 +77,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     }
 
     /// <inheritdoc/>
-    public async Task Save(T obj)
+    virtual public async Task Save(T obj)
     {
         if (obj == null)
         {
