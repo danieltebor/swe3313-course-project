@@ -25,31 +25,6 @@ internal class User : IUser
                 [DisallowNull, StringLength(72, MinimumLength = 8)] string password,
                 bool isAdmin = false)
     {
-        if (username is null)
-        {
-            throw new ArgumentNullException(nameof(username));
-        }
-        else if (username.Length < 3)
-        {
-            throw new InvalidUsernameException("Username must be at least 3 characters long.");
-        }
-        else if (username.Length > 32)
-        {
-            throw new InvalidUsernameException("Username cannot be longer than 32 characters.");
-        }
-        else if (password is null)
-        {
-            throw new ArgumentNullException(nameof(password));
-        }
-        else if (password.Length < 8)
-        {
-            throw new InvalidPasswordException("Password must be at least 8 characters long.");
-        }
-        else if (password.Length > 72)
-        {
-            throw new InvalidPasswordException("Password cannot be longer than 72 characters.");
-        }
-
         Id = id;
         Username = username;
         Password = password;

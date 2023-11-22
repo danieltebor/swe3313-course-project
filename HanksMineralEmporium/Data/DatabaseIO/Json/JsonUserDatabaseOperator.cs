@@ -1,7 +1,6 @@
 using HanksMineralEmporium.Core.UserManagement;
 using HanksMineralEmporium.Shared.Util;
 
-
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 
 /// <summary>
@@ -24,35 +23,75 @@ public class JsonUserDatabaseOperator : JsonDatabaseOperator<IUser>, IUserDataba
     }
 
     public JsonUserDatabaseOperator()
-        : base(DatabaseName, (IDatabaseObjectSerializer<IUser>)new JsonUserSerializer()) {}
+        : base(DatabaseName, new JsonDatabaseObjectSerializer<IUser>()) {}
 
     /// <inheritdoc/>
-    public Task<IUser?> GetByUsername(string username)
+    public override async Task SaveAsync(IUser user) {
+        await base.SaveAsync(user);
+
+        await _databaseLock.WaitAsync();
+        try
+        {
+            _transientUsernames.Remove(user.Username);
+        }
+        finally
+        {
+            _databaseLock.Release();
+        }
+    }
+
+    private IUser? GetByUsernameHelper(string username)
     {
-        
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            throw new ArgumentException("Username cannot be null or whitespace.", nameof(username));
+        }
+
+        var jsonFileStr = File.ReadAllText(_databasePath);
+        var objects = _jsonSerializer.DeserializeList(jsonFileStr);
+            
+        if (objects == null || objects.Count == 0)
+        {
+            return default;
+        }
+
+        var user = objects.FirstOrDefault(u => u.Username == username);
+        return user;
     }
 
     /// <inheritdoc/>
-    public Task<bool> IsUsernameTaken(string username)
+    public async Task<IUser?> GetByUsernameAsync(string username)
     {
-        
+        await _databaseLock.WaitAsync();
+        try
+        {
+            return GetByUsernameHelper(username);
+        }
+        finally
+        {
+            _databaseLock.Release();
+        }
     }
 
     /// <inheritdoc/>
-    public Task MakeAdmin(ulong userId)
+    public async Task<bool> IsUsernameTakenAsync(string username)
     {
-        
-    }
+        await _databaseLock.WaitAsync();
+        try
+        {
+            var user = GetByUsernameHelper(username);
+            var userIsTaken = user != null || _transientUsernames.Contains(username);
 
-    /// <inheritdoc/>
-    public Task MakeAdmin(IUser user)
-    {
-        
-    }
+            if (!userIsTaken)
+            {
+                _transientUsernames.Add(username);
+            }
 
-    /// <inheritdoc/>
-    public Task MakeAdmin(string username)
-    {
-        
+            return userIsTaken;
+        }
+        finally
+        {
+            _databaseLock.Release();
+        }
     }
 }
