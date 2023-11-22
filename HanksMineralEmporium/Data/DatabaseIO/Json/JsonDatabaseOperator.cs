@@ -10,18 +10,17 @@ namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : IDatabaseObject
 {
     [NotNull]
-    private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
-                                                + Path.DirectorySeparatorChar;
-    
-    [NotNull]
     private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
     [NotNull]
     private ulong _lastId = 0;
     
     [NotNull]
+    protected readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
+                                                  + Path.DirectorySeparatorChar;
+    [NotNull]
     protected readonly IDatabaseObjectSerializer<T> _jsonSerializer;
     [NotNull]
-    protected SemaphoreSlim _databaseLock = new(1, 1);
+    protected readonly SemaphoreSlim _databaseLock = new(1, 1);
 
     protected abstract IReadOnlyList<T> GetSeedData();
 
