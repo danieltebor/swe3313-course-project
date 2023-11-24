@@ -18,6 +18,15 @@ public interface IDatabaseObjectSerializer<T> where T : IDatabaseObject
     public string SerializeObject([DisallowNull] T obj);
 
     /// <summary>
+    /// Deserializes a string to an object.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns>The resulting object from deserializing the object string.</returns>
+    /// <exception cref="ArgumentException">Thrown when data is null or whitespace.</exception>
+    /// <exception cref="Exception">Thrown when an error occurs while deserializing the object.</exception>
+    public T DeserializeObject([DisallowNull] string data);
+
+    /// <summary>
     /// Serializes a list of objects to a string.
     /// </summary>
     /// <param name="objects">The objects to be serialized</param>
@@ -26,22 +35,11 @@ public interface IDatabaseObjectSerializer<T> where T : IDatabaseObject
     public string SerializeList([DisallowNull] IList<T> objects);
 
     /// <summary>
-    /// Deserializes a string to an object.
-    /// </summary>
-    /// <param name="data"></param>
-    /// <returns>The resulting object from deserializing the object string.</returns>
-    /// <exception cref="ArgumentException">Thrown when data is null or whitespace.</exception>
-    /// <exception cref="JsonException">Thrown when data is not a valid JSON string.</exception>
-    /// <exception cref="InvalidCastException">Thrown when data is not a valid JSON object.</exception>
-    public T DeserializeObject([DisallowNull] string data);
-
-    /// <summary>
     /// Deserializes a string to a list of objects.
     /// </summary>
     /// <param name="data"></param>
     /// <returns>The resulting object from deserializing the object string.</returns>
     /// <exception cref="ArgumentException">Thrown when data is null or whitespace.</exception>
-    /// <exception cref="JsonException">Thrown when data is not a valid JSON string.</exception>
-    /// <exception cref="InvalidCastException">Thrown when data is not a valid JSON array.</exception>
+    /// <exception cref="Exception">Thrown when an error occurs while deserializing the object.</exception>
     public List<T> DeserializeList([DisallowNull] string data);
 }

@@ -5,7 +5,7 @@ namespace HanksMineralEmporium.Data.DatabaseIO.Exception;
 /// <summary>
 /// Thrown when an object's ID is invalid.
 /// </summary>
-class InvalidIdException : System.Exception
+public class InvalidIdException : System.Exception
 {
     /// <summary>
     /// Creates a new InvalidIdException.

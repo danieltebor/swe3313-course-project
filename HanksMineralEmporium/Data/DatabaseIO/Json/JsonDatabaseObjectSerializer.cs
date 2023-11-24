@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 using Newtonsoft.Json;
@@ -5,7 +6,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 
-class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : IDatabaseObject
+public class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : IDatabaseObject
 {
     [NotNull]
     private readonly JsonSerializerSettings _jsonSerializerSettings;
@@ -29,6 +30,25 @@ class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : I
         return JsonConvert.SerializeObject(obj, _jsonSerializerSettings);
     }
 
+    public T DeserializeObject(string data)
+    {
+        if (string.IsNullOrWhiteSpace(data))
+        {
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(data));
+        }
+
+        try
+        {
+            var obj = JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings)
+                ?? throw new InvalidCastException("Data is not a valid JSON object.");
+            return obj;
+        }
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while deserializing the object.", ex);
+        }
+    }
+
     public string SerializeList(IList<T> objects)
     {
         if (objects == null)
@@ -39,26 +59,22 @@ class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : I
         return JsonConvert.SerializeObject(objects, _jsonSerializerSettings);
     }
 
-    public T DeserializeObject(string data)
-    {
-        if (string.IsNullOrWhiteSpace(data))
-        {
-            throw new ArgumentException("Data cannot be null or whitespace.", nameof(data));
-        }
-
-        var user = JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings)
-            ?? throw new InvalidCastException("Data is not a valid JSON object.");
-        return user;
-    }
-
     public List<T> DeserializeList(string data)
     {
         if (string.IsNullOrWhiteSpace(data))
         {
-            throw new ArgumentException("Data cannot be null or whitespace.", nameof(data));
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(data));
         }
 
-        return JsonConvert.DeserializeObject<List<T>>(data, _jsonSerializerSettings)
-            ?? throw new InvalidCastException("Data is not a valid JSON array.");
+        try
+        {
+            var objects = JsonConvert.DeserializeObject<List<T>>(data, _jsonSerializerSettings)
+                ?? throw new InvalidCastException("Data is not a valid JSON array.");
+            return objects;
+        }
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while deserializing the list.", ex);
+        }
     }
 }

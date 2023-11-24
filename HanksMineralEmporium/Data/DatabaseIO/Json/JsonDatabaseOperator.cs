@@ -12,7 +12,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     [NotNull]
     private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
     [NotNull]
-    private ulong _lastId = 0;
+    private ulong _currentId = 0;
     
     [NotNull]
     protected readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
@@ -59,7 +59,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     /// <param name="databaseName">Name of the JSON database file. Should not end in .json.</param>
     /// <exception cref="ArgumentException">Thrown when database path is null or empty.</exception>
     /// <exception cref="ArgumentNullException">Thrown when jsonSerializer is null.</exception>
-    public JsonDatabaseOperator([DisallowNull] string databaseName, [DisallowNull] IDatabaseObjectSerializer<T> jsonSerializer)
+    public JsonDatabaseOperator([DisallowNull] string databaseName, [DisallowNull] JsonDatabaseObjectSerializer<T> jsonSerializer)
     {
         if (string.IsNullOrWhiteSpace(databaseName))
         {
@@ -155,7 +155,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
             var jsonFileStr = File.ReadAllText(_databasePath);
             var objects = _jsonSerializer.DeserializeList(jsonFileStr);
             
-            if (objects == null || objects.Count == 0)
+            if (objects == null || objects.Count == 0 || objects.Count <= (int)id)
             {
                 return default;
             }
@@ -175,9 +175,12 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
+            if (string.IsNullOrWhiteSpace(jsonFile))
+            {
+                return new List<T>();
+            }
             var objects = _jsonSerializer.DeserializeList(jsonFile);
-            
-            return objects ?? new List<T>();
+            return objects;
         }
         finally
         {
@@ -190,10 +193,9 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     {
         _databaseLock.Wait();
         try {
-            _lastId++;
-            _transientIds.Add(_lastId);
+            _transientIds.Add(_currentId);
             
-            return _lastId;
+            return _currentId++;
         } finally {
             _databaseLock.Release();
         }
