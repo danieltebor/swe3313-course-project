@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #124419;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 3em;
+        }
+
+        button {
+            margin: 15px;
+            font-size: 2.25em;
+            background-color: #4d4d4d;
+            color: #fff;
+            border: none;
+            border-radius: 7.5px;
+            cursor: pointer;
+            padding: 15px;
+        }
+
+        article {
+            background-color: #9A8716;
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 30px;
+            width: 450px;
+            position: relative;
+        }
+
+        p {
+            text-align: left;
+            font-size: 1.8em;
+        }
+
+        p1 {
+            background-color: #9A8716;
+            padding: 15px;
+            text-align: center;
+        }
+
+        p2 {
+            text-align: left;
+            font-size: 1.8em;
+        }
+
+        p3 {
+            font-weight: bold;
+            font-size: 1.8em;
+        }
+
+        select {
+            width: 300px;
+            margin: 15px auto;
+            display: block;
+            font-size: 1.5em;
+        }
+
+        p.center-text {
+            text-align: center;
+            margin: 0;
+            font-size: 2.25em;
+        }
+
+        button.back-to-shopping,
+        button.return-to-payment,
+        button.complete-order-bottom {
+            background-color: #4d4d4d;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 7.5px;
+            cursor: pointer;
+            font-size: 2.25em;
+            margin-bottom: 30px;
+        }
+
+        button.back-to-shopping {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+
+        button.return-to-payment {
+            position: absolute;
+            top: 15px;
+            transform: translateX(-50%);
+            left: 50%;
+        }
+
+        button.complete-order-bottom {
+            position: absolute;
+            bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-to-shopping">Back To Shopping</button>
+    <button class="return-to-payment">Return To Payment</button>
+
+    <article>
+        <p>Are you sure you want to purchase?</p>
+        <select>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </article>
+    <p1>
+        <p2>
+            Card: **** **** **** 4444<br>
+            Subtotal: $0.00<br>
+            Tax: $0.00<br>
+            Shipping: $0.00<br>
+            ____________________ <br>
+            <p3>Total: $0.00</p3>
+        </p2>
+    </p1>
+
+    <button class="complete-order-bottom">Complete Order</button>
+</body>
+
+</html>
