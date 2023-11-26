@@ -1,0 +1,38 @@
+@page "/signin"
+@using MudBlazor
+@using Microsoft.AspNetCore.Components
+
+<MudThemeProvider Theme="@theme">
+    <MudCssBaseline />
+
+    <MudContainer Class="body-container">
+        <MudPaper Class="article" Elevation="4">
+            <div class="sign-in-text">Sign In</div>
+
+            <MudTextField @bind-Value="username" Label="Username" Class="user-input" Placeholder="Enter your username" />
+
+            <MudTextField @bind-Value="password" Label="Password" Type="Password" Class="user-input" Placeholder="Enter your password" />
+
+            <MudButton Class="action-button sign-in-button" OnClick="@(() => RedirectToSignIn())">Sign In</MudButton>
+
+            <MudButton Class="action-button go-back-button" OnClick="@(() => GoBack())">Go Back</MudButton>
+        </MudPaper>
+    </MudContainer>
+
+    @code {
+        private string username = "";
+        private string password = "";
+
+        private async Task RedirectToSignIn()
+        {
+            var message = $"Redirecting to Sign In page with:\nUsername: {username}\nPassword: {password}";
+            await JsRuntime.InvokeVoidAsync("alert", message);
+        }
+
+        private async Task GoBack()
+        {
+            var message = "Going back...";
+            await JsRuntime.InvokeVoidAsync("alert", message);
+        }
+    }
+</MudThemeProvider>
