@@ -47,5 +47,5 @@ public interface IUserManager
     /// <exception cref="UserNotFoundException">Thrown when the user to demote does not exist.</exception>
     public Task DemoteAdminAsync([DisallowNull] IUser userToDemote);
 
-    static abstract implicit operator DisablePrivateReflectionAttribute(IUserManager v);
+    
 }
