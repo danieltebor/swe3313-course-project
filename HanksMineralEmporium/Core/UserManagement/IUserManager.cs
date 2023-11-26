@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-
+using System.Runtime.CompilerServices;
 using HanksMineralEmporium.Core.UserManagement.Exception;
 
 namespace HanksMineralEmporium.Core.UserManagement;
@@ -46,4 +46,6 @@ public interface IUserManager
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="userToDemote"/> or <paramref name="adminPromoting"/> is null.</exception>
     /// <exception cref="UserNotFoundException">Thrown when the user to demote does not exist.</exception>
     public Task DemoteAdminAsync([DisallowNull] IUser userToDemote);
+
+    static abstract implicit operator DisablePrivateReflectionAttribute(IUserManager v);
 }
