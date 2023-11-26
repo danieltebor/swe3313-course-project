@@ -1,7 +1,6 @@
 using System;
 using HanksMineralEmporium.Core.UserManagement;
 using HanksMineralEmporium.Core.UserManagement.Exception;
-using HanksMineralEmporium.Service.AuthenticationService.Exception;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
