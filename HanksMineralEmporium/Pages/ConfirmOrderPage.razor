@@ -1,0 +1,39 @@
+
+<MudThemeProvider Theme="Theme.Default">
+    <MudCssBaseline />
+
+    <div class="mudblazor-app">
+        <MudContainer>
+            <MudRow>
+                <MudCol Class="mud-col-spacing">
+                    <MudButton Class="back-to-shopping" Variant="Variant.Filled">Back To Shopping</MudButton>
+                </MudCol>
+                <MudCol Class="mud-col-spacing">
+                    <MudButton Class="return-to-payment" Variant="Variant.Filled">Return To Payment</MudButton>
+                </MudCol>
+            </MudRow>
+
+            <MudPaper Class="mud-paper-spacing">
+                <p class="center-text mud-typography-h5">Are you sure you want to purchase?</p>
+                <MudSelect Class="mud-select-spacing" Label="Select an option">
+                    <MudSelectItem Value="option1">Option 1</MudSelectItem>
+                    <MudSelectItem Value="option2">Option 2</MudSelectItem>
+                    <MudSelectItem Value="option3">Option 3</MudSelectItem>
+                </MudSelect>
+            </MudPaper>
+
+            <MudPaper Class="mud-paper-spacing">
+                <div class="mud-typography-subtitle1">
+                    <p>Card: **** **** **** 4444</p>
+                    <p>Subtotal: $0.00</p>
+                    <p>Tax: $0.00</p>
+                    <p>Shipping: $0.00</p>
+                    <hr />
+                    <strong>Total: $0.00</strong>
+                </div>
+            </MudPaper>
+
+            <MudButton Class="complete-order-bottom mud-button-spacing" Variant="Variant.Filled">Complete Order</MudButton>
+        </MudContainer>
+    </div>
+</MudThemeProvider>
