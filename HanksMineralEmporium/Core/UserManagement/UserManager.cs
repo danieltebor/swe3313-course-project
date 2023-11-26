@@ -36,6 +36,11 @@ public class UserManager : IUserManager
     /// <inheritdoc/>
     public async Task MakeAdminAsync(IUser userToPromote)
     {
+        if (userToPromote is null)
+        {
+            throw new ArgumentNullException(nameof(userToPromote));
+        }
+
         var user = await LoadUserAsync(userToPromote.Username);
         user.IsAdmin = true;
         await _userDatabaseOperator.OverwriteAsync(user);
@@ -44,6 +49,11 @@ public class UserManager : IUserManager
     /// <inheritdoc/>
     public async Task DemoteAdminAsync(IUser userToDemote)
     {
+        if (userToDemote is null)
+        {
+            throw new ArgumentNullException(nameof(userToDemote));
+        }
+
         var user = await LoadUserAsync(userToDemote.Username);
         user.IsAdmin = false;
         await _userDatabaseOperator.OverwriteAsync(user);

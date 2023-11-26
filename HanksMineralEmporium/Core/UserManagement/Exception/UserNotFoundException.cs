@@ -14,5 +14,5 @@ public class UserNotFoundException : System.Exception
     /// Creates a new <see cref="UserNotFoundException"/>.
     /// </summary>
     /// <param name="username">The username of the user that was not found.</param>
-    public UserNotFoundException(string username) : base($"User with username {username} not found.") {}
+    public UserNotFoundException(string username) : base($"User with username '{username}' not found.") {}
 }

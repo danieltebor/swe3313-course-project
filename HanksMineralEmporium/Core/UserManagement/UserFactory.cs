@@ -77,6 +77,11 @@ internal class UserFactory : IUserFactory
     /// <inheritdoc/>
     public IUser GetUserByUsername(string username)
     {
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            throw new ArgumentException("Username cannot be null or whitespace.", nameof(username));
+        }
+
         var user = _userDatabaseOperator.GetByUsernameAsync(username).Result
             ?? throw new UserNotFoundException(username);
         return user;
