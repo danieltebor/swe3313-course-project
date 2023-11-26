@@ -1,0 +1,57 @@
+
+<MudAppBar Style="background:#9A8716;" Fixed="false" Elevation="0">
+    <MudImage Src="images/sweden.jpg" Width="113" Height="45" Alt="Swedish Farm House" Class="rounded-lg ma-4"/>
+    <MudButton Variant="Variant.Filled" Edge="Edge.Start" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">@Login</MudButton>
+    <MudSpacer />
+    <MudButton Variant="Variant.Filled" Edge="Edge.End" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">@ViewCart</MudButton>
+</MudAppBar>
+
+
+<MudStack>
+    <MudPaper Class="pa-4" Style ="background:#124419" Height="100%" Width="100%" Square="true" >
+        <MudImage Src="images/sweden.jpg" Width="150" Height="150" Alt="Swedish Farm House" Elevation="25"/>
+        
+        <MudPaper Class="d-flex align-center" Height="40px" Width="35%" Style="background:#9A8716;">
+            <MudText Typo="Typo.body1">Mineral: </MudText>
+        </MudPaper>
+
+        <br>
+        <MudPaper Class="d-flex align-center" Height="40px" Width="35%" Style="background:#9A8716;">
+            <MudText Typo="Typo.body1">Price: $0.00</MudText>
+        </MudPaper>
+
+        <br>
+        <MudPaper Class="d-flex align-center" Height="40px" Width="35%" Style="background:#9A8716;">
+            <MudText Typo="Typo.body2">Description: </MudText>
+        </MudPaper>
+
+        <br>
+        <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
+            <MudButton Class="py-2 d-flex align-center flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">@AddToCart</MudButton>
+        </MudPaper>
+
+        <br>
+        <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
+            <MudButton Class="py-2 d-flex align-center flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">@GoBack</MudButton>
+        </MudPaper>
+        
+    </MudPaper>
+</MudStack>      
+
+
+@code {
+    public string Login { get; set; } = "Login";
+    public string ViewCart { get; set; } = "View cart";
+    public string AddToCart { get; set; } = "Add to cart";
+    public string GoBack { get; set; } = "Go Back";
+    
+    
+    void ButtonOnClick()
+    {
+        @*
+        ButtonClicked += 1;
+        Text = $"Awesome x {ButtonClicked}";
+        ButtonText = "Click Me Again";
+        *@
+    }
+}
