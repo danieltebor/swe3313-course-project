@@ -18,16 +18,15 @@ internal class UserFactory : IUserFactory
     }
 
     /// <inheritdoc/>
-    public IUser CreateNewUser(string username, string password)
+    public IUser CreateNewUser(string username, string hashedPassword)
     {
         CredentialValidation.ValidateUsername(username);
-        CredentialValidation.ValidatePassword(password);
 
         if (_userDatabaseOperator.IsUsernameTakenAsync(username).Result) {
             throw new InvalidUsernameException("Username is already taken.");
         }
 
-        var user = new User(_userDatabaseOperator.GetNewUniqueId(), username, password);
+        var user = new User(_userDatabaseOperator.GetNewUniqueId(), username, hashedPassword);
         _userDatabaseOperator.SaveAsync(user).Wait();
 
         return user;
