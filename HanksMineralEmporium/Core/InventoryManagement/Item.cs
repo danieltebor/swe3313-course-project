@@ -5,6 +5,8 @@ namespace HanksMineralEmporium.Core.InventoryManagement;
 /// </summary>
 public class Item : IItem
 {
+    private decimal _price;
+
     /// <summary>
     /// Creates a new Item object.
     /// </summary>
@@ -25,10 +27,6 @@ public class Item : IItem
         {
             throw new ArgumentException("Value cannot be null or whitespace.", nameof(imagePath));
         }
-        else if (price < 0)
-        {
-            throw new ArgumentException("Value cannot be less than 0.", nameof(price));
-        }
 
         Id = id;
         Price = price;
@@ -39,7 +37,7 @@ public class Item : IItem
 
     public ulong Id { get; }
     public decimal Price { 
-        get => Price; 
+        get => _price; 
         set
         {
             if (value < 0)
@@ -47,7 +45,7 @@ public class Item : IItem
                 throw new ArgumentException("Value cannot be less than 0.", nameof(value));
             }
 
-            price = value;
+            _price = value;
         }
     }
     public string Name { get; set; }
