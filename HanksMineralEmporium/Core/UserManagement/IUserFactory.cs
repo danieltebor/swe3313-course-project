@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 using HanksMineralEmporium.Core.UserManagement.Exception;
 
 namespace HanksMineralEmporium.Core.UserManagement;
@@ -19,7 +17,7 @@ internal interface IUserFactory
     /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> or <paramref name="password"/> is null or whitespace.</exception>
     /// <exception cref="InvalidUsernameException">Thrown when the given username is invalid or already taken.</exception>
     /// <exception cref="InvalidPasswordException">Thrown when the given password is invalid.</exception>
-    public IUser CreateNewUser([DisallowNull] string username, [DisallowNull] string password);
+    public IUser CreateNewUser(string username, string password);
     
     /// <summary>
     /// Gets an existing user by their username.
@@ -36,5 +34,5 @@ internal interface IUserFactory
     /// <returns>The retreived IUser</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> is null or whitespace.</exception>
     /// <exception cref="UserNotFoundException">Thrown when no user with the given username exists.</exception>
-    public IUser GetUserByUsername([DisallowNull] string username);
+    public IUser GetUserByUsername(string username);
 }

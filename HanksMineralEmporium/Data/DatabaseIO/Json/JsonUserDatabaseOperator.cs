@@ -6,7 +6,7 @@ namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 /// <summary>
 /// JSON implementation of <see cref="IUserDatabaseOperator"/>.
 /// </summary>
-public class JsonUserDatabaseOperator : JsonDatabaseOperator<IUser>, IUserDatabaseOperator
+internal class JsonUserDatabaseOperator : JsonDatabaseOperator<IUser>, IUserDatabaseOperator
 {
     private static readonly string DatabaseName = "Users";
 

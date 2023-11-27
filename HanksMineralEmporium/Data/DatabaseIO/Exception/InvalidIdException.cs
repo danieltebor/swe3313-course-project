@@ -11,5 +11,11 @@ public class InvalidIdException : System.Exception
     /// Creates a new InvalidIdException.
     /// </summary>
     /// <param name="message">Message to display.</param>
-    public InvalidIdException([DisallowNull] string message) : base(message) {}
+    /// <exception cref="ArgumentException">Thrown when message is null or whitespace.</exception>
+    public InvalidIdException(string message) : base(message) {
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(message));
+        }
+    }
 }
