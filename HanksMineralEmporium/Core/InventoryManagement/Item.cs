@@ -17,11 +17,11 @@ public class Item : IItem
     /// or when price is less than 0.</exception>
     public Item(ulong id, decimal price, string name, string description, string imagePath)
     {
-        if (name.IsNullOrWhiteSpace())
+        if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
         }
-        else if (imagePath.IsNullOrWhiteSpace())
+        else if (string.IsNullOrWhiteSpace(imagePath))
         {
             throw new ArgumentException("Value cannot be null or whitespace.", nameof(imagePath));
         }
