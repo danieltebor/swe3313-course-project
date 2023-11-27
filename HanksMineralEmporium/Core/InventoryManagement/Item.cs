@@ -39,7 +39,7 @@ public class Item : IItem
 
     public ulong Id { get; }
     public decimal Price { 
-        get; 
+        get => Price; 
         set => Price = value < 0 ? throw new ArgumentException("Value cannot be less than 0.", nameof(value)) : value;
     }
     public string Name { get; set; }
