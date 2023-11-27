@@ -18,9 +18,9 @@ internal class UserManager : IUserManager
     }
 
     /// <inheritdoc/>
-    public async Task<IUser> RegisterUserAsync(string username, string password)
+    public async Task<IUser> RegisterUserAsync(string username, string hashedPassword)
     {
-        return await Task.Run(() => _userFactory.CreateNewUser(username, password));
+        return await Task.Run(() => _userFactory.CreateNewUser(username, hashedPassword));
     }
 
     /// <inheritdoc/>

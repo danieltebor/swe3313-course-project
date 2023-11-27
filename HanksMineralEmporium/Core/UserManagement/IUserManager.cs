@@ -11,12 +11,11 @@ public interface IUserManager
     /// Creates a new user with the given username and password. The id is generated automatically.
     /// </summary>
     /// <param name="username">The username of the user to be created.</param>
-    /// <param name="password">The password of the user to be created.</param>
+    /// <param name="hashedPassword">The password of the user to be created.</param>
     /// <returns>The created user</returns>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> or <paramref name="password"/> is null or whitespace.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> or <paramref name="hashedPassword"/> is null or whitespace.</exception>
     /// <exception cref="InvalidUsernameException">Thrown when the given username is invalid or already taken.</exception>
-    /// <exception cref="InvalidPasswordException">Thrown when the given password is invalid.</exception>
-    public Task<IUser> RegisterUserAsync(string username, string password);
+    public Task<IUser> RegisterUserAsync(string username, string hashedPassword);
 
     /// <summary>
     /// Gets an existing user by their username.

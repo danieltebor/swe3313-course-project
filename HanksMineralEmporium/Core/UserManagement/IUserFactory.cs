@@ -12,12 +12,11 @@ internal interface IUserFactory
     /// and the user is saved in the database.
     /// </summary>
     /// <param name="username">The username of the user to create.</param>
-    /// <param name="password">The password of the user to create.</param>
+    /// <param name="hashedPassword">The password of the user to create.</param>
     /// <returns>The created IUser.</returns>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> or <paramref name="password"/> is null or whitespace.</exception>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> or <paramref name="hashedPassword"/> is null or whitespace.</exception>
     /// <exception cref="InvalidUsernameException">Thrown when the given username is invalid or already taken.</exception>
-    /// <exception cref="InvalidPasswordException">Thrown when the given password is invalid.</exception>
-    public IUser CreateNewUser(string username, string password);
+    public IUser CreateNewUser(string username, string hashedPassword);
     
     /// <summary>
     /// Gets an existing user by their username.
