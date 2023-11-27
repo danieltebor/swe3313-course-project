@@ -29,9 +29,7 @@ public class JsonDatabaseObjectSerializerTests
         IDatabaseObject? obj = null;
 
         // Act.
-        #pragma warning disable CS8604 // Possible null reference argument.
-        var result = Assert.Throws<ArgumentNullException>(() => _serializer.SerializeObject(obj));
-        #pragma warning restore CS8604 // Possible null reference argument.
+        var result = Assert.Throws<ArgumentNullException>(() => _serializer.SerializeObject(obj!));
 
         // Assert.
         Assert.Equal("Value cannot be null. (Parameter 'obj')", result.Message);
@@ -57,12 +55,10 @@ public class JsonDatabaseObjectSerializerTests
     {
         // Arrange.
         string? jsonString1 = null;
-        string? jsonString2 = "";
+        string jsonString2 = "";
 
         // Act.
-        #pragma warning disable CS8604 // Possible null reference argument.
-        var result1 = Assert.Throws<ArgumentException>(() => _serializer.DeserializeObject(jsonString1));
-        #pragma warning restore CS8604 // Possible null reference argument.
+        var result1 = Assert.Throws<ArgumentException>(() => _serializer.DeserializeObject(jsonString1!));
         var result2 = Assert.Throws<ArgumentException>(() => _serializer.DeserializeObject(jsonString2));
 
         // Assert.
@@ -106,9 +102,7 @@ public class JsonDatabaseObjectSerializerTests
         List<IDatabaseObject>? objects = null;
 
         // Act.
-        #pragma warning disable CS8604 // Possible null reference argument.
-        var result = Assert.Throws<ArgumentNullException>(() => _serializer.SerializeList(objects));
-        #pragma warning restore CS8604 // Possible null reference argument.
+        var result = Assert.Throws<ArgumentNullException>(() => _serializer.SerializeList(objects!));
 
         // Assert.
         Assert.Equal("Value cannot be null. (Parameter 'objects')", result.Message);
@@ -140,12 +134,10 @@ public class JsonDatabaseObjectSerializerTests
     {
         // Arrange.
         string? jsonString1 = null;
-        string? jsonString2 = "";
+        string jsonString2 = "";
 
         // Act.
-        #pragma warning disable CS8604 // Possible null reference argument.
-        var result1 = Assert.Throws<ArgumentException>(() => _serializer.DeserializeList(jsonString1));
-        #pragma warning restore CS8604 // Possible null reference argument.
+        var result1 = Assert.Throws<ArgumentException>(() => _serializer.DeserializeList(jsonString1!));
         var result2 = Assert.Throws<ArgumentException>(() => _serializer.DeserializeList(jsonString2));
 
         // Assert.

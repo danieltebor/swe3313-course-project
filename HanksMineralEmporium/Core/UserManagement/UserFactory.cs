@@ -10,51 +10,18 @@ namespace HanksMineralEmporium.Core.UserManagement;
 /// </summary>
 internal class UserFactory : IUserFactory
 {
-    [NotNull]
     private readonly IUserDatabaseOperator _userDatabaseOperator;
 
-    public UserFactory([DisallowNull] IUserDatabaseOperator userDatabaseOperator) {
+    public UserFactory(IUserDatabaseOperator userDatabaseOperator) {
         _userDatabaseOperator = userDatabaseOperator 
             ?? throw new ArgumentNullException(nameof(userDatabaseOperator));
-    }
-
-    private static void ValidateUsername(string username)
-    {
-        if (username is null)
-        {
-            throw new ArgumentNullException(nameof(username));
-        }
-        else if (username.Length < 3)
-        {
-            throw new InvalidUsernameException("Username must be at least 3 characters long.");
-        }
-        else if (username.Length > 32)
-        {
-            throw new InvalidUsernameException("Username cannot be longer than 32 characters.");
-        }
-    }
-
-    private static void ValidatePassword(string password)
-    {
-        if (password is null)
-        {
-            throw new ArgumentNullException(nameof(password));
-        }
-        else if (password.Length < 8)
-        {
-            throw new InvalidPasswordException("Password must be at least 8 characters long.");
-        }
-        else if (password.Length > 72)
-        {
-            throw new InvalidPasswordException("Password cannot be longer than 72 characters.");
-        }
     }
 
     /// <inheritdoc/>
     public IUser CreateNewUser(string username, string password)
     {
-        ValidateUsername(username);
-        ValidatePassword(password);
+        CredentialValidation.ValidateUsername(username);
+        CredentialValidation.ValidatePassword(password);
 
         if (_userDatabaseOperator.IsUsernameTakenAsync(username).Result) {
             throw new InvalidUsernameException("Username is already taken.");

@@ -25,9 +25,7 @@ public class UserManagerTests
         IUserDatabaseOperator? database = null;
 
         // Act.
-        #pragma warning disable CS8604 // Possible null reference argument.
-        var result = Assert.Throws<ArgumentNullException>(() => new UserManager(database));
-        #pragma warning restore CS8604 // Possible null reference argument.
+        var result = Assert.Throws<ArgumentNullException>(() => new UserManager(database!));
 
         // Assert.
         Assert.Equal("Value cannot be null. (Parameter 'userDatabaseOperator')", result.Message);
