@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace HanksMineralEmporium.Core.UserManagement.Exception;
 
 /// <summary>
@@ -12,7 +10,7 @@ public class InvalidUsernameException : ArgumentException
     /// </summary>
     /// <param name="message">The message to display.</param>
     /// <exception cref="ArgumentNullException">Thrown when message is null.</exception>
-    public InvalidUsernameException([DisallowNull] string message) : base(message) {
+    public InvalidUsernameException(string message) : base(message) {
         if (message is null)
         {
             throw new ArgumentNullException(nameof(message));

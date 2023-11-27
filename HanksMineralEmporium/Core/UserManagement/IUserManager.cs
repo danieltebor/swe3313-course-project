@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 using HanksMineralEmporium.Core.UserManagement.Exception;
 
 namespace HanksMineralEmporium.Core.UserManagement;
@@ -18,7 +16,7 @@ public interface IUserManager
     /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> or <paramref name="password"/> is null or whitespace.</exception>
     /// <exception cref="InvalidUsernameException">Thrown when the given username is invalid or already taken.</exception>
     /// <exception cref="InvalidPasswordException">Thrown when the given password is invalid.</exception>
-    public Task<IUser> RegisterUserAsync([DisallowNull] string username, [DisallowNull] string password);
+    public Task<IUser> RegisterUserAsync(string username, string password);
 
     /// <summary>
     /// Gets an existing user by their username.
@@ -27,7 +25,7 @@ public interface IUserManager
     /// <returns>The retreived user.</returns>
     /// <exception cref="ArgumentException">Thrown when <paramref name="username"/> is null or whitespace.</exception>
     /// <exception cref="UserNotFoundException">Thrown when no user with the given username exists.</exception>
-    public Task<IUser> LoadUserAsync([DisallowNull] string username);
+    public Task<IUser> LoadUserAsync(string username);
 
     /// <summary>
     /// Makes the given user an admin.
@@ -36,7 +34,7 @@ public interface IUserManager
     /// <returns>A task representing the asynchronous operation.</returns>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="userToPromote"/> or <paramref name="adminPromoting"/> is null.</exception>
     /// <exception cref="UserNotFoundException">Thrown when the user to promote does not exist.</exception>
-    public Task MakeAdminAsync([DisallowNull] IUser userToPromote);
+    public Task MakeAdminAsync(IUser userToPromote);
 
     /// <summary>
     /// Removes the admin status from the given user.
@@ -45,5 +43,5 @@ public interface IUserManager
     /// <returns>A task representing the asynchronous operation.</returns>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="userToDemote"/> or <paramref name="adminPromoting"/> is null.</exception>
     /// <exception cref="UserNotFoundException">Thrown when the user to demote does not exist.</exception>
-    public Task DemoteAdminAsync([DisallowNull] IUser userToDemote);
+    public Task DemoteAdminAsync(IUser userToDemote);
 }
