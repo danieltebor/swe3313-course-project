@@ -21,6 +21,10 @@ internal class UserFactory : IUserFactory
     public IUser CreateNewUser(string username, string hashedPassword)
     {
         CredentialValidation.ValidateUsername(username);
+        if (string.IsNullOrWhiteSpace(hashedPassword))
+        {
+            throw new ArgumentException("Password cannot be null or whitespace.", nameof(hashedPassword));
+        }
 
         if (_userDatabaseOperator.IsUsernameTakenAsync(username).Result) {
             throw new InvalidUsernameException("Username is already taken.");
