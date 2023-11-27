@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace HanksMineralEmporium.Core.InventoryManagement;
 
 /// <summary>
@@ -15,8 +13,9 @@ public class Item : IItem
     /// <param name="name">The name of the item.</param>
     /// <param name="description">The description of the item.</param>
     /// <param name="imagePath">The path to the image of the item.</param>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> or <paramref name="imagePath"/> is null or whitespace.</exception>
-    public Item([DisallowNull] ulong id, decimal price, [DisallowNull] string name, [AllowNull] string description, [DisallowNull] string imagePath)
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> or <paramref name="imagePath"/> is null or whitespace,
+    /// or when price is less than 0.</exception>
+    public Item(ulong id, decimal price, string name, string description, string imagePath)
     {
         if (name.IsNullOrWhiteSpace())
         {
@@ -39,7 +38,10 @@ public class Item : IItem
     }
 
     public ulong Id { get; }
-    public decimal Price { get; set; }
+    public decimal Price { 
+        get; 
+        set => Price = value < 0 ? throw new ArgumentException("Value cannot be less than 0.", nameof(value)) : value;
+    }
     public string Name { get; set; }
     public string Description { get; set; }
     public string ImagePath { get; set; }
