@@ -43,6 +43,6 @@ public class Item : IItem
         set => Price = value < 0 ? throw new ArgumentException("Value cannot be less than 0.", nameof(value)) : value;
     }
     public string Name { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
     public string ImagePath { get; set; }
 }

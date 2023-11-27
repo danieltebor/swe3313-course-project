@@ -10,6 +10,7 @@ public interface IItem : IDatabaseObject
     /// <summary>
     /// The price of the item.
     /// </summary>
+    /// <exception cref="ArgumentException">Thrown when value is less than 0.</exception>
     public decimal Price { get; set; }
 
     /// <summary>
