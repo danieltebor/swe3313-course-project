@@ -10,57 +10,27 @@ namespace HanksMineralEmporium.Core.UserManagement;
 /// </summary>
 internal class UserFactory : IUserFactory
 {
-    [NotNull]
     private readonly IUserDatabaseOperator _userDatabaseOperator;
 
-    public UserFactory([DisallowNull] IUserDatabaseOperator userDatabaseOperator) {
+    public UserFactory(IUserDatabaseOperator userDatabaseOperator) {
         _userDatabaseOperator = userDatabaseOperator 
             ?? throw new ArgumentNullException(nameof(userDatabaseOperator));
     }
 
-    private static void ValidateUsername(string username)
-    {
-        if (username is null)
-        {
-            throw new ArgumentNullException(nameof(username));
-        }
-        else if (username.Length < 3)
-        {
-            throw new InvalidUsernameException("Username must be at least 3 characters long.");
-        }
-        else if (username.Length > 32)
-        {
-            throw new InvalidUsernameException("Username cannot be longer than 32 characters.");
-        }
-    }
-
-    private static void ValidatePassword(string password)
-    {
-        if (password is null)
-        {
-            throw new ArgumentNullException(nameof(password));
-        }
-        else if (password.Length < 8)
-        {
-            throw new InvalidPasswordException("Password must be at least 8 characters long.");
-        }
-        else if (password.Length > 72)
-        {
-            throw new InvalidPasswordException("Password cannot be longer than 72 characters.");
-        }
-    }
-
     /// <inheritdoc/>
-    public IUser CreateNewUser(string username, string password)
+    public IUser CreateNewUser(string username, string hashedPassword)
     {
-        ValidateUsername(username);
-        ValidatePassword(password);
+        CredentialValidation.ValidateUsername(username);
+        if (string.IsNullOrWhiteSpace(hashedPassword))
+        {
+            throw new ArgumentException("Password cannot be null or whitespace.", nameof(hashedPassword));
+        }
 
         if (_userDatabaseOperator.IsUsernameTakenAsync(username).Result) {
             throw new InvalidUsernameException("Username is already taken.");
         }
 
-        var user = new User(_userDatabaseOperator.GetNewUniqueId(), username, password);
+        var user = new User(_userDatabaseOperator.GetNewUniqueId(), username, hashedPassword);
         _userDatabaseOperator.SaveAsync(user).Wait();
 
         return user;
@@ -77,6 +47,11 @@ internal class UserFactory : IUserFactory
     /// <inheritdoc/>
     public IUser GetUserByUsername(string username)
     {
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            throw new ArgumentException("Username cannot be null or whitespace.", nameof(username));
+        }
+
         var user = _userDatabaseOperator.GetByUsernameAsync(username).Result
             ?? throw new UserNotFoundException(username);
         return user;

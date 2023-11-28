@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 using HanksMineralEmporium.Data.DatabaseIO.Exception;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
@@ -7,19 +5,14 @@ namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 /// <summary>
 /// Provides base implementations for operations on a JSON database.
 /// </summary>
-public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : IDatabaseObject
+internal abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : IDatabaseObject
 {
-    [NotNull]
     private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
-    [NotNull]
-    private ulong _lastId = 0;
+    private ulong _currentId = 0;
     
-    [NotNull]
     protected readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
                                                   + Path.DirectorySeparatorChar;
-    [NotNull]
     protected readonly IDatabaseObjectSerializer<T> _jsonSerializer;
-    [NotNull]
     protected readonly SemaphoreSlim _databaseLock = new(1, 1);
 
     protected abstract IReadOnlyList<T> GetSeedData();
@@ -59,7 +52,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     /// <param name="databaseName">Name of the JSON database file. Should not end in .json.</param>
     /// <exception cref="ArgumentException">Thrown when database path is null or empty.</exception>
     /// <exception cref="ArgumentNullException">Thrown when jsonSerializer is null.</exception>
-    public JsonDatabaseOperator([DisallowNull] string databaseName, [DisallowNull] IDatabaseObjectSerializer<T> jsonSerializer)
+    public JsonDatabaseOperator(string databaseName, JsonDatabaseObjectSerializer<T> jsonSerializer)
     {
         if (string.IsNullOrWhiteSpace(databaseName))
         {
@@ -155,7 +148,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
             var jsonFileStr = File.ReadAllText(_databasePath);
             var objects = _jsonSerializer.DeserializeList(jsonFileStr);
             
-            if (objects == null || objects.Count == 0)
+            if (objects == null || objects.Count == 0 || objects.Count <= (int)id)
             {
                 return default;
             }
@@ -175,9 +168,12 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
         try
         {
             var jsonFile = File.ReadAllText(_databasePath);
+            if (string.IsNullOrWhiteSpace(jsonFile))
+            {
+                return new List<T>();
+            }
             var objects = _jsonSerializer.DeserializeList(jsonFile);
-            
-            return objects ?? new List<T>();
+            return objects;
         }
         finally
         {
@@ -190,10 +186,9 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     {
         _databaseLock.Wait();
         try {
-            _lastId++;
-            _transientIds.Add(_lastId);
+            _transientIds.Add(_currentId);
             
-            return _lastId;
+            return _currentId++;
         } finally {
             _databaseLock.Release();
         }

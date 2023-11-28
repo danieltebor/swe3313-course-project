@@ -1,13 +1,13 @@
-using System.Diagnostics.CodeAnalysis;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 
-class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : IDatabaseObject
+/// <summary>
+/// JSON implementation of <see cref="IDatabaseObjectSerializer{T}"/>.
+/// </summary>
+internal class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : IDatabaseObject
 {
-    [NotNull]
     private readonly JsonSerializerSettings _jsonSerializerSettings;
 
     public JsonDatabaseObjectSerializer() {
@@ -26,7 +26,33 @@ class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : I
             throw new ArgumentNullException(nameof(obj));
         }
         
-        return JsonConvert.SerializeObject(obj, _jsonSerializerSettings);
+        try
+        {
+            return JsonConvert.SerializeObject(obj, _jsonSerializerSettings);
+        }
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while serializing the object.", ex);
+        }
+    }
+
+    public T DeserializeObject(string data)
+    {
+        if (string.IsNullOrWhiteSpace(data))
+        {
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(data));
+        }
+
+        try
+        {
+            var obj = JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings)
+                ?? throw new InvalidCastException("Data is not a valid JSON object.");
+            return obj;
+        }
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while deserializing the object.", ex);
+        }
     }
 
     public string SerializeList(IList<T> objects)
@@ -36,29 +62,32 @@ class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : I
             throw new ArgumentNullException(nameof(objects));
         }
 
-        return JsonConvert.SerializeObject(objects, _jsonSerializerSettings);
-    }
-
-    public T DeserializeObject(string data)
-    {
-        if (string.IsNullOrWhiteSpace(data))
+        try
         {
-            throw new ArgumentException("Data cannot be null or whitespace.", nameof(data));
+            return JsonConvert.SerializeObject(objects, _jsonSerializerSettings);
         }
-
-        var user = JsonConvert.DeserializeObject<T>(data, _jsonSerializerSettings)
-            ?? throw new InvalidCastException("Data is not a valid JSON object.");
-        return user;
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while serializing the list.", ex);
+        }
     }
 
     public List<T> DeserializeList(string data)
     {
         if (string.IsNullOrWhiteSpace(data))
         {
-            throw new ArgumentException("Data cannot be null or whitespace.", nameof(data));
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(data));
         }
 
-        return JsonConvert.DeserializeObject<List<T>>(data, _jsonSerializerSettings)
-            ?? throw new InvalidCastException("Data is not a valid JSON array.");
+        try
+        {
+            var objects = JsonConvert.DeserializeObject<List<T>>(data, _jsonSerializerSettings)
+                ?? throw new InvalidCastException("Data is not a valid JSON array.");
+            return objects;
+        }
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while deserializing the list.", ex);
+        }
     }
 }

@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace HanksMineralEmporium.Core.UserManagement.Exception;
 
 /// <summary>
@@ -12,7 +10,7 @@ public class InvalidPasswordException : ArgumentException
     /// </summary>
     /// <param name="message">The message to display.</param>
     /// <exception cref="ArgumentNullException">Thrown when message is null.</exception>
-    public InvalidPasswordException([DisallowNull] string message) : base(message) {
+    public InvalidPasswordException(string message) : base(message) {
         if (message is null)
         {
             throw new ArgumentNullException(nameof(message));

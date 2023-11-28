@@ -21,13 +21,15 @@ internal class User : IUser
     /// <exception cref="InvalidUsernameException">Thrown when <paramref name="username"/> is less than 3 characters or greater than 32 characters.</exception>
     /// <exception cref="InvalidPasswordException">Thrown when <paramref name="password"/> is less than 8 characters or greater than 72 characters.</exception>
     public User(ulong id,
-                [DisallowNull, StringLength(32, MinimumLength = 3)] string username,
-                [DisallowNull, StringLength(72, MinimumLength = 8)] string password,
+                [StringLength(32, MinimumLength = 3)] string username,
+                [StringLength(72, MinimumLength = 8)] string hashedPassword,
                 bool isAdmin = false)
     {
+        CredentialValidation.ValidateUsername(username);
+
         Id = id;
         Username = username;
-        Password = password;
+        Password = hashedPassword;
         IsAdmin = isAdmin;
     }
 
