@@ -1,39 +1,96 @@
+@page "/ConfirmOrder"
+@using MudBlazor
 
-<MudThemeProvider Theme="Theme.Default">
-    <MudCssBaseline />
+<MudContainer>
+    <MudStack>
+        <MudPaper BackgroundColor="#124419">
+            <MudGrid>
+                <MudItem>
+                    <MudIconButton Icon="Icons.Material.Filled.ArrowBack" Color="Color.Primary" Size="Size.Large" Class="back-to-shopping" />
+                </MudItem>
+                <MudItem>
+                    <MudIconButton Icon="Icons.Material.Filled.Receipt" Color="Color.Primary" Size="Size.Large" Class="return-to-payment" />
+                </MudItem>
+            </MudGrid>
 
-    <div class="mudblazor-app">
-        <MudContainer>
-            <MudRow>
-                <MudCol Class="mud-col-spacing">
-                    <MudButton Class="back-to-shopping" Variant="Variant.Filled">Back To Shopping</MudButton>
-                </MudCol>
-                <MudCol Class="mud-col-spacing">
-                    <MudButton Class="return-to-payment" Variant="Variant.Filled">Return To Payment</MudButton>
-                </MudCol>
-            </MudRow>
+            <MudText Typo="Typo.h3" Class="center-text">Are you sure you want to purchase?</MudText>
 
-            <MudPaper Class="mud-paper-spacing">
-                <p class="center-text mud-typography-h5">Are you sure you want to purchase?</p>
-                <MudSelect Class="mud-select-spacing" Label="Select an option">
-                    <MudSelectItem Value="option1">Option 1</MudSelectItem>
-                    <MudSelectItem Value="option2">Option 2</MudSelectItem>
-                    <MudSelectItem Value="option3">Option 3</MudSelectItem>
-                </MudSelect>
-            </MudPaper>
+            <MudList Dense="true" Class="select">
+                <MudListItem>Option1</MudListItem>
+                <MudListItem>Option2</MudListItem>
+                <MudListItem>Option3</MudListItem>
+            </MudList>
+        </MudPaper>
 
-            <MudPaper Class="mud-paper-spacing">
-                <div class="mud-typography-subtitle1">
-                    <p>Card: **** **** **** 4444</p>
-                    <p>Subtotal: $0.00</p>
-                    <p>Tax: $0.00</p>
-                    <p>Shipping: $0.00</p>
-                    <hr />
+        <div class="p1">
+            <div class="p2">
+                <p>Card: **** **** **** 4444<br />
+                    Subtotal: $0.00<br />
+                    Tax: $0.00<br />
+                    Shipping: $0.00<br />
+                    <br />
                     <strong>Total: $0.00</strong>
-                </div>
-            </MudPaper>
+                </p>
+            </div>
+        </div>
 
-            <MudButton Class="complete-order-bottom mud-button-spacing" Variant="Variant.Filled">Complete Order</MudButton>
-        </MudContainer>
-    </div>
-</MudThemeProvider>
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" Class="complete-order-bottom">Complete Order</MudButton>
+    </MudStack>
+</MudContainer>
+
+<style>
+    .p1 {
+        background-color: #9A8716;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .p2 {
+        text-align: left;
+        font-size: 1.8em;
+    }
+
+    .center-text {
+        text-align: center;
+        margin: 0;
+        font-size: 2.25em;
+    }
+
+    .back-to-shopping,
+    .return-to-payment,
+    .complete-order-bottom {
+        background-color: #4d4d4d;
+        color: #fff;
+        padding: 15px;
+        border: none;
+        border-radius: 7.5px;
+        cursor: pointer;
+        font-size: 2.25em;
+        margin-bottom: 30px;
+    }
+
+    .back-to-shopping {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+
+    .return-to-payment {
+        position: absolute;
+        top: 15px;
+        transform: translateX(-50%);
+        left: 50%;
+    }
+
+    .complete-order-bottom {
+        position: absolute;
+        bottom: 15px;
+    }
+
+    .select {
+        width: 300px;
+        margin: 15px auto;
+        display: block;
+        font-size: 1.5em;
+    }
+</style>
