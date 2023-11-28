@@ -1,41 +1,65 @@
 @page "/SalesReport"
 
-@using MudBlazor
-@using MudBlazor.Services
+<div class="background-section"></div>
 
-<MudThemeProvider />
-<MudDialogProvider />
+<h3 class="sales-report-header">Sales Report</h3>
 
-<div style="background-color: #124419; margin: 0;">
-    <div class="background-section"></div>
+<div class="user-text">User</div>
+<div class="item-text">Item</div>
+<button class="go-to-receipt-btn">Go To Receipt</button>
 
-    <h3 class="text-center text-white">Sales Report</h3>
+<!-- Repeat the above block for other sections -->
 
-    <MudPaper Class="user-text" Style="top: 50px; left: 25%;">User</MudPaper>
-    <MudPaper Class="item-text" Style="top: 50px; left: 46.9%;">Item</MudPaper>
-    <MudButton Class="go-to-receipt-btn" Style="top: 50px; left: 68%;" Color="Color.Default" BackgroundColor="Color.From("#4d4d4d")">Go To Receipt</MudButton>
+<style>
+    body {
+        background-color: #124419;
+        margin: 0;
+    }
 
-    <div class="text-center">
-        <MudPaper Class="user-text" Style="top: 90px;">User</MudPaper>
-        <MudPaper Class="item-text" Style="top: 90px;">Item</MudPaper>
-        <MudButton Class="go-to-receipt-btn" Style="top: 90px;" Color="Color.Default" BackgroundColor="Color.From("#4d4d4d")">Go To Receipt</MudButton>
-    </div>
+    .background-section {
+        position: fixed;
+        top: 0;
+        left: 25%;
+        width: 50%;
+        height: 100%;
+        background-color: #9A8716;
+        z-index: -1;
+    }
 
-    <div class="text-center">
-        <MudPaper Class="user-text" Style="top: 130px;">User</MudPaper>
-        <MudPaper Class="item-text" Style="top: 130px;">Item</MudPaper>
-        <MudButton Class="go-to-receipt-btn" Style="top: 130px;" Color="Color.Default" BackgroundColor="Color.From("#4d4d4d")">Go To Receipt</MudButton>
-    </div>
+    .sales-report-header {
+        text-align: center;
+        color: white;
+        position: relative;
+    }
 
-    <div class="text-center">
-        <MudPaper Class="user-text" Style="top: 170px;">User</MudPaper>
-        <MudPaper Class="item-text" Style="top: 170px;">Item</MudPaper>
-        <MudButton Class="go-to-receipt-btn" Style="top: 170px;" Color="Color.Default" BackgroundColor="Color.From("#4d4d4d")">Go To Receipt</MudButton>
-    </div>
+    .user-text,
+    .item-text {
+        text-align: left;
+        color: white;
+        position: absolute;
+        z-index: 1;
+    }
 
-    <div class="text-center">
-        <MudPaper Class="user-text" Style="top: 210px;">User</MudPaper>
-        <MudPaper Class="item-text" Style="top: 210px;">Item</MudPaper>
-        <MudButton Class="go-to-receipt-btn" Style="top: 210px;" Color="Color.Default" BackgroundColor="Color.From("#4d4d4d")">Go To Receipt</MudButton>
-    </div>
-</div>
+    .user-text {
+        top: 50px;
+        left: 25%;
+    }
+
+    .item-text {
+        top: 50px;
+        left: 46.9%;
+    }
+
+    .go-to-receipt-btn {
+        position: absolute;
+        top: 45px;
+        left: 63%;
+        color: white;
+        background-color: #4d4d4d;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1;
+    }
+</style>
