@@ -1,6 +1,12 @@
 @page "/ViewYourItems"
 
 <MudContainer Class="body-container">
+    <div class="button-container">
+        <MudButton Class="back-to-shopping" @onclick="HandleBackToShopping">
+            Back To Shopping
+        </MudButton>
+    </div>
+
     <MudPaper Class="article">
         <div class="center-text">
             <h3>Shopping Cart</h3>
@@ -15,22 +21,13 @@
 
     <MudPaper Class="p1">
         <div class="p2">
-            <div class="p3">Total: $0.00</div>
+            <div class="p3">Subtotal: $0.00</div>
         </div>
     </MudPaper>
 
-    <div class="total-and-button-container">
-        <div class="total-container">
-            <div class="p3">Total: $0.00</div>
-        </div>
-    </div>
-
-    <div class="button-container">
-        <MudButton Class="back-to-shopping" @onclick="HandleBackToShopping">
-            Back To Shopping
-        </MudButton>
-
+    <div class="total-container">
         <div class="button-group">
+            <!-- Centered "Pay Now" below the subtotal -->
             <MudButton Class="pay-now" @onclick="HandlePayNow">
                 Pay Now
             </MudButton>
@@ -90,33 +87,21 @@
         color: #fff;
     }
 
-    .total-and-button-container {
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .total-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 20px;
     }
 
-    .total-container {
-        text-align: center;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-    .button-group {
-        display: flex;
-    }
-
-    .return-to-shopping {
-        margin-left: auto; /* Move to the opposite side */
-    }
-
     .back-to-shopping,
-    .pay-now-bottom {
+    .pay-now {
         background-color: #4d4d4d;
         color: #fff;
         padding: 15px;
@@ -124,7 +109,7 @@
         border-radius: 7.5px;
         cursor: pointer;
         font-size: 2.25em;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
     }
 </style>
 
