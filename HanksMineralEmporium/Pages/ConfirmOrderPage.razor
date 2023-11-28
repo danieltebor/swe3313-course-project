@@ -1,44 +1,70 @@
-@page "/ConfirmOrder"
-@using MudBlazor
+@page "/ViewYourItems"
 
-<MudContainer>
-    <MudStack>
-        <MudPaper BackgroundColor="#124419">
-            <MudGrid>
-                <MudItem>
-                    <MudIconButton Icon="Icons.Material.Filled.ArrowBack" Color="Color.Primary" Size="Size.Large" Class="back-to-shopping" />
-                </MudItem>
-                <MudItem>
-                    <MudIconButton Icon="Icons.Material.Filled.Receipt" Color="Color.Primary" Size="Size.Large" Class="return-to-payment" />
-                </MudItem>
-            </MudGrid>
-
-            <MudText Typo="Typo.h3" Class="center-text">Are you sure you want to purchase?</MudText>
-
-            <MudList Dense="true" Class="select">
-                <MudListItem>Option1</MudListItem>
-                <MudListItem>Option2</MudListItem>
-                <MudListItem>Option3</MudListItem>
-            </MudList>
-        </MudPaper>
-
-        <div class="p1">
-            <div class="p2">
-                <p>Card: **** **** **** 4444<br />
-                    Subtotal: $0.00<br />
-                    Tax: $0.00<br />
-                    Shipping: $0.00<br />
-                    <br />
-                    <strong>Total: $0.00</strong>
-                </p>
-            </div>
+<MudContainer Class="body-container">
+    <MudPaper Class="article">
+        <div class="center-text">
+            <h3>Shopping Cart</h3>
         </div>
+        <MudSelect Label="Select Item" Class="select" @bind-Value="selectedOption">
+            @foreach (var option in Options)
+            {
+                <MudSelectItem Value="@option">@option</MudSelectItem>
+            }
+        </MudSelect>
+    </MudPaper>
 
-        <MudButton Variant="Variant.Filled" Color="Color.Secondary" Class="complete-order-bottom">Complete Order</MudButton>
-    </MudStack>
+    <MudPaper Class="p1">
+        <div class="p2">
+            <div class="p3">Total: $0.00</div>
+        </div>
+    </MudPaper>
+
+    <div class="total-and-button-container">
+        <div class="total-container">
+            <div class="p3">Total: $0.00</div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <MudButton Class="back-to-shopping" @onclick="HandleBackToShopping">
+            Back To Shopping
+        </MudButton>
+
+        <div class="button-group">
+            <MudButton Class="pay-now" @onclick="HandlePayNow">
+                Pay Now
+            </MudButton>
+        </div>
+    </div>
 </MudContainer>
 
 <style>
+    .body-container {
+        background-color: #124419;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .article {
+        background-color: #9A8716;
+        text-align: center;
+        padding: 30px;
+        margin-bottom: 30px;
+        width: 450px;
+        position: relative;
+    }
+
+    .select {
+        width: 300px;
+        margin: 15px auto;
+        display: block;
+        font-size: 1.5em;
+    }
+
     .p1 {
         background-color: #9A8716;
         padding: 15px;
@@ -48,17 +74,49 @@
     .p2 {
         text-align: left;
         font-size: 1.8em;
+        color: #fff;
+    }
+
+    .p3 {
+        font-weight: bold;
+        font-size: 1.8em;
+        color: #fff;
     }
 
     .center-text {
         text-align: center;
         margin: 0;
         font-size: 2.25em;
+        color: #fff;
+    }
+
+    .total-and-button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .total-container {
+        text-align: center;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .button-group {
+        display: flex;
+    }
+
+    .return-to-shopping {
+        margin-left: auto; /* Move to the opposite side */
     }
 
     .back-to-shopping,
-    .return-to-payment,
-    .complete-order-bottom {
+    .pay-now-bottom {
         background-color: #4d4d4d;
         color: #fff;
         padding: 15px;
@@ -68,29 +126,41 @@
         font-size: 2.25em;
         margin-bottom: 30px;
     }
-
-    .back-to-shopping {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-    }
-
-    .return-to-payment {
-        position: absolute;
-        top: 15px;
-        transform: translateX(-50%);
-        left: 50%;
-    }
-
-    .complete-order-bottom {
-        position: absolute;
-        bottom: 15px;
-    }
-
-    .select {
-        width: 300px;
-        margin: 15px auto;
-        display: block;
-        font-size: 1.5em;
-    }
 </style>
+
+@code {
+    private List<string> Options;
+    private string selectedOption;
+
+    protected override void OnInitialized()
+    {
+        // Call a method to fetch and fill the options dynamically
+        FetchOptions();
+    }
+
+    private void FetchOptions()
+    {
+        // Replace this with your logic to fetch options dynamically
+        Options = new List<string> { "Option 1", "Option 2", "Option 3" };
+    }
+
+    private void UpdateTotal()
+    {
+        // Add your logic to update the total based on the selected option
+    }
+
+    private void HandlePayNow()
+    {
+        // Add your logic to handle the complete order button click
+    }
+
+    private void HandleBackToShopping()
+    {
+        // Add your logic to handle the back to shopping button click
+    }
+
+    private void HandleReturnToPayment()
+    {
+        // Add your logic to handle the return to payment button click
+    }
+}
