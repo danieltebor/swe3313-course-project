@@ -46,6 +46,4 @@ public interface IUserManager
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="userToDemote"/> or <paramref name="adminPromoting"/> is null.</exception>
     /// <exception cref="UserNotFoundException">Thrown when the user to demote does not exist.</exception>
     public Task DemoteAdminAsync([DisallowNull] IUser userToDemote);
-
-    
 }
