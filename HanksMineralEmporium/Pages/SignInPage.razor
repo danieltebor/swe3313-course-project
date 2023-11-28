@@ -18,6 +18,63 @@
         <button class="action-button go-back-button" @onclick="goBack">Go Back</button>
     </div>
 </MudContainer>
+
+<style>
+    body {
+        background-color: #124419;
+        color: #FFFFFF;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .article {
+        background-color: #9A8716;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+        width: 300px;
+    }
+
+    .sign-in-text {
+        text-align: center;
+        color: black;
+        margin-top: 10px;
+        font-size: 2em;
+    }
+
+    .center-text {
+        text-align: center;
+    }
+
+    .user-input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .action-button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .sign-in-button {
+        background-color: #4d4d4d;
+        color: #FFFFFF;
+    }
+
+    .go-back-button {
+        background-color: #4d4d4d;
+        color: #FFFFFF;
+    }
+</style>
+
 @code {
     public string? username;
     public string? password;
