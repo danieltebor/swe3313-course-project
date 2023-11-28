@@ -9,7 +9,7 @@
 
                 <MudTextField T="string" Label="Your name" />
                 <MudTextField T="string" Label="Email" />
-                <MudTextField Mask="@(new PatternMask(".{6,}"))" T="string" Label="Password" HelperText= @HelperText />
+                <MudTextField T="string" Label="Password" HelperText= "*Enter at least 6 numbers and/or letters for the password" />
                 <br>
 
                 <MudStack>
@@ -37,12 +37,10 @@
 </MudStack>
 
 @code {
-    @* string colour = Colors.Green.Darken4; *@
-
     public string SignUpButton { get; set; } = "Sign up";
     public string GoBackButton { get; set; } = "Go back";
     public int ButtonClicked { get; set; }
-    public string HelperText { get; set; } = "*Enter at least 6 numbers and/or letters for the password";
+    //public string HelperText { get; set; } = "*Enter at least 6 numbers and/or letters for the password";
 
     void ButtonOnClick() {
         //Text = $"Awesome x {ButtonClicked}";
