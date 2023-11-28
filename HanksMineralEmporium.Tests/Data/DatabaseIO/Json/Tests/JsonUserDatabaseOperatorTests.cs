@@ -1,5 +1,6 @@
 namespace HanksMineralEmporium.Data.DatabaseIO.Json.Tests;
 
+[Collection("Database tests")]
 public class JsonUserDatabaseOperatorTests
 {
     private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database", "Users.json");

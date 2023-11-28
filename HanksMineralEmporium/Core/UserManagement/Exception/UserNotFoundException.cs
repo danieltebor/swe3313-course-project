@@ -28,10 +28,12 @@ public class UserNotFoundException : System.Exception
     /// Creates a new <see cref="UserNotFoundException"/>.
     /// </summary>
     /// <param name="innerException">The exception that is the cause of the current exception.</param>
-    public UserNotFoundException(DatabaseObjectNotFoundException<IUser> innerException) : base("User not found.", innerException) {
+    public UserNotFoundException(DatabaseObjectNotFoundException<IUser> innerException) {
         if (innerException is null)
         {
             throw new ArgumentNullException(nameof(innerException));
         }
+
+        throw new UserNotFoundException(innerException.Id);
     }
 }
