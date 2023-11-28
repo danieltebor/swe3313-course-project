@@ -1,35 +1,90 @@
-@inherits LayoutComponentBase
+@page "/ViewYourItems"
 
-<MudThemeProvider Theme="@theme">
-    <MudDialogProvider />
-    <div class="receipt-container">
-        <div class="receipt-header">Receipt</div>
+<MudContainer Class="receipt-container">
+    <div class="receipt-header">Receipt</div>
 
-        <div class="text-container">
-            <MudPaper Class="text-content">
-                <p>
-                    Card: **** **** **** 4444<br>
-                    Subtotal: $0.00<br>
-                    Tax: $0.00<br>
-                    Shipping: $0.00<br>
-                    _________________
-                </p>
-            </MudPaper>
+    <div class="text-container">
+        <div class="text-content">
+            <p>
+                Card: **** **** **** 4444<br>
+                Subtotal: $0.00<br>
+                Tax: $0.00<br>
+                Shipping: $0.00<br>
+                _________________
+            </p>
         </div>
-
-        <div class="dropdown-container">
-            <div class="shipping-address-heading">Shipping Address</div>
-            <MudSelect>
-                <MudSelectItem Value="option1">Option 1</MudSelectItem>
-                <MudSelectItem Value="option2">Option 2</MudSelectItem>
-                <MudSelectItem Value="option3">Option 3</MudSelectItem>
-            </MudSelect>
-        </div>
-
-        <MudButton Class="ok-button">OK</MudButton>
     </div>
-</MudThemeProvider>
 
-@code {
-    private MudTheme theme = new MudTheme();
-}
+    <MudContainer Class="dropdown-container">
+        <div class="shipping-address-heading">Shipping Address</div>
+        <MudList>
+            <MudListItem>Option 1</MudListItem>
+            <MudListItem>Option 2</MudListItem>
+            <MudListItem>Option 3</MudListItem>
+        </MudList>
+    </MudContainer>
+
+    <MudButton Class="ok-button">OK</MudButton>
+</MudContainer>
+<style>
+    .receipt-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #124419;
+        margin: 0;
+        color: white;
+    }
+
+    .receipt-header {
+        background-color: #9A8716;
+        padding: 15px;
+        text-align: center;
+        font-size: 2.44rem;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .text-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: #9A8716;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .text-content {
+        background-color: #9A8716;
+    }
+
+    .dropdown-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 80%;
+        width: 20%;
+    }
+
+    .shipping-address-heading {
+        background-color: #9A8716;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 2.44rem;
+    }
+
+    .ok-button {
+        margin-top: 20px;
+        background-color: #4d4d4d;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
