@@ -1,47 +1,110 @@
-@page "/ViewItemsPage"
-<MudContainer Style="height: 100vh; overflow-y: auto;">
-    <MudPaper Class="m-4" BackgroundColor="Color.FromRgb(18, 68, 25)">
-        <h3 class="text-white text-center">Image Gallery</h3>
+@page "/ViewItems"
 
+<MudContainer Class="body-container">
+    <div class="container">
         @for (int i = 1; i <= 3; i++)
         {
-            <MudPaper Class="m-4">
-                <div class="d-flex justify-content-between mb-3">
-                    @for (int j = 1; j <= 4; j++)
-                    {
-                        <div>
-                            <img src="image_link_@(i * 4 - 4 + j).jpg" alt="Image @(i * 4 - 4 + j)">
-                        </div>
-                    }
-                </div>
+            <MudCard Class="gallery-card mb-3">
+                <MudCardContent>
+                    <div class="image-container">
+                        @for (int j = 1; j <= 4; j++)
+                        {
+                            <img src="image_link_@(i * 4 + j - 4).jpg" alt="Image @(i * 4 + j - 4)">
+                        }
+                    </div>
 
-                <div class="d-flex justify-content-between mb-3">
-                    @for (int j = 1; j <= 4; j++)
-                    {
-                        <div>
-                            <p class="font-weight-bold text-center">Minerals @(i * 4 - 4 + j)</p>
-                        </div>
-                    }
-                </div>
+                    <div class="mineral-container">
+                        @for (int j = 1; j <= 4; j++)
+                        {
+                            <p class="mineral-label">Minerals @(i * 4 + j - 4)</p>
+                        }
+                    </div>
 
-                <div class="d-flex justify-content-between mb-3">
-                    @for (int j = 1; j <= 4; j++)
-                    {
-                        <div>
-                            <p class="text-center">Description @(i * 4 - 4 + j)</p>
-                        </div>
-                    }
-                </div>
+                    <div class="description-container">
+                        @for (int j = 1; j <= 4; j++)
+                        {
+                            <p class="description-label">Description @(i * 4 + j - 4)</p>
+                        }
+                    </div>
 
-                <div class="d-flex justify-content-between">
-                    @for (int j = 1; j <= 4; j++)
-                    {
-                        <div>
-                            <MudButton Class="add-to-cart-button" Color="Color.FromRgb(68, 68, 68)">Add To Cart</MudButton>
-                        </div>
-                    }
-                </div>
-            </MudPaper>
+                    <div class="cart-button-container">
+                        @for (int j = 1; j <= 4; j++)
+                        {
+                            <MudButton Class="add-to-cart-button">Add To Cart</MudButton>
+                        }
+                    </div>
+                </MudCardContent>
+            </MudCard>
         }
-    </MudPaper>
+    </div>
 </MudContainer>
+
+<style>
+    .body-container {
+        background-color: #124419;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .gallery-card {
+        background-color: #9A8716;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .container {
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .image-container img {
+        margin-right: 10px;
+    }
+
+    .mineral-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .mineral-label {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .description-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .description-label {
+        text-align: center;
+    }
+
+    .cart-button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .add-to-cart-button {
+        background-color: #444;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>
+
