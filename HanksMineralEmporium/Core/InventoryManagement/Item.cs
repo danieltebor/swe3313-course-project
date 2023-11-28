@@ -3,7 +3,7 @@ namespace HanksMineralEmporium.Core.InventoryManagement;
 /// <summary>
 /// Represents an item in the inventory.
 /// </summary>
-public class Item : IItem
+internal class Item : IItem
 {
     private decimal _price;
 
@@ -17,7 +17,7 @@ public class Item : IItem
     /// <param name="imagePath">The path to the image of the item.</param>
     /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> or <paramref name="imagePath"/> is null or whitespace,
     /// or when price is less than 0.</exception>
-    public Item(ulong id, decimal price, string name, string description, string imagePath)
+    public Item(ulong id, decimal price, string name, string? description, string imagePath)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
