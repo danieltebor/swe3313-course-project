@@ -1,0 +1,43 @@
+
+<MudStack>
+    <MudPaper Class="pa-4" Style ="background:#124419">
+        <MudStack>
+            <MudPaper Class="pa-4" Style="background:#9A8716;">
+
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.h6">Create Account</MudText>
+                <br>
+
+                <MudTextField T="string" Label="Your name" />
+                <MudTextField T="string" Label="Email" />
+                <MudTextField T="string" Label="Password" HelperText= "*Enter at least 6 numbers and/or letters for the password" />
+                <br>
+
+                <MudStack>
+                    <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
+                    <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">@SignUpButton</MudButton>
+                    </MudPaper>
+                </MudStack>
+
+
+                <br>
+                <MudStack>
+                    <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
+                    <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">@GoBackButton</MudButton>
+                    </MudPaper>
+                </MudStack>
+
+            </MudPaper>
+        </MudStack>
+    </MudPaper>
+</MudStack>
+
+@code {
+    public string SignUpButton { get; set; } = "Sign up";
+    public string GoBackButton { get; set; } = "Go back";
+    public int ButtonClicked { get; set; }
+    //public string HelperText { get; set; } = "*Enter at least 6 numbers and/or letters for the password";
+
+    void ButtonOnClick() {
+        //Text = $"Awesome x {ButtonClicked}";
+    }
+}
