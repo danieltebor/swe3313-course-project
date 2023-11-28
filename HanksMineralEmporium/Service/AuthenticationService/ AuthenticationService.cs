@@ -8,7 +8,6 @@ using MudBlazor;
 using Microsoft.AspNetCore.Http.HttpResults;
 using HanksMineralEmporium.Service.AuthenticationService.Exception;
 
-
 namespace HanksMineralEmporium.Service.AuthenticationService
 {
     /// <summary>
