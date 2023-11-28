@@ -10,8 +10,6 @@ namespace HanksMineralEmporium.Core.UserManagement;
 /// </summary>
 internal class User : IUser
 {
-    
-
     /// <summary>
     /// Initializes a new instance of the <see cref="User"/> class.
     /// </summary>

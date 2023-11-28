@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using HanksMineralEmporium.Core.UserManagement.Exception;
 
 namespace HanksMineralEmporium.Core.UserManagement;
@@ -37,7 +36,7 @@ public interface IUserManager
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="userToPromote"/> or <paramref name="adminPromoting"/> is null.</exception>
     /// <exception cref="UserNotFoundException">Thrown when the user to promote does not exist.</exception>
     public Task MakeAdminAsync([DisallowNull] IUser userToPromote);
-    
+
     /// <summary>
     /// Removes the admin status from the given user.
     /// </summary>
