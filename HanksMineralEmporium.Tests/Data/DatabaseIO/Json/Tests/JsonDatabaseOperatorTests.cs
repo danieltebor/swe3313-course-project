@@ -20,6 +20,7 @@ internal class TestJsonDatabaseOperator : JsonDatabaseOperator<IDatabaseObject>
         : base("Generic", new JsonDatabaseObjectSerializer<IDatabaseObject>()) {}
 }
 
+[Collection("Database tests")]
 public class JsonDatabaseOperatorTests
 {
     private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database", "Generic.json");

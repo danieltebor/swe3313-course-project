@@ -1,14 +1,13 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 
-public class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : IDatabaseObject
+/// <summary>
+/// JSON implementation of <see cref="IDatabaseObjectSerializer{T}"/>.
+/// </summary>
+internal class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> where T : IDatabaseObject
 {
-    [NotNull]
     private readonly JsonSerializerSettings _jsonSerializerSettings;
 
     public JsonDatabaseObjectSerializer() {
@@ -27,7 +26,14 @@ public class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> wher
             throw new ArgumentNullException(nameof(obj));
         }
         
-        return JsonConvert.SerializeObject(obj, _jsonSerializerSettings);
+        try
+        {
+            return JsonConvert.SerializeObject(obj, _jsonSerializerSettings);
+        }
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while serializing the object.", ex);
+        }
     }
 
     public T DeserializeObject(string data)
@@ -56,7 +62,14 @@ public class JsonDatabaseObjectSerializer<T> : IDatabaseObjectSerializer<T> wher
             throw new ArgumentNullException(nameof(objects));
         }
 
-        return JsonConvert.SerializeObject(objects, _jsonSerializerSettings);
+        try
+        {
+            return JsonConvert.SerializeObject(objects, _jsonSerializerSettings);
+        }
+        catch (System.Exception ex)
+        {
+            throw new System.Exception("An error occurred while serializing the list.", ex);
+        }
     }
 
     public List<T> DeserializeList(string data)

@@ -25,9 +25,7 @@ public class UserManagerTests
         IUserDatabaseOperator? database = null;
 
         // Act.
-        #pragma warning disable CS8604 // Possible null reference argument.
-        var result = Assert.Throws<ArgumentNullException>(() => new UserManager(database));
-        #pragma warning restore CS8604 // Possible null reference argument.
+        var result = Assert.Throws<ArgumentNullException>(() => new UserManager(database!));
 
         // Assert.
         Assert.Equal("Value cannot be null. (Parameter 'userDatabaseOperator')", result.Message);
@@ -83,12 +81,12 @@ public class UserManagerTests
         IUserManager userManager = new UserManager(mockDatabase.Object);
 
         // Act.
-        var resultTask = Assert.ThrowsAsync<ArgumentNullException>(() => userManager.RegisterUserAsync("TestUser", null!));
+        var resultTask = Assert.ThrowsAsync<ArgumentException>(() => userManager.RegisterUserAsync("TestUser", null!));
         resultTask.Wait();
         var result = resultTask.Result;
 
         // Assert.
-        Assert.Equal("Value cannot be null. (Parameter 'password')", result.Message);
+        Assert.Equal("Password cannot be null or whitespace. (Parameter 'hashedPassword')", result.Message);
     }
 
     [Fact]
@@ -114,31 +112,6 @@ public class UserManagerTests
         // Assert.
         Assert.Equal("Username must be at least 3 characters long.", result1.Message);
         Assert.Equal("Username cannot be longer than 32 characters.", result2.Message);
-    }
-
-    [Fact]
-    public void RegisterUserAsync_WithInvalidPasswords_ThrowsInvalidPasswordException()
-    {
-        // Arrange.
-        var mockDatabase = new Mock<IUserDatabaseOperator>();
-        mockDatabase.Setup(x => x.IsUsernameTakenAsync(It.IsAny<string>())).ReturnsAsync(false);
-        mockDatabase.Setup(x => x.GetNewUniqueId()).Returns(1);
-        mockDatabase.Setup(x => x.SaveAsync(It.IsAny<IUser>()));
-
-        IUserManager userManager = new UserManager(mockDatabase.Object);
-
-        // Act.
-        var resultTask1 = Assert.ThrowsAsync<InvalidPasswordException>(() => userManager.RegisterUserAsync("TestUser", "Te"));
-        resultTask1.Wait();
-        var result1 = resultTask1.Result;
-
-        var resultTask2 = Assert.ThrowsAsync<InvalidPasswordException>(() => userManager.RegisterUserAsync("TestUser", "This is a very, very, very long password that is just about as long as 72 characters."));
-        resultTask2.Wait();
-        var result2 = resultTask2.Result;
-
-        // Assert.
-        Assert.Equal("Password must be at least 8 characters long.", result1.Message);
-        Assert.Equal("Password cannot be longer than 72 characters.", result2.Message);
     }
 
     [Fact]

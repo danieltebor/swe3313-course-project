@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 using HanksMineralEmporium.Data.DatabaseIO;
 
 namespace HanksMineralEmporium.Core.UserManagement;
@@ -7,14 +5,12 @@ namespace HanksMineralEmporium.Core.UserManagement;
 /// <summary>
 /// Implementation of <see cref="IUserManager"/>.
 /// </summary>
-public class UserManager : IUserManager
+internal class UserManager : IUserManager
 {
-    [NotNull]
     private readonly IUserFactory _userFactory;
-    [NotNull]
     private readonly IUserDatabaseOperator _userDatabaseOperator;
 
-    public UserManager([DisallowNull] IUserDatabaseOperator userDatabaseOperator) {
+    public UserManager(IUserDatabaseOperator userDatabaseOperator) {
         _userDatabaseOperator = userDatabaseOperator 
             ?? throw new ArgumentNullException(nameof(userDatabaseOperator));
 
@@ -22,9 +18,9 @@ public class UserManager : IUserManager
     }
 
     /// <inheritdoc/>
-    public async Task<IUser> RegisterUserAsync(string username, string password)
+    public async Task<IUser> RegisterUserAsync(string username, string hashedPassword)
     {
-        return await Task.Run(() => _userFactory.CreateNewUser(username, password));
+        return await Task.Run(() => _userFactory.CreateNewUser(username, hashedPassword));
     }
 
     /// <inheritdoc/>

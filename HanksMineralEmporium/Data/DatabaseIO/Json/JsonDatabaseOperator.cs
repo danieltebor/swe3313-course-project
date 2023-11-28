@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 using HanksMineralEmporium.Data.DatabaseIO.Exception;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
@@ -7,19 +5,14 @@ namespace HanksMineralEmporium.Data.DatabaseIO.Json;
 /// <summary>
 /// Provides base implementations for operations on a JSON database.
 /// </summary>
-public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : IDatabaseObject
+internal abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : IDatabaseObject
 {
-    [NotNull]
     private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
-    [NotNull]
     private ulong _currentId = 0;
     
-    [NotNull]
     protected readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
                                                   + Path.DirectorySeparatorChar;
-    [NotNull]
     protected readonly IDatabaseObjectSerializer<T> _jsonSerializer;
-    [NotNull]
     protected readonly SemaphoreSlim _databaseLock = new(1, 1);
 
     protected abstract IReadOnlyList<T> GetSeedData();
@@ -59,7 +52,7 @@ public abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T : I
     /// <param name="databaseName">Name of the JSON database file. Should not end in .json.</param>
     /// <exception cref="ArgumentException">Thrown when database path is null or empty.</exception>
     /// <exception cref="ArgumentNullException">Thrown when jsonSerializer is null.</exception>
-    public JsonDatabaseOperator([DisallowNull] string databaseName, [DisallowNull] JsonDatabaseObjectSerializer<T> jsonSerializer)
+    public JsonDatabaseOperator(string databaseName, JsonDatabaseObjectSerializer<T> jsonSerializer)
     {
         if (string.IsNullOrWhiteSpace(databaseName))
         {
