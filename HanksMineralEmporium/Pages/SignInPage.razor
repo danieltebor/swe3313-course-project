@@ -1,38 +1,38 @@
-@page "/signin"
+@page "/SignIn"
 @using MudBlazor
-@using Microsoft.AspNetCore.Components
+@using MudBlazor.Services
+@using MudBlazor.Dialog
 
-<MudThemeProvider Theme="@theme">
-    <MudCssBaseline />
+<MudContainer>
+    <div class="article">
+        <div class="sign-in-text">Sign In</div>
 
-    <MudContainer Class="body-container">
-        <MudPaper Class="article" Elevation="4">
-            <div class="sign-in-text">Sign In</div>
+        <label for="username" class="center-text">Username:</label>
+        <input type="text" id="username" @bind="username" class="user-input" placeholder="Enter your username">
 
-            <MudTextField @bind-Value="username" Label="Username" Class="user-input" Placeholder="Enter your username" />
+        <label for="password" class="center-text">Password:</label>
+        <input type="password" id="password" @bind="password" class="user-input" placeholder="Enter your password">
 
-            <MudTextField @bind-Value="password" Label="Password" Type="Password" Class="user-input" Placeholder="Enter your password" />
+        <button class="action-button sign-in-button" @onclick="redirectToSignIn">Sign In</button>
 
-            <MudButton Class="action-button sign-in-button" OnClick="@(() => RedirectToSignIn())">Sign In</MudButton>
+        <button class="action-button go-back-button" @onclick="goBack">Go Back</button>
+    </div>
+</MudContainer>
+@code {
+    public string? username;
+    public string? password;
 
-            <MudButton Class="action-button go-back-button" OnClick="@(() => GoBack())">Go Back</MudButton>
-        </MudPaper>
-    </MudContainer>
+    [Inject]
+    public IDialogService? MudDialogService { get; set; }
 
-    @code {
-        private string username = "";
-        private string password = "";
-
-        private async Task RedirectToSignIn()
-        {
-            var message = $"Redirecting to Sign In page with:\nUsername: {username}\nPassword: {password}";
-            await JsRuntime.InvokeVoidAsync("alert", message);
-        }
-
-        private async Task GoBack()
-        {
-            var message = "Going back...";
-            await JsRuntime.InvokeVoidAsync("alert", message);
-        }
+    public void redirectToSignIn()
+    {
+        var alertMessage = $"Redirecting to Sign In page with:\nUsername: {username}\nPassword: {password}";
+        MudDialogService?.ShowMessageBox(alertMessage, "Redirecting");
     }
-</MudThemeProvider>
+
+    private void goBack()
+    {
+        MudDialogService?.ShowMessageBox("Going back...", "Go Back");
+    }
+}
