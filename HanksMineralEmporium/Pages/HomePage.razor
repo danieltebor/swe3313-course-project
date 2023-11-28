@@ -1,14 +1,14 @@
 @page "/HomePage"
 
-<div class="container">
-    <button class="button" @onclick="SignIn">Sign In</button>
+<MudContainer Class="container">
+    <MudButton Class="button" OnClick="@SignIn">Sign In</MudButton>
 
     <img src="https://via.placeholder.com/150" alt="Placeholder Image" class="image" />
 
-    <button class="button" @onclick="CreateAccount">Create Account</button>
+    <MudButton Class="button" OnClick="@CreateAccount">Create Account</MudButton>
 
-    <button class="button" @onclick="SkipLogin">Skip Login</button>
-</div>
+    <MudButton Class="button" OnClick="@SkipLogin">Skip Login</MudButton>
+</MudContainer>
 
 <style>
     .container {
@@ -42,15 +42,18 @@
 </style>
 
 @code {
-    private void SignIn()
+    public void SignIn()
     {
+        // Implement sign-in logic
     }
 
-    private void CreateAccount()
+    public void CreateAccount()
     {
+        // Implement create account logic
     }
 
-    private void SkipLogin()
+    public void SkipLogin()
     {
+        // Implement skip login logic
     }
 }
