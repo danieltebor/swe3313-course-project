@@ -1,7 +1,8 @@
 using MudBlazor.Services;
 
-using HanksMineralEmporium.Core.UserManagement;
+using HanksMineralEmporium.Core.InventoryManagement;
 using HanksMineralEmporium.Core.SalesManagement;
+using HanksMineralEmporium.Core.UserManagement;
 using HanksMineralEmporium.Data.DatabaseIO;
 using HanksMineralEmporium.Data.DatabaseIO.Json;
 using HanksMineralEmporium.Service.AuthenticationService;
@@ -24,11 +25,13 @@ services.AddSession(options =>
 });
 
 // Configure database services
+services.AddSingleton<IItemDatabaseOperator, JsonItemDatabaseOperator>();
 services.AddSingleton<IUserDatabaseOperator, JsonUserDatabaseOperator>();
 services.AddSingleton<IReceiptDatabaseOperator, JsonReceiptDatabaseOperator>();
 services.AddSingleton<ISalesDatabaseOperator, JsonSalesDatabaseOperator>();
 
 // Configure manager services
+services.AddSingleton<IInventoryManager, InventoryManager>();
 services.AddSingleton<IUserManager, UserManager>();
 services.AddSingleton<ISalesManager, SalesManager>();
 
