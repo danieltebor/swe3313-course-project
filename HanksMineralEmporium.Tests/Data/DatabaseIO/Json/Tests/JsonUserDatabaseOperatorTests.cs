@@ -1,9 +1,16 @@
+using System.Reflection;
+
 namespace HanksMineralEmporium.Data.DatabaseIO.Json.Tests;
 
 [Collection("Database tests")]
 public class JsonUserDatabaseOperatorTests
 {
-    private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database", "Users.json");
+    private readonly string _databasePath = Path.Combine(
+        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+            ?? throw new NullReferenceException(),
+        "Resources",
+        "Database",
+        "Users.json");
 
     [Fact]
     public void GetByUsernameAsync_ExistingUser_ReturnsUser()

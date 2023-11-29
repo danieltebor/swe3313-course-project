@@ -26,4 +26,10 @@
     <ProjectReference Include="..\HanksMineralEmporium\HanksMineralEmporium.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources/**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
