@@ -15,16 +15,18 @@ public class AuthenticationService : IAuthenticationService
 
     public AuthenticationService(IUserManager userManager, IHttpContextAccessor httpContextAccessor)
     {
-        _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+        _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     }
 
+    /// <inheritdoc/>
     public async Task RegisterUserAsync(string username, string password)
     {
         var hashedPassword = PasswordHashUtil.HashPassword(password);
         await _userManager.RegisterUserAsync(username, hashedPassword);
     }
 
+    /// <inheritdoc/>
     public async Task LoginUserAsync(string username, string password)
     {
         var user = await _userManager.LoadUserAsync(username);
@@ -34,13 +36,21 @@ public class AuthenticationService : IAuthenticationService
             throw new PasswordMismatchException("Incorrect Password.");
         }
 
-        _httpContextAccessor.HttpContext.Response.Cookies.Append("UserId", user.Id.ToString());
-        _httpContextAccessor.HttpContext.Response.Cookies.Append("Username", user.Username);
+        var httpContext = _httpContextAccessor.HttpContext
+            ?? throw new InvalidOperationException("HttpContext is null.");
+        httpContext.Session.SetString("UserId", user.Id.ToString());
+        httpContext.Session.SetString("Username", user.Username);
+        httpContext.Session.SetString("IsAdmin", user.IsAdmin.ToString());
+
     }
 
-    public async Task LogoutUserAsync(ulong userId)
+    /// <inheritdoc/>
+    public void LogoutUser()
     {
-        _httpContextAccessor.HttpContext.Response.Cookies.Delete("UserId");
-        _httpContextAccessor.HttpContext.Response.Cookies.Delete("Username");
+        var httpContext = _httpContextAccessor.HttpContext
+            ?? throw new InvalidOperationException("HttpContext is null.");
+        httpContext.Session.Remove("UserId");
+        httpContext.Session.Remove("Username");
+        httpContext.Session.Remove("IsAdmin");
     }
 }

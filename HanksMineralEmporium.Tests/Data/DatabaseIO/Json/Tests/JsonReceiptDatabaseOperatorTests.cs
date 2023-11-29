@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using HanksMineralEmporium.Core.SalesManagement;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json.Tests;
@@ -5,7 +7,12 @@ namespace HanksMineralEmporium.Data.DatabaseIO.Json.Tests;
 [Collection("Database tests")]
 public class JsonReceiptDatabaseOperatorTests
 {
-    private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database", "Receipts.json");
+    private readonly string _databasePath = Path.Combine(
+        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+            ?? throw new NullReferenceException(),
+        "Resources",
+        "Database",
+        "Receipts.json");
 
     [Fact]
     public void GetReceiptsByUserIdAsync_ExistingUser_ReturnsReceipts()

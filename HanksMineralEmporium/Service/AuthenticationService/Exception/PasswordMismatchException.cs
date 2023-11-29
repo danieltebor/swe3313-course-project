@@ -10,5 +10,4 @@ class PasswordMismatchException : System.Exception
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
     public PasswordMismatchException(string message) : base(message){}
-
 }
