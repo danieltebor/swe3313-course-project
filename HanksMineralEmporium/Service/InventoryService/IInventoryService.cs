@@ -1,9 +1,9 @@
-namespace HanksMineralEmporium.Core.InventoryManagement;
+namespace HanksMineralEmporium.Service.InventoryService;
 
 /// <summary>
-/// Contract for a manager that handles <see cref="IItem"/> objects.
+/// Contract for a service that provides <see cref="IItem"/> objects.
 /// </summary>
-public interface IInventoryManager
+public interface IInventoryService
 {
     /// <summary>
     /// Adds a new item to the inventory.
@@ -37,10 +37,4 @@ public interface IInventoryManager
     /// <exception cref="FileNotFoundException">Thrown when the image file does not exist.</exception>
     /// <exception cref="IOException">Thrown when the image file cannot be read.</exception>
     public string GetItemImagePath(string imageFilename);
-
-    /// <summary>
-    /// Gets all item images.
-    /// </summary>
-    /// <returns>A list of all item images.</returns>
-    public IReadOnlyList<string> GetAllItemImagePathsAsync();
 }
