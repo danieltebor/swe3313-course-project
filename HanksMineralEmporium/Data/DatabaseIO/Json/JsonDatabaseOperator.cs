@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using HanksMineralEmporium.Data.DatabaseIO.Exception;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json;
@@ -10,8 +12,11 @@ internal abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T :
     private readonly ISet<ulong> _transientIds = new HashSet<ulong>();
     private ulong _currentId = 0;
     
-    protected readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database") 
-                                                  + Path.DirectorySeparatorChar;
+    protected readonly string _databasePath = Path.Combine(
+        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+            ?? throw new NullReferenceException(),
+        "Resources",
+        "Database") + Path.DirectorySeparatorChar;
     protected readonly IDatabaseObjectSerializer<T> _jsonSerializer;
     protected readonly SemaphoreSlim _databaseLock = new(1, 1);
 
@@ -23,6 +28,13 @@ internal abstract class JsonDatabaseOperator<T> : IDatabaseOperator<T> where T :
         {
             if (GetAllAsync().Result.Count > 0)
             {
+                var jsonFile = File.ReadAllText(_databasePath);
+                var objects = _jsonSerializer.DeserializeList(jsonFile);
+                if (objects != null && objects.Count > 0)
+                {
+                    _currentId = objects[^1].Id + 1;
+                }
+
                 return;
             }
         }
