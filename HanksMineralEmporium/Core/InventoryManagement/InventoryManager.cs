@@ -36,7 +36,7 @@ internal class InventoryManager : IInventoryManager
     }
 
     /// <inheritdoc/>
-    public string GetItemImagePathAsync(string imageFilename)
+    public string GetItemImagePath(string imageFilename)
     {
         if (string.IsNullOrWhiteSpace(imageFilename))
         {
