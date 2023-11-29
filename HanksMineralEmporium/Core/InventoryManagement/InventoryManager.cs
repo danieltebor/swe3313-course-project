@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using HanksMineralEmporium.Core.SalesManagement;
 using HanksMineralEmporium.Data.DatabaseIO;
 
@@ -18,9 +20,9 @@ internal class InventoryManager : IInventoryManager
     }
 
     /// <inheritdoc/>
-    public async Task<IItem> AddNewItemAsync(decimal price, string name, string imagePath, string? description = null)
+    public async Task<IItem> AddNewItemAsync(decimal price, string name, string imageFilename, string? description = null)
     {
-        return await Task.Run(() => _itemFactory.CreateNewItem(price, name, imagePath, description));
+        return await Task.Run(() => _itemFactory.CreateNewItem(price, name, imageFilename, description));
     }
 
     /// <inheritdoc/>
@@ -31,5 +33,31 @@ internal class InventoryManager : IInventoryManager
 
         return (await _itemDatabaseOperator.GetAllAsync())
             .Where(item => !soldItemIds.Contains(item.Id)).ToList();
+    }
+
+    /// <inheritdoc/>
+    public string GetItemImagePathAsync(string imageFilename)
+    {
+        if (string.IsNullOrWhiteSpace(imageFilename))
+        {
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(imageFilename));
+        }
+
+        return Path.Combine(
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? throw new InvalidOperationException(),
+            "Resources",
+            "MineralImages",
+            imageFilename);
+    }
+
+    /// <inheritdoc/>
+    public IReadOnlyList<string> GetAllItemImagePathsAsync()
+    {
+        var savePath = Path.Combine(
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? throw new InvalidOperationException(),
+            "Resources",
+            "MineralImages");
+
+        return Directory.GetFiles(savePath).ToList();
     }
 }

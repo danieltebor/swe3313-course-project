@@ -14,25 +14,25 @@ internal class Item : IItem
     /// <param name="price">The price of the item.</param>
     /// <param name="name">The name of the item.</param>
     /// <param name="description">The description of the item.</param>
-    /// <param name="imagePath">The path to the image of the item.</param>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> or <paramref name="imagePath"/> is null or whitespace,
+    /// <param name="imageFilename">The name of the image file.</param>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="name"/> or <paramref name="imageFilename"/> is null or whitespace,
     /// or when price is less than 0.</exception>
-    public Item(ulong id, decimal price, string name, string? description, string imagePath)
+    public Item(ulong id, decimal price, string name, string? description, string imageFilename)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
         }
-        else if (string.IsNullOrWhiteSpace(imagePath))
+        else if (string.IsNullOrWhiteSpace(imageFilename))
         {
-            throw new ArgumentException("Value cannot be null or whitespace.", nameof(imagePath));
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(imageFilename));
         }
 
         Id = id;
         Price = price;
         Name = name;
         Description = description;
-        ImagePath = imagePath;
+        ImageFilename = imageFilename;
     }
 
     public ulong Id { get; }
@@ -50,5 +50,5 @@ internal class Item : IItem
     }
     public string Name { get; set; }
     public string? Description { get; set; }
-    public string ImagePath { get; set; }
+    public string ImageFilename { get; set; }
 }
