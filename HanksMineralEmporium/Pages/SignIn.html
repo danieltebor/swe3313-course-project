@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #124419;
+            color: #FFFFFF;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        article {
+            background-color: #9A8716;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 300px;
+        }
+
+        .sign-in-text {
+            text-align: center;
+            color: black;
+            margin-top: 10px;
+            font-size: 2em;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        .article-content {
+            text-align: center;
+            font-style: normal;
+        }
+
+        .bold-text {
+            font-weight: bold;
+        }
+
+        .action-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .sign-in-button {
+            background-color: #4d4d4d;
+            color: #FFFFFF;
+        }
+
+        .go-back-button {
+            background-color: #4d4d4d;
+            color: #FFFFFF;
+        }
+
+        .user-input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <article>
+        <div class="sign-in-text">Sign In</div>
+
+        <label for="username" class="center-text">Username:</label>
+        <input type="text" id="username" class="user-input" placeholder="Enter your username">
+
+        <label for="password" class="center-text">Password:</label>
+        <input type="password" id="password" class="user-input" placeholder="Enter your password">
+
+        <button class="action-button sign-in-button" onclick="redirectToSignIn()">Sign In</button>
+
+        <button class="action-button go-back-button" onclick="goBack()">Go Back</button>
+    </article>
+
+    <script>
+        function redirectToSignIn() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            alert("Redirecting to Sign In page with:\nUsername: " + username + "\nPassword: " + password);
+        }
+
+        function goBack() {
+            alert("Going back...");
+        }
+    </script>
+</body>
+
+</html>
