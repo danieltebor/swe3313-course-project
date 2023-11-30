@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using HanksMineralEmporium.Data.DatabaseIO.Exception;
 
 namespace HanksMineralEmporium.Data.DatabaseIO.Json.Tests;
@@ -23,7 +25,12 @@ internal class TestJsonDatabaseOperator : JsonDatabaseOperator<IDatabaseObject>
 [Collection("Database tests")]
 public class JsonDatabaseOperatorTests
 {
-    private readonly string _databasePath = Path.Combine(Environment.CurrentDirectory, "Data", "Database", "Generic.json");
+    private readonly string _databasePath = Path.Combine(
+        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+            ?? throw new NullReferenceException(),
+        "Resources",
+        "Database",
+        "Generic.json");
 
     [Fact]
     public void InitializeDatabase_WithExistingDatabaseSmallerThanSeedData_DoesNotOverwrite()
