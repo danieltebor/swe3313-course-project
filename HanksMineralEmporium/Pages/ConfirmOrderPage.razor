@@ -1,39 +1,75 @@
+<style>
+    .mudblazor-app {
+        background-color: #124419;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
 
-<MudThemeProvider Theme="Theme.Default">
-    <MudCssBaseline />
+    .mud-typography-h5 {
+        text-align: center;
+        font-size: 2.55em;
+        color: #fff;
+    }
 
-    <div class="mudblazor-app">
-        <MudContainer>
-            <MudRow>
-                <MudCol Class="mud-col-spacing">
-                    <MudButton Class="back-to-shopping" Variant="Variant.Filled">Back To Shopping</MudButton>
-                </MudCol>
-                <MudCol Class="mud-col-spacing">
-                    <MudButton Class="return-to-payment" Variant="Variant.Filled">Return To Payment</MudButton>
-                </MudCol>
-            </MudRow>
+    .mud-button-spacing {
+        margin: 12.75px;
+        font-size: 1.9125em;
+        padding: 12.75px;
+    }
 
-            <MudPaper Class="mud-paper-spacing">
-                <p class="center-text mud-typography-h5">Are you sure you want to purchase?</p>
-                <MudSelect Class="mud-select-spacing" Label="Select an option">
-                    <MudSelectItem Value="option1">Option 1</MudSelectItem>
-                    <MudSelectItem Value="option2">Option 2</MudSelectItem>
-                    <MudSelectItem Value="option3">Option 3</MudSelectItem>
-                </MudSelect>
-            </MudPaper>
+    .mud-paper-spacing {
+        background-color: #9A8716;
+        text-align: center;
+        padding: 25.5px;
+        margin-bottom: 25.5px;
+        width: 450px;
+        position: relative;
+    }
 
-            <MudPaper Class="mud-paper-spacing">
-                <div class="mud-typography-subtitle1">
-                    <p>Card: **** **** **** 4444</p>
-                    <p>Subtotal: $0.00</p>
-                    <p>Tax: $0.00</p>
-                    <p>Shipping: $0.00</p>
-                    <hr />
-                    <strong>Total: $0.00</strong>
-                </div>
-            </MudPaper>
+    .mud-typography-subtitle1 {
+        text-align: left;
+        font-size: 1.53em;
+        color: #fff;
+    }
 
-            <MudButton Class="complete-order-bottom mud-button-spacing" Variant="Variant.Filled">Complete Order</MudButton>
-        </MudContainer>
-    </div>
-</MudThemeProvider>
+    .mud-select-spacing {
+        width: 255px;
+        margin: 12.75px auto;
+        font-size: 1.275em;
+        color: #fff;
+    }
+
+    .center-text {
+        text-align: center;
+        margin: 0;
+        font-size: 1.9125em;
+        color: #fff;
+    }
+
+    .back-to-shopping,
+    .return-to-payment,
+    .complete-order-bottom {
+        padding: 12.75px;
+        border-radius: 6.375px;
+        cursor: pointer;
+        font-size: 1.9125em;
+        margin-bottom: 25.5px;
+        background-color: #4d4d4d;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .back-to-shopping,
+    .return-to-payment,
+    .complete-order-bottom .mud-button-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
