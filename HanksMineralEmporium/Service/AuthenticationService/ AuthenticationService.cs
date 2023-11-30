@@ -8,7 +8,7 @@ namespace HanksMineralEmporium.Service.AuthenticationService;
 /// <summary>
 /// Initializes a new instance of the <see cref="AuthenticationService"/> class.
 /// </summary>
-public class AuthenticationService : IAuthenticationService
+internal class AuthenticationService : IAuthenticationService
 {
     private readonly IUserManager _userManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -22,6 +22,9 @@ public class AuthenticationService : IAuthenticationService
     /// <inheritdoc/>
     public async Task RegisterUserAsync(string username, string password)
     {
+        CredentialValidation.ValidateUsername(username);
+        CredentialValidation.ValidatePassword(password);
+
         var hashedPassword = PasswordHashUtil.HashPassword(password);
         await _userManager.RegisterUserAsync(username, hashedPassword);
     }
@@ -29,6 +32,15 @@ public class AuthenticationService : IAuthenticationService
     /// <inheritdoc/>
     public async Task LoginUserAsync(string username, string password)
     {
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            throw new System.Exception("Invalid Username.");
+        }
+        else if (string.IsNullOrWhiteSpace(password))
+        {
+            throw new System.Exception("Invalid Password.");
+        }
+
         var user = await _userManager.LoadUserAsync(username);
 
         if (!PasswordHashUtil.VerifyPassword(password, user.Password))
@@ -41,7 +53,6 @@ public class AuthenticationService : IAuthenticationService
         httpContext.Session.SetString("UserId", user.Id.ToString());
         httpContext.Session.SetString("Username", user.Username);
         httpContext.Session.SetString("IsAdmin", user.IsAdmin.ToString());
-
     }
 
     /// <inheritdoc/>

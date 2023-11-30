@@ -1,9 +1,11 @@
+using HanksMineralEmporium.Core.InventoryManagement;
+
 namespace HanksMineralEmporium.Service.InventoryService;
 
 /// <summary>
 /// Service that provides <see cref="IItem"/> objects.
 /// </summary>
-public class InventoryService : IInventoryService
+internal class InventoryService : IInventoryService
 {
     private readonly IInventoryManager _inventoryManager;
 
@@ -35,6 +37,6 @@ public class InventoryService : IInventoryService
     /// <inheritdoc/>
     public string GetItemImagePath(string imageFilename)
     {
-        return _inventoryManager.GetItemImagePathAsync(imageFilename);
+        return _inventoryManager.GetItemImagePath(imageFilename);
     }
 }

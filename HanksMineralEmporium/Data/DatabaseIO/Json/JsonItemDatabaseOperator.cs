@@ -28,7 +28,7 @@ internal class JsonItemDatabaseOperator : JsonDatabaseOperator<IItem>, IItemData
         public string? DownloadUrl { get; set; }
     }
 
-    private async Task PopulateSeedImages()
+    private void PopulateSeedImages()
     {
         var seedImagesPath = Path.Combine(
             Directory.GetCurrentDirectory(),
@@ -37,9 +37,14 @@ internal class JsonItemDatabaseOperator : JsonDatabaseOperator<IItem>, IItemData
             "seed-mineral-images");
 
         var imagesPath = Path.Combine(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? throw new InvalidOperationException(),
-            "Resources",
-            "MineralImages");
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            "mineral-images");
+
+        if (!Directory.Exists(imagesPath))
+        {
+            Directory.CreateDirectory(imagesPath);
+        }
 
         foreach (var seedImage in Directory.GetFiles(seedImagesPath))
         {
@@ -48,7 +53,7 @@ internal class JsonItemDatabaseOperator : JsonDatabaseOperator<IItem>, IItemData
 
             if (!File.Exists(seedImageSavePath))
             {
-                await File.Copy(seedImage, seedImageSavePath);
+                File.Copy(seedImage, seedImageSavePath);
             }
         }
     }
@@ -73,7 +78,6 @@ internal class JsonItemDatabaseOperator : JsonDatabaseOperator<IItem>, IItemData
 
     public JsonItemDatabaseOperator() : base(DatabaseName, new JsonDatabaseObjectSerializer<IItem>())
     {
-        Console.WriteLine("Initializing JsonItemDatabaseOperator...");
-        PopulateSeedImages().Wait();
+        PopulateSeedImages();
     }
 }

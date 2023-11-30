@@ -22,14 +22,14 @@ internal class User : IUser
     /// <exception cref="InvalidPasswordException">Thrown when <paramref name="password"/> is less than 8 characters or greater than 72 characters.</exception>
     public User(ulong id,
                 [StringLength(32, MinimumLength = 3)] string username,
-                [StringLength(72, MinimumLength = 8)] string hashedPassword,
+                string password,
                 bool isAdmin = false)
     {
         CredentialValidation.ValidateUsername(username);
 
         Id = id;
         Username = username;
-        Password = hashedPassword;
+        Password = password;
         IsAdmin = isAdmin;
     }
 
