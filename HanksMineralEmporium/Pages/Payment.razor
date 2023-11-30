@@ -101,6 +101,17 @@
     }
 
     private void Continue() {
+        var shippingOption = _selectedShippingOption switch
+        {
+            1 => ShippingOption.Ground,
+            2 => ShippingOption.ThreeDay,
+            3 => ShippingOption.Overnight,
+            _ => ShippingOption.Ground
+        };
+        var shippingInfo = new ShippingInfo(_streetAddress, _city, _state, _zipCode, shippingOption);
+        var creditCardInfo = new CreditCardInfo(_cardNumber, _expiration, _cvc);
+        CheckoutService.ShippingInfo = shippingInfo;
+        CheckoutService.CreditCardInfo = creditCardInfo;
         NavigationManager.NavigateTo("/confirm-order");
     }
 }

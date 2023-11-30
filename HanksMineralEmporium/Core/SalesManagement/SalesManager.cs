@@ -18,7 +18,7 @@ internal class SalesManager : ISalesManager
     private readonly ISet<ulong> _transientItemIds = new HashSet<ulong>();
     private readonly SemaphoreSlim _checkoutLock = new SemaphoreSlim(1, 1);
 
-    public SalesManager( ISalesDatabaseOperator salesDatabaseOperator, IReceiptDatabaseOperator receiptDatabaseOperator)
+    public SalesManager(ISalesDatabaseOperator salesDatabaseOperator, IReceiptDatabaseOperator receiptDatabaseOperator)
     {
         if (salesDatabaseOperator is null)
         {
@@ -36,16 +36,26 @@ internal class SalesManager : ISalesManager
     }
 
     /// <inheritdoc/>
-    public async Task<IReceipt> CheckoutItemsAsync(IEnumerable<IItem> items, ulong userId, ShippingOption shippingOption)
+    public async Task<IReceipt> CheckoutItemsAsync(IEnumerable<IItem> items, ulong userId, 
+                                                   IShippingInfo shippingInfo, ICreditCardInfo creditCardInfo)
     {
         if (items is null)
         {
             throw new ArgumentNullException(nameof(items));
         }
-        else if (!Enum.IsDefined(typeof(ShippingOption), shippingOption))
+        else if (shippingInfo is null)
         {
-            throw new ArgumentException("Invalid shipping option.", nameof(shippingOption));
+            throw new ArgumentNullException(nameof(shippingInfo));
         }
+        else if (creditCardInfo is null)
+        {
+            throw new ArgumentNullException(nameof(creditCardInfo));
+        }
+        else if (!items.Any())
+        {
+            throw new ArgumentOutOfRangeException(nameof(items), "Must have at least one item to checkout.");
+        }
+        else
         if (items.Any(item => item == null))
         {
             throw new ArgumentException("One of the items is null.", nameof(items));
@@ -64,9 +74,10 @@ internal class SalesManager : ISalesManager
             }
 
             var subtotal = items.Sum(item => item.Price);
-            var shipping = (decimal)shippingOption;
             var tax = subtotal * 0.06m;
-            var receipt = _receiptFactory.CreateNewReceipt(userId, subtotal, shipping, tax);
+            var lastFourCreditCardDigits = creditCardInfo.CardNumber
+                .Substring(creditCardInfo.CardNumber.Length - 4);
+            var receipt = _receiptFactory.CreateNewReceipt(userId, subtotal, tax, shippingInfo, lastFourCreditCardDigits);
 
             foreach (var item in items)
             {   

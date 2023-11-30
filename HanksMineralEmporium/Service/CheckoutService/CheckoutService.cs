@@ -9,6 +9,15 @@ namespace HanksMineralEmporium.Service.CheckoutService;
 
 public class CheckoutService : ICheckoutService
 {
+    /// <inheritdoc/>
+    public uint CartItemCount => (uint)GetItemsInCart().Count;
+
+    /// <inheritdoc/>
+    public IShippingInfo? ShippingInfo { get; set; }
+
+    /// <inheritdoc/>
+    public ICreditCardInfo? CreditCardInfo { get; set; }
+
     private readonly ISalesManager _salesManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly JsonSerializerSettings _jsonSerializerSettings;
@@ -110,7 +119,4 @@ public class CheckoutService : ICheckoutService
 
         httpContext.Session.SetString("Cart", "");
     }
-
-    /// <inheritdoc/>
-    public uint CartItemCount => (uint)GetItemsInCart().Count;
 }

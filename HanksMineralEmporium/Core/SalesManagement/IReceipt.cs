@@ -31,4 +31,29 @@ public interface IReceipt : IDatabaseObject
     /// The total cost of the order.
     /// </summary>
     public decimal Total { get; }
+
+    /// <summary>
+    /// The street address of the order.
+    /// </summary>
+    public string StreetAddress { get; }
+
+    /// <summary>
+    /// The city of the order.
+    /// </summary>
+    public string City { get; }
+
+    /// <summary>
+    /// The state of the order.
+    /// </summary>
+    public string State { get; }
+
+    /// <summary>
+    /// The zip code of the order.
+    /// </summary>
+    public string ZipCode { get; }
+
+    /// <summary>
+    /// Last four digits of the credit card used to pay for the order.
+    /// </summary>
+    public string LastFourCreditCardDigits { get; }
 }

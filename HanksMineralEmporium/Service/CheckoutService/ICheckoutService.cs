@@ -1,9 +1,27 @@
 using HanksMineralEmporium.Core.InventoryManagement;
+using HanksMineralEmporium.Core.SalesManagement;
 
 namespace HanksMineralEmporium.Service.CheckoutService;
 
 public interface ICheckoutService
 {
+    /// <summary>
+    /// Gets the number of items in the cart.
+    /// </summary>
+    /// <returns>The number of items in the cart.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
+    public uint CartItemCount { get; }
+
+    /// <summary>
+    /// Stores the shipping info.
+    /// </summary>
+    public IShippingInfo? ShippingInfo { get; set; }
+
+    /// <summary>
+    /// Stores the credit card info.
+    /// </summary>
+    public ICreditCardInfo? CreditCardInfo { get; set; }
+
     /// <summary>
     /// Adds an item to the cart.
     /// </summary>
@@ -42,11 +60,4 @@ public interface ICheckoutService
     /// </summary>
     /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
     public void ClearCart();
-
-    /// <summary>
-    /// Gets the number of items in the cart.
-    /// </summary>
-    /// <returns>The number of items in the cart.</returns>
-    /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
-    public uint CartItemCount { get; }
 }
