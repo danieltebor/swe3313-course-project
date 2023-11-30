@@ -20,7 +20,7 @@
             <MudItem xs="12" sm="4">
                 <div style="display: flex; align-items: center;">
                     <img src="https://via.placeholder.com/150" alt="logo" height="60" style="padding-right: 10px;" />
-                    <MudTextField Label="Search" Variant="Variant.Outlined" @bind-Value="searchText" />
+                    <MudTextField Label="Search" Variant="Variant.Outlined" @bind-Value="SearchText" />
                 </div>
             </MudItem>
             <MudItem xs="12" sm="2">
@@ -32,7 +32,7 @@
         </MudGrid>
     </MudAppBar>
     <MudGrid>
-        @foreach (var item in items)
+        @foreach (var item in FilteredItems)
         {
             <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudCard>
@@ -73,14 +73,43 @@
 </style>
 
 @code {
-    private IEnumerable<IItem> items = new List<IItem>();
-    private string searchText = "";
+    private IEnumerable<IItem> _items = new List<IItem>();
+    private string _searchText = string.Empty;
+    
+    private IEnumerable<IItem> FilteredItems
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_searchText))
+            {
+                return _items;
+            }
+            else
+            {
+                return _items.Where(item => item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase));
+            }
+        }
+    }
+
+    private string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (_searchText != value)
+            {
+                _searchText = value;
+                StateHasChanged();
+            }
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            items = await InventoryService.GetAllAvailableItemsAsync();
+            _items = await InventoryService.GetAllAvailableItemsAsync();
+            SearchText = string.Empty;
             StateHasChanged();
         }
     }
