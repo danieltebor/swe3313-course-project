@@ -8,7 +8,7 @@ namespace HanksMineralEmporium.Service.AuthenticationService;
 /// <summary>
 /// Initializes a new instance of the <see cref="AuthenticationService"/> class.
 /// </summary>
-public class AuthenticationService : IAuthenticationService
+internal class AuthenticationService : IAuthenticationService
 {
     private readonly IUserManager _userManager;
     private readonly IHttpContextAccessor _httpContextAccessor;
