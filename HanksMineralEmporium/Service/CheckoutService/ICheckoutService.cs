@@ -10,7 +10,7 @@ public interface ICheckoutService
     /// <param name="item">The item to add to the cart.</param>
     /// <exception cref="ArgumentNullException">Thrown when the item is null.</exception>
     /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
-    /// <exception cref="ItemAlreadySoldException">Thrown when the item is already sold.</exception>
+    /// <exception cref="ItemsAlreadySoldException">Thrown when the item is already sold.</exception>
     public Task AddItemToCartAsync(IItem item);
 
     /// <summary>
@@ -19,13 +19,12 @@ public interface ICheckoutService
     /// <param name="item">The item to remove from the cart.</param>
     /// <exception cref="ArgumentNullException">Thrown when the item is null.</exception>
     /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
-    public Task RemoveItemFromCartAsync(IItem item);
+    public void RemoveItemFromCart(IItem item);
 
     /// <summary>
     /// Gets the items in the cart.
     /// </summary>
-    /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
     /// <returns>The items in the cart.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
-    public Task<IReadOnlyList<IItem>> GetItemsInCartAsync();
+    public IReadOnlyList<IItem> GetItemsInCart();
 }
