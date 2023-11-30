@@ -1,0 +1,48 @@
+@using System.Net.Http.Json
+@inject HttpClient httpClient
+
+<MudStack>
+    <MudPaper Class="pa-4" Style ="background:#124419">
+        <MudStack>
+            @* maybe remove the coloring for SR so looks like View Cart*@
+            <MudPaper Class="pa-4" Style="background:#9A8716;">
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Sales Report</MudText>
+            </MudPaper>
+            
+        <MudDataGrid Items="@salesReport" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+            <Columns>
+                <PropertyColumn Property="x => x.ID" />
+                <PropertyColumn Property="x => x.User" />
+                <TemplateColumn CellClass="d-flex justify-end">
+                    <CellTemplate>
+                        <MudStack Row>
+                            <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">Go To Receipt</MudButton>
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+        </MudDataGrid>
+
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">OK</MudButton>      
+            
+        </MudStack>
+    </MudPaper>
+</MudStack>
+
+@code {
+    public record SalesReport(string ID, string User);
+    public IEnumerable<SalesReport> salesReport;
+
+    void ButtonOnClick(){}
+
+    protected override void OnInitialized()
+    {
+        salesReport = new List<SalesReport>
+        {
+            new SalesReport("Sam", "CPA"),
+            new SalesReport("Alicia", "Product Manager"),
+
+        };
+    }
+    
+}
