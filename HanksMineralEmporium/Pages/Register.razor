@@ -1,4 +1,4 @@
-@page "/login"
+@page "/register"
 
 @inject NavigationManager NavigationManager
 
@@ -10,11 +10,11 @@
         <MudStack>
             <MudPaper Class="pa-4" Style="background:#9A8716;">
 
-                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.h6">Login</MudText>
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.h6">Create Account</MudText>
                 <br>
 
                 <MudTextField T="string" Label="Username" @bind-Value="_username" />
-                <MudTextField T="string" Label="Password" @bind-Value="_password" 
+                <MudTextField T="string" Label="Password" HelperText= "*Minumum length 8" @bind-Value="_password" 
                               InputType="@(_passwordIsVisible ? InputType.Text : InputType.Password)"
                               Adornment="Adornment.End" 
                               AdornmentIcon="@(_passwordIsVisible ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
@@ -23,14 +23,15 @@
 
                 <MudStack>
                     <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
-                        <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => Submit()">Submit</MudButton>
+                    <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => Submit()">Register</MudButton>
                     </MudPaper>
                 </MudStack>
+
 
                 <br>
                 <MudStack>
                     <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
-                        <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => Return()">Return</MudButton>
+                    <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => Return()">Return</MudButton>
                     </MudPaper>
                 </MudStack>
 
@@ -38,11 +39,6 @@
                 {
                     <MudText Color="Color.Error">@_errorMessage</MudText>
                 }
-
-                <MudText>
-                    Don't have an account? 
-                    <a href="/register">Register</a>
-                </MudText>
             </MudPaper>
         </MudStack>
     </MudPaper>
@@ -62,7 +58,6 @@
 
     private bool _passwordIsVisible = false;
 
-
     private void TogglePasswordVisibility()
     {
         _passwordIsVisible = !_passwordIsVisible;
@@ -72,7 +67,7 @@
     {
         try
         {
-            await AuthenticationService.LoginUserAsync(_username, _password);
+            await AuthenticationService.RegisterUserAsync(_username, _password);
             NavigationManager.NavigateTo("/");
         }
         catch (Exception ex)
