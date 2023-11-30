@@ -5,7 +5,7 @@ namespace HanksMineralEmporium.Service.InventoryService;
 /// <summary>
 /// Service that provides <see cref="IItem"/> objects.
 /// </summary>
-public class InventoryService : IInventoryService
+internal class InventoryService : IInventoryService
 {
     private readonly IInventoryManager _inventoryManager;
 

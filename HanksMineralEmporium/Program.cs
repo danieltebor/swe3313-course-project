@@ -69,6 +69,7 @@ app.Use(async (context, next) =>
         context.Session.SetString("UserId", "");
         context.Session.SetString("Username", "");
         context.Session.SetString("IsAdmin", "false");
+        context.Session.SetString("Cart", "");
     }
 
     await next.Invoke();
