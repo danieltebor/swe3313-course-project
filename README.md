@@ -43,3 +43,39 @@ A brief presentation of the design can be found [here](/docs/ui-design/ui-design
 The documentation for the technical design can be found [here](/docs/technical-design/technical-design.md).
 
 A brief presentation of the technical design can be found [here](/docs/technical-design/technical-design-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/technical-design/technical-design-presentation.mp4).
+
+## Implementation
+The presentation for the implementation can be found [here](/docs/final-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/final-presentation.mp4).
+
+## Building and Running
+This project requires [Git](https://git-scm.com/downloads) and [.NET 7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
+
+To clone and build the repository, run the following commands:
+```bash
+git clone https://github.com/danieltebor/swe3313-course-project/
+```
+```bash
+cd swe3313-course-project
+```
+
+### Running
+To build and run the project, run the following in the project root:
+```bash
+cd HanksMineralEmporium
+```
+```
+dotnet build
+```
+```
+dotnet run
+```
+
+This will open a port on localhost that the site can be viewed through. The default for this is [localhost:5148](http://localhost:5148/).
+
+### Testing
+The unit tests can be run with the following command in the project root:
+```bash
+dotnet test
+```
+
+
