@@ -61,10 +61,22 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedUICultures = supportedCultures
 });
 
+app.UseSession();
+app.Use(async (context, next) =>
+{
+    if (context.Session.GetString("Username") == null)
+    {
+        context.Session.SetString("UserId", "");
+        context.Session.SetString("Username", "");
+        context.Session.SetString("IsAdmin", "false");
+    }
+
+    await next.Invoke();
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseSession();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
