@@ -1,75 +1,72 @@
-<style>
-    .mudblazor-app {
-        background-color: #124419;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-    }
 
-    .mud-typography-h5 {
-        text-align: center;
-        font-size: 2.55em;
-        color: #fff;
-    }
+<MudStack>
+    <MudPaper Class="pa-4" Style ="background:#124419">
 
-    .mud-button-spacing {
-        margin: 12.75px;
-        font-size: 1.9125em;
-        padding: 12.75px;
-    }
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">Return to shopping</MudButton>
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">Back to payment</MudButton>
+        <br>
+        <br>
 
-    .mud-paper-spacing {
-        background-color: #9A8716;
-        text-align: center;
-        padding: 25.5px;
-        margin-bottom: 25.5px;
-        width: 450px;
-        position: relative;
-    }
+        <MudStack>
+            <MudPaper Class="pa-2" Style="background:#9A8716;">
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.h6">Are you sure you want to purchase?</MudText>
+            </MudPaper>    
+        </MudStack>
+        <br>    
 
-    .mud-typography-subtitle1 {
-        text-align: left;
-        font-size: 1.53em;
-        color: #fff;
-    }
+        <MudGrid>
+            <MudItem Align="Align.Center" xs="6" md="6">
+                <MudPaper Width="70%">
+                    <MudList Clickable="@Clickable">
+                        <MudListItem>
+                            Item 1 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
+                        </MudListItem>
+                        
+                        <MudListItem>
+                            Item 2 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
+                        </MudListItem>
 
-    .mud-select-spacing {
-        width: 255px;
-        margin: 12.75px auto;
-        font-size: 1.275em;
-        color: #fff;
-    }
+                        <MudListItem>
+                            Item 3 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
+                        </MudListItem>
+                        
+                    </MudList>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
 
-    .center-text {
-        text-align: center;
-        margin: 0;
-        font-size: 1.9125em;
-        color: #fff;
-    }
+        <br>
+        <MudStack>
+            <MudPaper Class="pa-4" Style="background:#9A8716;">
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Card: **** **** **** 4444</MudText>
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Subtotal: $0.00</MudText>
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Tax: $0.00</MudText>
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Shipping: $0.00</MudText>
+                
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.h5">  _________________</MudText>
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.h6">Total: $0.00 </MudText>
+            </MudPaper>    
+        </MudStack>
+        <br>        
 
-    .back-to-shopping,
-    .return-to-payment,
-    .complete-order-bottom {
-        padding: 12.75px;
-        border-radius: 6.375px;
-        cursor: pointer;
-        font-size: 1.9125em;
-        margin-bottom: 25.5px;
-        background-color: #4d4d4d;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 
-    .back-to-shopping,
-    .return-to-payment,
-    .complete-order-bottom .mud-button-label {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        <MudStack>
+            <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
+            <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">Complete order</MudButton>
+            </MudPaper>
+        </MudStack>
+    </MudPaper>    
+</MudStack>
+
+
+@code {
+    public bool Clickable { get; set; }
+    
+    void ButtonOnClick() {
+        @*
+        ButtonClicked += 1;
+        Text = $"Awesome x {ButtonClicked}";
+        ButtonText = "Click Me Again";
+        *@
     }
-</style>
+}
