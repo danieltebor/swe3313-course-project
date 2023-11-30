@@ -18,7 +18,8 @@ public class SalesManagerTests
             new Item(1, 20m, "Test Item 2", "Test Description 2", "Test Image Path 2"),
             new Item(2, 30m, "Test Item 3", "Test Description 3", "Test Image Path 3"),
         };
-        var shippingOption = ShippingOption.Ground;
+        var shippingInfo = new ShippingInfo("Test Street Address", "Test City", "Test State", "Test Zip Code", ShippingOption.Ground);
+        var creditCardInfo = new CreditCardInfo("0000 0000 0000 0000", "01/02", "000");
 
         var mockSalesDatabaseOperator = new Mock<ISalesDatabaseOperator>();
         mockSalesDatabaseOperator.Setup(x => x.SaveAsync(It.IsAny<ISale>()))
@@ -42,7 +43,7 @@ public class SalesManagerTests
         var salesManager = new SalesManager(mockSalesDatabaseOperator.Object, mockReceiptDatabaseOperator.Object);
 
         // Act
-        var receipt = salesManager.CheckoutItemsAsync(items, 0, shippingOption).Result;
+        var receipt = salesManager.CheckoutItemsAsync(items, 0, shippingInfo, creditCardInfo).Result;
 
         // Assert
         Assert.NotNull(receipt);
@@ -60,7 +61,8 @@ public class SalesManagerTests
             new Item(1, 20m, "Test Item 2", "Test Description 2", "Test Image Path 2"),
             new Item(2, 30m, "Test Item 3", "Test Description 3", "Test Image Path 3"),
         };
-        var shippingOption = ShippingOption.Ground;
+        var shippingInfo = new ShippingInfo("Test Street Address", "Test City", "Test State", "Test Zip Code", ShippingOption.Ground);
+        var creditCardInfo = new CreditCardInfo("0000 0000 0000 0000", "01/02", "000");
 
         var mockSalesDatabaseOperator = new Mock<ISalesDatabaseOperator>();
         mockSalesDatabaseOperator.Setup(x => x.SaveAsync(It.IsAny<ISale>()))
@@ -84,7 +86,7 @@ public class SalesManagerTests
         var salesManager = new SalesManager(mockSalesDatabaseOperator.Object, mockReceiptDatabaseOperator.Object);
 
         // Act
-        var exception = Assert.ThrowsAsync<ItemsAlreadySoldException>(() => salesManager.CheckoutItemsAsync(items, 0, shippingOption));
+        var exception = Assert.ThrowsAsync<ItemsAlreadySoldException>(() => salesManager.CheckoutItemsAsync(items, 0, shippingInfo, creditCardInfo));
 
         // Assert
         Assert.NotNull(exception);
@@ -95,7 +97,8 @@ public class SalesManagerTests
     {
         // Arrange
         var items = new List<IItem>();
-        var shippingOption = ShippingOption.Ground;
+        var shippingInfo = new ShippingInfo("Test Street Address", "Test City", "Test State", "Test Zip Code", ShippingOption.Ground);
+        var creditCardInfo = new CreditCardInfo("0000 0000 0000 0000", "01/02", "000");
 
         var mockSalesDatabaseOperator = new Mock<ISalesDatabaseOperator>();
         mockSalesDatabaseOperator.Setup(x => x.SaveAsync(It.IsAny<ISale>()))
@@ -114,7 +117,7 @@ public class SalesManagerTests
         var salesManager = new SalesManager(mockSalesDatabaseOperator.Object, mockReceiptDatabaseOperator.Object);
 
         // Act
-        var exception = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => salesManager.CheckoutItemsAsync(items, 0, shippingOption));
+        var exception = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => salesManager.CheckoutItemsAsync(items, 0, shippingInfo, creditCardInfo));
 
         // Assert
         Assert.NotNull(exception);
@@ -130,7 +133,8 @@ public class SalesManagerTests
             null!,
             new Item(2, 30m, "Test Item 3", "Test Description 3", "Test Image Path 3"),
         };
-        var shippingOption = ShippingOption.Ground;
+        var shippingInfo = new ShippingInfo("Test Street Address", "Test City", "Test State", "Test Zip Code", ShippingOption.Ground);
+        var creditCardInfo = new CreditCardInfo("0000 0000 0000 0000", "01/02", "000");
 
         var mockSalesDatabaseOperator = new Mock<ISalesDatabaseOperator>();
         mockSalesDatabaseOperator.Setup(x => x.SaveAsync(It.IsAny<ISale>()))
@@ -149,47 +153,12 @@ public class SalesManagerTests
         var salesManager = new SalesManager(mockSalesDatabaseOperator.Object, mockReceiptDatabaseOperator.Object);
 
         // Act
-        var exception1 = Assert.ThrowsAsync<ArgumentNullException>(() => salesManager.CheckoutItemsAsync(null!, 0, shippingOption));
-        var exception2 = Assert.ThrowsAsync<ArgumentNullException>(() => salesManager.CheckoutItemsAsync(listWithNullItems, 0, shippingOption));
+        var exception1 = Assert.ThrowsAsync<ArgumentNullException>(() => salesManager.CheckoutItemsAsync(null!, 0, shippingInfo, creditCardInfo));
+        var exception2 = Assert.ThrowsAsync<ArgumentNullException>(() => salesManager.CheckoutItemsAsync(listWithNullItems, 0, shippingInfo, creditCardInfo));
 
         // Assert
         Assert.NotNull(exception1);
         Assert.NotNull(exception2);
-    }
-
-    [Fact]
-    public void CheckoutItemsAsync_WithInvalidShippingOption_ThrowsArgumentException()
-    {
-        // Arrange
-        var items = new List<IItem>()
-        {
-            new Item(0, 10m, "Test Item 1", "Test Description 1", "Test Image Path 1"),
-            new Item(1, 20m, "Test Item 2", "Test Description 2", "Test Image Path 2"),
-            new Item(2, 30m, "Test Item 3", "Test Description 3", "Test Image Path 3"),
-        };
-        var shippingOption = (ShippingOption)int.MaxValue;
-
-        var mockSalesDatabaseOperator = new Mock<ISalesDatabaseOperator>();
-        mockSalesDatabaseOperator.Setup(x => x.SaveAsync(It.IsAny<ISale>()))
-            .Returns(Task.CompletedTask);
-        var saleId = 0ul;
-        mockSalesDatabaseOperator.Setup(x => x.GetNewUniqueId()).Returns(() => saleId++);
-        mockSalesDatabaseOperator.Setup(x => x.GetSoldItemIdsAsync())
-            .ReturnsAsync(new List<ulong>());
-
-        var mockReceiptDatabaseOperator = new Mock<IReceiptDatabaseOperator>();
-        mockReceiptDatabaseOperator.Setup(x => x.SaveAsync(It.IsAny<IReceipt>()))
-            .Returns(Task.CompletedTask);
-        var receiptId = 0ul;
-        mockReceiptDatabaseOperator.Setup(x => x.GetNewUniqueId()).Returns(() => receiptId++);
-
-        var salesManager = new SalesManager(mockSalesDatabaseOperator.Object, mockReceiptDatabaseOperator.Object);
-
-        // Act
-        var exception = Assert.ThrowsAsync<ArgumentException>(() => salesManager.CheckoutItemsAsync(items, 0, shippingOption));
-
-        // Assert
-        Assert.NotNull(exception);
     }
 
     [Fact]
@@ -249,7 +218,7 @@ public class SalesManagerTests
 
         var mockReceiptDatabaseOperator = new Mock<IReceiptDatabaseOperator>();
         mockReceiptDatabaseOperator.Setup(x => x.GetByIdAsync(0))
-            .ReturnsAsync(new Receipt(0, 0, 0, 0, 0));
+            .ReturnsAsync(new Receipt(0, 0, 0, 0, 0, "Test", "Test", "Test", "Test", "0000"));
 
         var salesManager = new SalesManager(mockSalesDatabaseOperator.Object, mockReceiptDatabaseOperator.Object);
 

@@ -13,13 +13,16 @@ public interface ISalesManager
     /// </summary>
     /// <param name="items">The items to checkout.</param>
     /// <param name="userId">The ID of the user to checkout the items for.</param>
-    /// <param name="shippingOption">The shipping option to use for the checkout.</param>
+    /// <param name="shippingInfo">The shipping info to use.</param>
+    /// <param name="creditCardInfo">The credit card info to use.</param>
     /// <returns>The created IReceipt.</returns>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="items"/> is null.</exception>
-    /// <exception cref="ArgumentException">Thrown when <paramref name="shippingOption"/> is invalid.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="shippingInfo"/> is null.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="creditCardInfo"/> is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="items"/> is empty.</exception>
     /// <exception cref="ItemAlreadySoldException">Thrown when any of the given items have already been sold.</exception>
-    public Task<IReceipt> CheckoutItemsAsync(IEnumerable<IItem> items, ulong userId, ShippingOption shippingOption);
+    public Task<IReceipt> CheckoutItemsAsync(IEnumerable<IItem> items, ulong userId,
+                                             IShippingInfo shippingInfo, ICreditCardInfo creditCardInfo);   
 
     /// <summary>
     /// Gets all sales in the database.

@@ -20,9 +20,9 @@ public class JsonReceiptDatabaseOperatorTests
         // Arrange.
         var receiptDatabaseOperator = new JsonReceiptDatabaseOperator();
 
-        var receipt1 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0);
-        var receipt2 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0);
-        var receipt3 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 1, 10, 0, 0);
+        var receipt1 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0, "Test", "Test", "Test", "Test", "0000");
+        var receipt2 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0, "Test", "Test", "Test", "Test", "0000");
+        var receipt3 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 1, 10, 0, 0, "Test", "Test", "Test", "Test", "0000");
 
         receiptDatabaseOperator.SaveAsync(receipt1).Wait();
         receiptDatabaseOperator.SaveAsync(receipt2).Wait();
@@ -45,9 +45,9 @@ public class JsonReceiptDatabaseOperatorTests
         // Arrange.
         var receiptDatabaseOperator = new JsonReceiptDatabaseOperator();
 
-        var receipt1 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0);
-        var receipt2 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0);
-        var receipt3 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 1, 10, 0, 0);
+        var receipt1 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0, "Test", "Test", "Test", "Test", "0000");
+        var receipt2 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 0, 10, 0, 0, "Test", "Test", "Test", "Test", "0000");
+        var receipt3 = new Receipt(receiptDatabaseOperator.GetNewUniqueId(), 1, 10, 0, 0, "Test", "Test", "Test", "Test", "0000");
 
         receiptDatabaseOperator.SaveAsync(receipt1).Wait();
         receiptDatabaseOperator.SaveAsync(receipt2).Wait();
