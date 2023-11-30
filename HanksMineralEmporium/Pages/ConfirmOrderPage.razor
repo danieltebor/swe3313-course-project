@@ -1,9 +1,18 @@
+@page "/confirm-order"
+
+@inject NavigationManager NavigationManager
+
+@using HanksMineralEmporium.Service.CheckoutService
+@inject ICheckoutService CheckoutService
+
+@* costs need to be adjusted*@
+
 
 <MudStack>
     <MudPaper Class="pa-4" Style ="background:#124419">
 
-        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">Return to shopping</MudButton>
-        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">Back to payment</MudButton>
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => ReturnToShopping()">Return To Shopping</MudButton>
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => BackToPayment()">Back To payment</MudButton>
         <br>
         <br>
 
@@ -18,18 +27,12 @@
             <MudItem Align="Align.Center" xs="6" md="6">
                 <MudPaper Width="70%">
                     <MudList Clickable="@Clickable">
-                        <MudListItem>
-                            Item 1 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
-                        </MudListItem>
-                        
-                        <MudListItem>
-                            Item 2 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
-                        </MudListItem>
-
-                        <MudListItem>
-                            Item 3 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
-                        </MudListItem>
-                        
+                        @foreach (var item in CheckoutService.GetItemsInCart())
+                        {
+                            <MudListItem>
+                                @item.Name - $@item.Price
+                            </MudListItem>
+                        }                        
                     </MudList>
                 </MudPaper>
             </MudItem>
@@ -39,7 +42,7 @@
         <MudStack>
             <MudPaper Class="pa-4" Style="background:#9A8716;">
                 <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Card: **** **** **** 4444</MudText>
-                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Subtotal: $0.00</MudText>
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Subtotal: $@(CalcSubtotal())</MudText>
                 <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Tax: $0.00</MudText>
                 <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.Black};")" Typo="Typo.body1">Shipping: $0.00</MudText>
                 
@@ -52,7 +55,7 @@
 
         <MudStack>
             <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
-            <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">Complete order</MudButton>
+            <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => CompleteOrder()">Complete Order</MudButton>
             </MudPaper>
         </MudStack>
     </MudPaper>    
@@ -61,12 +64,30 @@
 
 @code {
     public bool Clickable { get; set; }
-    
-    void ButtonOnClick() {
-        @*
-        ButtonClicked += 1;
-        Text = $"Awesome x {ButtonClicked}";
-        ButtonText = "Click Me Again";
-        *@
+
+    private void ReturnToShopping()
+    {
+        NavigationManager.NavigateTo("/");
     }
+
+    private void BackToPayment()
+    {
+        NavigationManager.NavigateTo("/payment");
+    }
+
+    private void CompleteOrder() {
+        NavigationManager.NavigateTo("/receipt");
+    }
+
+    private decimal CalcSubtotal()
+    {
+        decimal subtotal = 0;
+        foreach (var item in CheckoutService.GetItemsInCart())
+        {
+            subtotal += item.Price;
+        }
+        return subtotal;
+    }
+
+    
 }
