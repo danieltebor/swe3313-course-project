@@ -14,9 +14,10 @@ internal class JsonUserDatabaseOperator : JsonDatabaseOperator<IUser>, IUserData
 
     protected override IReadOnlyList<IUser> GetSeedData()
     {
+        var hash = PasswordHashUtil.HashPassword("admin");
         List<IUser> seedData = new()
         {
-            new User(GetNewUniqueId(), "admin", PasswordHashUtil.HashPassword("admin"), true)
+            new User(GetNewUniqueId(), "admin", hash, true)
         };
 
         return seedData;
@@ -55,8 +56,7 @@ internal class JsonUserDatabaseOperator : JsonDatabaseOperator<IUser>, IUserData
             return default;
         }
 
-        var user = objects.FirstOrDefault(u => u.Username == username);
-        return user;
+        return objects.FirstOrDefault(u => u.Username == username);
     }
 
     /// <inheritdoc/>
