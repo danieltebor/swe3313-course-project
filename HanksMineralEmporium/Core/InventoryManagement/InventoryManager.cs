@@ -44,9 +44,9 @@ internal class InventoryManager : IInventoryManager
         }
 
         return Path.Combine(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? throw new InvalidOperationException(),
-            "Resources",
-            "MineralImages",
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            "mineral-images",
             imageFilename);
     }
 
@@ -54,9 +54,9 @@ internal class InventoryManager : IInventoryManager
     public IReadOnlyList<string> GetAllItemImagePathsAsync()
     {
         var savePath = Path.Combine(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? throw new InvalidOperationException(),
-            "Resources",
-            "MineralImages");
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            "mineral-images");
 
         return Directory.GetFiles(savePath).ToList();
     }

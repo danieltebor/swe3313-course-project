@@ -1,3 +1,6 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+
 using MudBlazor.Services;
 
 using HanksMineralEmporium.Core.InventoryManagement;
@@ -6,6 +9,7 @@ using HanksMineralEmporium.Core.UserManagement;
 using HanksMineralEmporium.Data.DatabaseIO;
 using HanksMineralEmporium.Data.DatabaseIO.Json;
 using HanksMineralEmporium.Service.AuthenticationService;
+using HanksMineralEmporium.Service.CheckoutService;
 using HanksMineralEmporium.Service.InventoryService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +42,7 @@ services.AddSingleton<ISalesManager, SalesManager>();
 
 // Configure services
 services.AddScoped<IAuthenticationService, AuthenticationService>();
+services.AddScoped<ICheckoutService, CheckoutService>();
 services.AddScoped<IInventoryService, InventoryService>();
 
 var app = builder.Build();
@@ -50,10 +55,31 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+var supportedCultures = new[] { new CultureInfo("en-US") };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en-US"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
+
+app.UseSession();
+app.Use(async (context, next) =>
+{
+    if (context.Session.GetString("Username") == null)
+    {
+        context.Session.SetString("UserId", "");
+        context.Session.SetString("Username", "");
+        context.Session.SetString("IsAdmin", "false");
+        context.Session.SetString("Cart", "");
+    }
+
+    await next.Invoke();
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseSession();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
