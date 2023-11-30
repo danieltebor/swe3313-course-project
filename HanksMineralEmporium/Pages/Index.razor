@@ -10,6 +10,7 @@
 @inject IInventoryService InventoryService
 
 @{
+    var userId = HttpContextAccessor.HttpContext?.Session?.GetString("UserId");
     var username = HttpContextAccessor.HttpContext?.Session?.GetString("Username");
     var isAdmin = HttpContextAccessor.HttpContext?.Session?.GetString("IsAdmin") == "true";
 }

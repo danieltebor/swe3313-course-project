@@ -22,14 +22,8 @@ public class AuthenticationService : IAuthenticationService
     /// <inheritdoc/>
     public async Task RegisterUserAsync(string username, string password)
     {
-        if (string.IsNullOrWhiteSpace(username))
-        {
-            throw new System.Exception("Invalid Username.");
-        }
-        else if (string.IsNullOrWhiteSpace(password))
-        {
-            throw new System.Exception("Invalid Password.");
-        }
+        CredentialValidation.ValidateUsername(username);
+        CredentialValidation.ValidatePassword(password);
 
         var hashedPassword = PasswordHashUtil.HashPassword(password);
         await _userManager.RegisterUserAsync(username, hashedPassword);
