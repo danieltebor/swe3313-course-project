@@ -29,7 +29,7 @@
 </MudStack>
 
 @code {
-    public record SalesReport(string ID, string User);
+    public record SalesReport(int ID, string User);
     public IEnumerable<SalesReport> salesReport;
 
     void ButtonOnClick(){}
@@ -38,8 +38,8 @@
     {
         salesReport = new List<SalesReport>
         {
-            new SalesReport("Sam", "CPA"),
-            new SalesReport("Alicia", "Product Manager"),
+            new SalesReport(1, "Daniel"),
+            new SalesReport(2, "Megan"),
 
         };
     }
