@@ -10,6 +10,26 @@ public class ItemsAlreadySoldException : System.Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="ItemsAlreadySoldException"/> class.
     /// </summary>
+    public ItemsAlreadySoldException()
+        : base("Items has already been sold.")
+    {
+        SoldItemIds = Enumerable.Empty<ulong>();
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ItemsAlreadySoldException"/> class.
+    /// </summary>
+    /// <param name="soldItemId">The ID of the item that has already been sold.</param>
+    public ItemsAlreadySoldException(ulong soldItemId)
+        : base("Item with id '" + soldItemId + "' already sold.")
+    {
+        SoldItemIds = Enumerable.Empty<ulong>()
+            .Append(soldItemId);
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ItemsAlreadySoldException"/> class.
+    /// </summary>
     /// <param name="soldItemIds">The IDs of the items that have already been sold.</param>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="soldItemIds"/> is null.</exception>
     public ItemsAlreadySoldException(IEnumerable<ulong> soldItemIds)

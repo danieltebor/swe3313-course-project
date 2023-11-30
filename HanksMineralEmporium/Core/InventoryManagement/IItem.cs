@@ -24,7 +24,7 @@ public interface IItem : IDatabaseObject
     public string? Description { get; set; }
 
     /// <summary>
-    /// The path to the image of the item.
+    /// The name of the image file.
     /// </summary>
-    public string ImagePath { get; set; }
+    public string ImageFilename { get; set; }
 }
