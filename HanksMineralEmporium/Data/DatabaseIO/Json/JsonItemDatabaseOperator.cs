@@ -37,9 +37,14 @@ internal class JsonItemDatabaseOperator : JsonDatabaseOperator<IItem>, IItemData
             "seed-mineral-images");
 
         var imagesPath = Path.Combine(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? throw new InvalidOperationException(),
-            "Resources",
-            "MineralImages");
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            "mineral-images");
+
+        if (!Directory.Exists(imagesPath))
+        {
+            Directory.CreateDirectory(imagesPath);
+        }
 
         foreach (var seedImage in Directory.GetFiles(seedImagesPath))
         {

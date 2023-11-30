@@ -59,3 +59,6 @@ msbuild.wrn
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Instance wwwroot files
+HanksMineralEmporium/wwwroot/mineral-images
