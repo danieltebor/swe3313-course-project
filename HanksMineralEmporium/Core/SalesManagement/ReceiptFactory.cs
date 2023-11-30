@@ -16,9 +16,11 @@ internal class ReceiptFactory : IReceiptFactory
     }
 
     /// <inheritdoc/>
-    public IReceipt CreateNewReceipt(ulong userId, decimal subtotal, decimal shipping, decimal tax)
+    public IReceipt CreateNewReceipt(ulong userId, decimal subtotal, decimal tax,
+                                     IShippingInfo shippingInfo, string lastFourCreditCardDigits)
     {
-        var receipt = new Receipt(_receiptDatabaseOperator.GetNewUniqueId(), userId, subtotal, shipping, tax);
+        var receipt = new Receipt(_receiptDatabaseOperator.GetNewUniqueId(), userId, subtotal, (decimal)shippingInfo.SelectedShippingOption, tax,
+                                  shippingInfo.StreetAddress, shippingInfo.City, shippingInfo.State, shippingInfo.ZipCode, lastFourCreditCardDigits);
         _receiptDatabaseOperator.SaveAsync(receipt).Wait();
 
         return receipt;
