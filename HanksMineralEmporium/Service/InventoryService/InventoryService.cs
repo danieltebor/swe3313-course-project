@@ -1,3 +1,5 @@
+using HanksMineralEmporium.Core.InventoryManagement;
+
 namespace HanksMineralEmporium.Service.InventoryService;
 
 /// <summary>
