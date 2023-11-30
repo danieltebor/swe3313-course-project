@@ -3,10 +3,35 @@
     <MudPaper Class="pa-4" Style ="background:#124419">
         <MudStack>
             <MudPaper Class="pa-4" Style="background:#9A8716;">
-                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Receipt: ItemName</MudText>
+                <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Receipt</MudText>
             </MudPaper>
-            <br>
-            
+
+            <MudPaper Class="pa-4" Style="background:#9A8716;">
+                <MudText Align="Align.Start" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.body1">Shipping address: </MudText>
+            </MudPaper>
+
+        <MudGrid>
+            <MudItem xs="12" md="6">
+                <MudPaper Width="70%">
+                    <MudList Clickable="@Clickable">
+                        <MudListItem>
+                            Item 1 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
+                        </MudListItem>
+                        
+                        <MudListItem>
+                            Item 2 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
+                        </MudListItem>
+
+                        <MudListItem>
+                            Item 3 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"></MudIconButton>
+                        </MudListItem>
+                        
+                    </MudList>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+
+
             <MudPaper Class="pa-4" Style="background:#9A8716;">
                 <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.body1">Card: **** **** **** 4444</MudText>
                 <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.body1">Subtotal: $0.00</MudText>
@@ -17,7 +42,21 @@
                 <MudText Align="Align.Center" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Total: $0.00 </MudText>
 
             </MudPaper>
-            
         </MudStack>
+
+        <br>
+        <MudStack>
+            <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
+            <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="ButtonOnClick">OK</MudButton>
+            </MudPaper>
+        </MudStack>
+
     </MudPaper>
 </MudStack>
+
+@code{
+    void ButtonOnClick(){}
+
+    public bool Clickable { get; set; }
+
+}
