@@ -37,6 +37,6 @@ public class InventoryService : IInventoryService
     /// <inheritdoc/>
     public string GetItemImagePath(string imageFilename)
     {
-        return _inventoryManager.GetItemImagePathAsync(imageFilename);
+        return _inventoryManager.GetItemImagePath(imageFilename);
     }
 }
