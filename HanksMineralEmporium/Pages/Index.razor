@@ -1,7 +1,140 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+@inject IHttpContextAccessor HttpContextAccessor
+@inject NavigationManager NavigationManager
 
-<h1>Hello, world!</h1>
+@using HanksMineralEmporium.Core.InventoryManagement
+@using HanksMineralEmporium.Service.AuthenticationService
+@using HanksMineralEmporium.Service.InventoryService
+@inject IAuthenticationService AuthenticationService
+@inject IInventoryService InventoryService
 
-Welcome to your new app.
+@{
+    var username = HttpContextAccessor.HttpContext?.Session?.GetString("Username");
+    var isAdmin = HttpContextAccessor.HttpContext?.Session?.GetString("IsAdmin") == "true";
+}
+
+<MudContainer Class="background">
+    <MudAppBar Elevation="0" Class="mud-app-bar">
+        <MudGrid Justify="Justify.SpaceBetween" Style="align-items: center;">
+            <MudItem xs="12" sm="4">
+                <div style="display: flex; align-items: center;">
+                    <img src="https://via.placeholder.com/150" alt="logo" height="60" style="padding-right: 10px;" />
+                    <MudTextField Label="Search" Variant="Variant.Outlined" @bind-Value="SearchText" />
+                </div>
+            </MudItem>
+            <MudItem xs="12" sm="2">
+                <div style="display: flex; align-items: center;">
+                    <MudButton Class="button" Style="margin-right: 10px;" OnClick="() => NavigateToLoginOrLogout()">@(string.IsNullOrEmpty(username) ? "Login" : "Logout")</MudButton>
+                    <MudButton Class="button" Disabled="@string.IsNullOrEmpty(username)" OnClick="() => NavigateToCheckout()">Checkout</MudButton>
+                </div>
+            </MudItem>
+        </MudGrid>
+    </MudAppBar>
+    <MudGrid>
+        @foreach (var item in FilteredItems)
+        {
+            <MudItem xs="12" sm="6" md="4" lg="3">
+                <MudCard>
+                    <div style="display: flex; justify-content: center; align-items: center; height: 250px; padding-top: 20px;">
+                        <img src="@($"mineral-images/{item.ImageFilename}")" alt="@item.Name" style="max-width: 250px; max-height: 250px;" />
+                    </div>
+                    <MudCardContent>
+                        <MudText>@item.Name</MudText>
+                        <MudText>@item.Price.ToString("C")</MudText>
+                        <MudText>@item.Description</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Class="button" Disabled="@string.IsNullOrEmpty(username)" OnClick="() => AddToCart(item)">Add to Cart</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+
+<style>
+    .mud-app-bar {
+        background-color: var(--primary-color);
+    }
+
+    .background {
+        background-color: var(--secondary-color);
+    }
+
+    .button {
+        background-color: var(--button-color);
+        color: white;
+    }
+
+    .button:hover {
+        background-color: var(--button-hover-color);
+    }
+</style>
+
+@code {
+    private IEnumerable<IItem> _items = new List<IItem>();
+    private string _searchText = string.Empty;
+    
+    private IEnumerable<IItem> FilteredItems
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_searchText))
+            {
+                return _items;
+            }
+            else
+            {
+                return _items.Where(item => item.Name.Contains(_searchText, StringComparison.OrdinalIgnoreCase));
+            }
+        }
+    }
+
+    private string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (_searchText != value)
+            {
+                _searchText = value;
+                StateHasChanged();
+            }
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _items = await InventoryService.GetAllAvailableItemsAsync();
+            SearchText = string.Empty;
+            StateHasChanged();
+        }
+    }
+
+    private void NavigateToLoginOrLogout()
+    {
+        var username = HttpContextAccessor.HttpContext?.Session?.GetString("Username");
+        if (string.IsNullOrEmpty(username))
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            AuthenticationService.LogoutUser();
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private void NavigateToCheckout()
+    {
+        NavigationManager.NavigateTo("/checkout");
+    }
+
+    private void AddToCart(IItem item)
+    {
+        Console.WriteLine(item.ImageFilename);
+    }
+}
