@@ -43,3 +43,8 @@ A brief presentation of the design can be found [here](/docs/ui-design/ui-design
 The documentation for the technical design can be found [here](/docs/technical-design/technical-design.md).
 
 A brief presentation of the technical design can be found [here](/docs/technical-design/technical-design-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/technical-design/technical-design-presentation.mp4).
+
+## Implementation
+The presentation for the implementation can be found [here](/docs/final-presentation.mp4) or can be [downloaded](https://github.com/danieltebor/swe3313-course-project/raw/main/docs/final-presentation.mp4).
+
+## Building and Running
