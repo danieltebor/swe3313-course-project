@@ -1,0 +1,108 @@
+@page "/checkout"
+
+@inject NavigationManager NavigationManager
+
+@using HanksMineralEmporium.Core.InventoryManagement
+@using HanksMineralEmporium.Service.CheckoutService
+@inject ICheckoutService CheckoutService
+
+<MudContainer Class="background">
+    <MudPaper Class="pa-4" Style ="background:#124419">
+
+        <MudButton Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => ReturnToShopping()">Return To Shopping</MudButton>
+        <br>
+        <br>
+
+        <MudText Typo="Typo.h6" Align="Align.Center" Style ="@($"color: {Colors.Shades.White};")">Checkout</MudText>
+
+        <MudGrid>
+            <MudItem xs="12" md="6">
+                <MudPaper Width="70%">
+                    <MudList Clickable="@Clickable">
+                        @foreach (var item in CheckoutService.GetItemsInCart())
+                        {
+                            <MudListItem>
+                                @item.Name - $@item.Price 
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="@(() => RemoveItemFromCart(item))"></MudIconButton>
+                            </MudListItem>
+                        }
+                    </MudList>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+
+
+        <br>
+        <MudStack>
+            <MudPaper Height="40px" Width="40%" Style="background:#9A8716;" Class="d-flex align-center">
+                <MudText Align="Align.Center" Typo="Typo.body1">Subtotal: $@(CalcSubtotal())</MudText>
+            </MudPaper>           
+        </MudStack>
+
+        <br>
+        <MudStack>
+            <MudPaper Class="d-flex align-center flex-grow-1 gap-4" Elevation="0">
+            <MudButton Class="py-2 d-flex flex-1" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Colors.Grey.Default};")" OnClick="() => PayNow()">Pay Now</MudButton>
+            </MudPaper>
+        </MudStack>
+
+    </MudPaper>    
+</MudContainer>
+
+<style>
+    .background {
+        background-color: var(--secondary-color);
+    }
+</style>
+
+@code {
+    public bool Clickable { get; set; }
+
+    private string _errorMessage = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (CheckoutService.CartItemCount == 0)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private void ReturnToShopping()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void RemoveItemFromCart(IItem item)
+    {
+        try
+        {
+            CheckoutService.RemoveItemFromCart(item);
+            if (CheckoutService.GetItemsInCart().Count == 0)
+            {
+                NavigationManager.NavigateTo("/");
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+    }
+
+    private decimal CalcSubtotal()
+    {
+        decimal subtotal = 0;
+        foreach (var item in CheckoutService.GetItemsInCart())
+        {
+            subtotal += item.Price;
+        }
+        return subtotal;
+    }
+
+    private void PayNow()
+    {
+        NavigationManager.NavigateTo("/payment");
+    }
+}
