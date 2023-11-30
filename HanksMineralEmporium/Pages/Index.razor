@@ -22,7 +22,7 @@
         <MudGrid Justify="Justify.SpaceBetween" Style="align-items: center;">
             <MudItem xs="12" sm="4">
                 <div style="display: flex; align-items: center;">
-                    <img src="https://via.placeholder.com/150" alt="logo" height="60" style="padding-right: 10px;" />
+                    <img src="logo.jpg" alt="logo" height="60" style="padding-right: 10px;" />
                     <MudTextField Label="Search" Variant="Variant.Outlined" @bind-Value="SearchText" />
                 </div>
             </MudItem>
@@ -144,7 +144,8 @@
     {
         if (firstRender)
         {
-            _items = await InventoryService.GetAllAvailableItemsAsync();
+            var unsortedItems = (IList<IItem>)await InventoryService.GetAllAvailableItemsAsync();
+            _items = unsortedItems.OrderByDescending(item => item.Price);
             SearchText = string.Empty;
             StateHasChanged();
         }
