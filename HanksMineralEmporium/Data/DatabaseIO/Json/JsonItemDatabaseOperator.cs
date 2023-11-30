@@ -78,7 +78,6 @@ internal class JsonItemDatabaseOperator : JsonDatabaseOperator<IItem>, IItemData
 
     public JsonItemDatabaseOperator() : base(DatabaseName, new JsonDatabaseObjectSerializer<IItem>())
     {
-        Console.WriteLine("Initializing JsonItemDatabaseOperator...");
         PopulateSeedImages();
     }
 }
