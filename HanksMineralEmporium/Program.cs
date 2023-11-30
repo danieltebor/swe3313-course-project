@@ -9,6 +9,7 @@ using HanksMineralEmporium.Core.UserManagement;
 using HanksMineralEmporium.Data.DatabaseIO;
 using HanksMineralEmporium.Data.DatabaseIO.Json;
 using HanksMineralEmporium.Service.AuthenticationService;
+using HanksMineralEmporium.Service.CheckoutService;
 using HanksMineralEmporium.Service.InventoryService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,7 @@ services.AddSingleton<ISalesManager, SalesManager>();
 
 // Configure services
 services.AddScoped<IAuthenticationService, AuthenticationService>();
+services.AddScoped<ICheckoutService, CheckoutService>();
 services.AddScoped<IInventoryService, InventoryService>();
 
 var app = builder.Build();

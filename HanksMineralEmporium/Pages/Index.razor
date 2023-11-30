@@ -5,8 +5,10 @@
 
 @using HanksMineralEmporium.Core.InventoryManagement
 @using HanksMineralEmporium.Service.AuthenticationService
+@using HanksMineralEmporium.Service.CheckoutService
 @using HanksMineralEmporium.Service.InventoryService
 @inject IAuthenticationService AuthenticationService
+@inject ICheckoutService CheckoutService
 @inject IInventoryService InventoryService
 
 @{
@@ -27,7 +29,7 @@
             <MudItem xs="12" sm="2">
                 <div style="display: flex; align-items: center;">
                     <MudButton Class="button" Style="margin-right: 10px;" OnClick="() => NavigateToLoginOrLogout()">@(string.IsNullOrEmpty(username) ? "Login" : "Logout")</MudButton>
-                    <MudButton Class="button" Disabled="@string.IsNullOrEmpty(username)" OnClick="() => NavigateToCheckout()">Checkout</MudButton>
+                    <MudButton Class="button" Disabled="@(string.IsNullOrEmpty(username) || CheckoutService.CartItemCount == 0)" OnClick="() => NavigateToCheckout()">Checkout</MudButton>
                 </div>
             </MudItem>
         </MudGrid>
@@ -46,12 +48,28 @@
                         <MudText>@item.Description</MudText>
                     </MudCardContent>
                     <MudCardActions>
-                        <MudButton Class="button" Disabled="@string.IsNullOrEmpty(username)" OnClick="() => AddToCart(item)">Add to Cart</MudButton>
+                        @if (CheckoutService.IsItemInCart(item))
+                        {
+                            <MudButton Class="undo_button"
+                                       OnClick="() => UndoAddToCart(item)">Undo</MudButton>
+                        }
+                        else
+                        {
+                            <MudButton Class="button"
+                                       Disabled="@string.IsNullOrEmpty(username)"
+                                       OnClick="async () => await AddToCartAsync(item)">Add to Cart</MudButton>
+                        }
                     </MudCardActions>
                 </MudCard>
             </MudItem>
         }
     </MudGrid>
+    @if (_showError)
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Filled" ShowCloseIcon="true" Class="bottom-alert" CloseIconClicked="() => CloseError()">
+            @_errorMessage
+        </MudAlert>
+    }
 </MudContainer>
 
 <style>
@@ -71,11 +89,28 @@
     .button:hover {
         background-color: var(--button-hover-color);
     }
+
+    .undo_button {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .undo_button:hover {
+        background-color: #fd564a;
+    }
+
+    .bottom-alert {
+        position: fixed;
+        bottom: 0;
+        z-index: 1000;
+    }
 </style>
 
 @code {
     private IEnumerable<IItem> _items = new List<IItem>();
     private string _searchText = string.Empty;
+    private string _errorMessage = string.Empty;
+    private bool _showError = false;
     
     private IEnumerable<IItem> FilteredItems
     {
@@ -125,6 +160,7 @@
         else
         {
             AuthenticationService.LogoutUser();
+            CheckoutService.ClearCart();
             NavigationManager.NavigateTo("/");
         }
     }
@@ -134,8 +170,34 @@
         NavigationManager.NavigateTo("/checkout");
     }
 
-    private void AddToCart(IItem item)
+    private async Task AddToCartAsync(IItem item)
     {
-        Console.WriteLine(item.ImageFilename);
+        try
+        {
+            await CheckoutService.AddItemToCartAsync(item);
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+            _showError = true;
+        }
+    }
+
+    private void UndoAddToCart(IItem item)
+    {
+        try
+        {
+            CheckoutService.RemoveItemFromCart(item);
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+            _showError = true;
+        }
+    }
+
+    private void CloseError()
+    {
+        _showError = false;
     }
 }

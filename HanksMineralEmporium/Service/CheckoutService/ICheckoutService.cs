@@ -27,4 +27,26 @@ public interface ICheckoutService
     /// <returns>The items in the cart.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
     public IReadOnlyList<IItem> GetItemsInCart();
+
+    /// <summary>
+    /// Checks if an item is in the cart.
+    /// </summary>
+    /// <param name="item">The item to check.</param>
+    /// <returns>True if the item is in the cart, false otherwise.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when the item is null.</exception>
+    /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
+    public bool IsItemInCart(IItem item);
+
+    /// <summary>
+    /// Clears the cart.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
+    public void ClearCart();
+
+    /// <summary>
+    /// Gets the number of items in the cart.
+    /// </summary>
+    /// <returns>The number of items in the cart.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when the HttpContext is null.</exception>
+    public uint CartItemCount { get; }
 }
